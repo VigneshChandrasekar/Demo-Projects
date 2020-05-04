@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sitecore.Xdb.ReferenceData.Web.XConnect</name>
+    </assembly>
+    <members>
+        <member name="T:Sitecore.Xdb.ReferenceData.Web.XConnect.Constants">
+            <summary>
+            Constants used throughout the application.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.ReferenceData.Web.XConnect.Constants.DefaultRoutePrefix">
+            <summary>
+            The default route prefix for the Web API controllers.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Web.XConnect.Controllers.ReferenceDataServiceStatusController">
+            <summary>
+            A controller which exposes operations to check the application status.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Web.XConnect.Controllers.ReferenceDataServiceStatusController.Index">
+            <summary>
+            Get the summary status information.
+            </summary>
+            <returns>The current status for the application.</returns>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Web.XConnect.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Web.XConnect.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Web.XConnect.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Web.XConnect.Resources.StatusServiceRunning">
+            <summary>
+              Looks up a localized string similar to The service is running.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Web.XConnect.XConnectHttpConfiguration">
+            <summary>
+            XConnect HTTP configuration bootstrap.
+            </summary>
+            <seealso cref="T:Sitecore.XConnect.DependencyInjection.Web.Abstractions.IHttpConfiguration" />
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Web.XConnect.XConnectHttpConfiguration.ConfigureServices(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Configures <see cref="T:System.Web.Http.HttpConfiguration"/>.
+            </summary>
+            <param name="config">The configuration to update.</param>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,254 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sitecore.Xdb.ReferenceData.Web</name>
+    </assembly>
+    <members>
+        <member name="T:Sitecore.Xdb.ReferenceData.Web.Conditions.ConditionValidatorExtensions">
+            <summary>
+            Extension methods for <see cref="T:Sitecore.Framework.Conditions.ConditionValidator`1"/>.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Web.Conditions.ConditionValidatorExtensions.Quietly``1(Sitecore.Framework.Conditions.ConditionValidator{``0})">
+            <summary>
+            Alters the validation to occur quietly, without throwing exceptions.
+            </summary>
+            <typeparam name="T">The type of the value being validated.</typeparam>
+            <param name="validator">The validator to make quiet.</param>
+            <returns>A new <see cref="T:Sitecore.Xdb.ReferenceData.Web.Conditions.QuietConditionValidator`1"/></returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Web.Conditions.ConditionValidatorExtensions.DidItFailQuietly``1(Sitecore.Framework.Conditions.ConditionValidator{``0})">
+            <summary>
+            Determines if the validation has failed using a <see cref="T:Sitecore.Xdb.ReferenceData.Web.Conditions.QuietConditionValidator`1"/>.
+            </summary>
+            <typeparam name="T">The type of the value being validated.</typeparam>
+            <param name="validator">The validator to extract the success value from.</param>
+            <returns>False if the validator is a <see cref="T:Sitecore.Xdb.ReferenceData.Web.Conditions.QuietConditionValidator`1"/> and validation failed, otherwise True.</returns>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Web.Conditions.QuietConditionValidator`1">
+            <summary>
+            A <see cref="T:Sitecore.Framework.Conditions.ConditionValidator`1"/> which returns a success value rather than throwing an exception.
+            </summary>
+            <typeparam name="T">The type being validated.</typeparam>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Web.Conditions.QuietConditionValidator`1.#ctor(Sitecore.Framework.Conditions.ConditionValidator{`0})">
+            <summary>
+            Creates an instance.
+            </summary>
+            <param name="baseValidator">The validator being made quiet.</param>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Web.Conditions.QuietConditionValidator`1.Succeeded">
+            <summary>
+            Gets a value indicating whether the validation succeeded or not.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Web.Conditions.QuietConditionValidator`1.ThrowExceptionCore(System.String,System.String,Sitecore.Framework.Conditions.ConstraintViolationType)">
+            <summary>
+            Handles an error in the validation.
+            </summary>
+            <param name="condition">A description of the condition which was not met.</param>
+            <param name="additionalMessage">An additional message to provide context for the violation.</param>
+            <param name="type">The type of violation.</param>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Web.ConflictNegotiatedContentResult`1">
+            <summary>
+            Represents an action result that performs content negotiation and returns an HttpStatusCode.Conflict response when it succeeds.
+            </summary>
+            <typeparam name="T">The type of content in the entity body.</typeparam>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Web.ConflictNegotiatedContentResult`1.#ctor(`0,System.Net.Http.Formatting.IContentNegotiator,System.Net.Http.HttpRequestMessage,System.Collections.Generic.IEnumerable{System.Net.Http.Formatting.MediaTypeFormatter})">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Web.ConflictNegotiatedContentResult`1.#ctor(`0,System.Web.Http.ApiController)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Web.ConflictNegotiatedContentResult`1.ExecuteAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Web.NotFoundNegotiatedContentResult`1">
+            <summary>
+            Represents an action result that performs content negotiation and returns an HttpStatusCode.NotFound response when it succeeds.
+            </summary>
+            <typeparam name="T">The type of content in the entity body.</typeparam>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Web.NotFoundNegotiatedContentResult`1.#ctor(`0,System.Net.Http.Formatting.IContentNegotiator,System.Net.Http.HttpRequestMessage,System.Collections.Generic.IEnumerable{System.Net.Http.Formatting.MediaTypeFormatter})">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Web.NotFoundNegotiatedContentResult`1.#ctor(`0,System.Web.Http.ApiController)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Web.NotFoundNegotiatedContentResult`1.ExecuteAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Web.ReferenceDataDefinitionController">
+            <summary>
+            A web endpoint exposing definition functions.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.ReferenceData.Web.ReferenceDataDefinitionController._logger">
+            <summary>
+            The <see cref="T:Microsoft.Extensions.Logging.ILogger`1"/> to log messages to.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.ReferenceData.Web.ReferenceDataDefinitionController._referenceDataService">
+            <summary>
+            The <see cref="T:Sitecore.Xdb.ReferenceData.Core.IReferenceDataTransportService"/> to forward API calls to.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Web.ReferenceDataDefinitionController.#ctor(Sitecore.Xdb.ReferenceData.Core.IReferenceDataTransportService,Microsoft.Extensions.Logging.ILogger{Sitecore.Xdb.ReferenceData.Web.ReferenceDataDefinitionController})">
+            <summary>
+            Create a new instance.
+            </summary>
+            <param name="referenceDataService">The <see cref="T:Sitecore.Xdb.ReferenceData.Core.IReferenceDataTransportService"/> to forward API calls to.</param>
+            <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILogger`1"/> to log messages to.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Web.ReferenceDataDefinitionController.Save(System.Collections.Generic.IEnumerable{Sitecore.Xdb.ReferenceData.Core.DefinitionEnvelope})">
+            <summary>
+            Saves a batch of definitions to the store.
+            </summary>
+            <param name="definitions">The definitions to save.</param>
+            <returns>The results of the operation.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Web.ReferenceDataDefinitionController.Delete(System.Collections.Generic.IEnumerable{Sitecore.Xdb.ReferenceData.Core.DefinitionKey})">
+            <summary>
+            Deletes a batch of definitions from the store.
+            </summary>
+            <param name="keys">The keys of the definitions to delete.</param>
+            <returns>The results of the operation.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Web.ReferenceDataDefinitionController.Get(System.Collections.Generic.IEnumerable{Sitecore.Xdb.ReferenceData.Core.DefinitionCriteria},System.Boolean)">
+            <summary>
+            Gets a batch of definitions from the store.
+            </summary>
+            <param name="criteria">The criteria for the definitions to retrieve.</param>
+            <param name="latestActiveOnly">Determines whether only the latest active definitions should be retrieved, or all versions.</param>
+            <returns>The definitions that where found from the criteria.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Web.ReferenceDataDefinitionController.GetByType(System.Guid,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            Gets a page of definitions that are of the specified type.
+            </summary>
+            <param name="typeKey">The key of the definition types to retrieve.</param>
+            <param name="latestActiveOnly">Determines whether only the latest active definitions should be retrieved, or all versions.</param>
+            <param name="pageNumber">The number of the page of results to retrieve.</param>
+            <param name="pageSize">The size of each page of results.</param>
+            <returns>The page of definitions.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Web.ReferenceDataDefinitionController.CreateResult(Sitecore.Xdb.ReferenceData.Core.Results.DeleteDefinitionsBatchResult)">
+            <summary>
+            Creates an appropriate action result for the provided batch result.
+            </summary>
+            <param name="results">The results to create the action result for.</param>
+            <returns>An action result to return to the caller.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Web.ReferenceDataDefinitionController.CreateResult(Sitecore.Xdb.ReferenceData.Core.Results.SaveDefinitionsBatchResult)">
+            <summary>
+            Creates an appropriate action result for the provided batch result.
+            </summary>
+            <param name="results">The results to create the action result for.</param>
+            <returns>An action result to return to the caller.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Web.ReferenceDataDefinitionController.LogBatchResult(Sitecore.Xdb.ReferenceData.Core.Results.SaveDefinitionsBatchResult)">
+            <summary>
+            Log results of a batch result to the logger.
+            </summary>
+            <param name="result">The results to log.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Web.ReferenceDataDefinitionController.LogBatchResult(Sitecore.Xdb.ReferenceData.Core.Results.DeleteDefinitionsBatchResult)">
+            <summary>
+            Log results of a batch result to the logger.
+            </summary>
+            <param name="result">The results to log.</param>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Web.ReferenceDataDefinitionTypeController">
+            <summary>
+            A web endpoint exposing definition type functions.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.ReferenceData.Web.ReferenceDataDefinitionTypeController._referenceDataService">
+            <summary>
+            The <see cref="T:Sitecore.Xdb.ReferenceData.Core.IReferenceDataTransportService"/> to forward API calls to.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Web.ReferenceDataDefinitionTypeController.#ctor(Sitecore.Xdb.ReferenceData.Core.IReferenceDataTransportService)">
+            <summary>
+            Create a new instance.
+            </summary>
+            <param name="referenceDataService">The <see cref="T:Sitecore.Xdb.ReferenceData.Core.IReferenceDataTransportService"/> to forward API calls to.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Web.ReferenceDataDefinitionTypeController.Get(System.String)">
+            <summary>
+            Retrieves a definition type by name.
+            </summary>
+            <param name="name">The case-sensitive name of the definition type.</param>
+            <returns>The definition type key of the definition type, or null if the definition type does not exist.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Web.ReferenceDataDefinitionTypeController.Ensure(System.String)">
+            <summary>
+            Gets or creates a definition type by name.
+            </summary>
+            <param name="name">The case-sensitive name of the definition type.</param>
+            <returns>The key of the definition type.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Web.ReferenceDataDefinitionTypeController.Delete(System.Guid)">
+            <summary>
+            Deletes an existing definition type.
+            </summary>
+            <param name="id">The ID of the definition type to delete.</param>
+            <returns>A value indicating the status of the operation.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Web.ReferenceDataDefinitionTypeController.CreateResult(Sitecore.Xdb.ReferenceData.Core.Results.DeleteDefinitionTypeOperationResult)">
+            <summary>
+            Creates an appropriate action result for the provided operation result.
+            </summary>
+            <param name="result">The result to create the action result for.</param>
+            <returns>An action result to return to the caller.</returns>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Web.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Web.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Web.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Web.Resources.DeleteBatchNotComplete">
+            <summary>
+              Looks up a localized string similar to Delete batch did not complete successfully.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Web.Resources.LineMultiplexDelimiter">
+            <summary>
+              Looks up a localized string similar to  .
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Web.Resources.ParameterInvalid">
+            <summary>
+              Looks up a localized string similar to Parameter &apos;{0}&apos; is invalid.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Web.Resources.ParameterNotEmpty">
+            <summary>
+              Looks up a localized string similar to Parameter &apos;{0}&apos; is empty.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Web.Resources.ParameterRequired">
+            <summary>
+              Looks up a localized string similar to Parameter &apos;{0}&apos; must be provided.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Web.Resources.SaveBatchNotComplete">
+            <summary>
+              Looks up a localized string similar to Save batch did not complete successfully.
+            </summary>
+        </member>
+    </members>
+</doc>

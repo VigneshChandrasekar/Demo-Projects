@@ -1,0 +1,728 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sitecore.Processing.Cursors.Sql</name>
+    </assembly>
+    <members>
+        <member name="T:Sitecore.Processing.Cursors.Sql.Constants">
+            <summary>
+                Represents a collection of constants used throughout the project.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.TasksDbSchema">
+            <summary>
+                The schema name for Sitecore.Processing.Tasks database.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.ColumnId">
+            <summary>
+                The name of the Id column.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.ColumnTaskId">
+            <summary>
+                The name of the TaskId column.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.ColumnCreated">
+            <summary>
+                The name of the Created column.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.ColumnAccessed">
+            <summary>
+                The name of the Accessed column.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.ColumnConcurrencyToken">
+            <summary>
+                The name of the ConcurrencyToken column.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.ColumnComputer">
+            <summary>
+                The name of the Computer column.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.ColumnProcess">
+            <summary>
+                The name of the Process column.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.ColumnAgent">
+            <summary>
+                The name of the Agent column.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.ColumnPriority">
+            <summary>
+                The name of the Priority column.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.ColumnSize">
+            <summary>
+                The name of the Size column.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.ColumnBookmark">
+            <summary>
+                The name of the Bookmark column.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.ColumnConsumed">
+            <summary>
+                The name of the Consumed column.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.ColumnIsDescending">
+            <summary>
+                The name of the IsDescending column.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.ColumnIsSplitSupported">
+            <summary>
+                The name of the IsSplitSupported column.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.ColumnIsSplitRequested">
+            <summary>
+                The name of the IsSplitRequested column.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.ColumnIsCompleted">
+            <summary>
+                The name of the IsCompleted column.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.TasksDbConnectionName">
+            <summary>
+                Name of the connection string for Tasks database.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.RoutineCausedExceptionFormat">
+            <summary>
+                The format string for exception message, describing which routine caused exception.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.AddCursorRoutine">
+            <summary>
+                The name of the AddCursor routine.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.DeleteCursorsByTaskIdRoutine">
+            <summary>
+                The name of the DeleteCursorsByTaskId routine.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.MarkCursorCompletedRoutine">
+            <summary>
+                The name of the MarkCursorCompleted routine.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.TryAcquireCursorRoutine">
+            <summary>
+                The name of the TryAcquireCursor routine.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.TryRegisterCursorSplitRequestRoutine">
+            <summary>
+                The name of the TryRegisterCursorSplitRequest routine.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.UpdateCursorProgressRoutine">
+            <summary>
+                The name of the UpdateCursorProgress routine.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.UpdateCursorRoutine">
+            <summary>
+                The name of the UpdateCursorAfterSplit routine.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.UpdateCursorSizeRoutine">
+            <summary>
+                The name of the UpdateCursorSize routine.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.UpdateCursorSplitSupportedRoutine">
+            <summary>
+                The name of the UpdateCursorSplitSupported routine.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.GetCursorsCountByTaskIdRoutine">
+            <summary>
+                The name of the GetCursorsCountByTaskId routine.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.GetTotalNumberOfConsumedItemsByTaskIdRoutine">
+            <summary>
+                The name of the GetTotalNumberOfConsumedItemsByTaskId routine.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.CheckAllCursorsCompletedRoutine">
+            <summary>
+                The name of the CheckAllCursorsCompleted routine.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.ConnectionStringNameParameter">
+            <summary>
+                The name of the ConnectionStringName parameter.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.CursorDataProviderDecoratorParameter">
+            <summary>
+                The name of the CursorDataProviderDecorator parameter.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.RetryerNameParameter">
+            <summary>
+                The name of the RetryerName parameter.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.CommandTimeoutParameter">
+            <summary>
+                The name of the CommandTimeout parameter.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.OwnershipTimeoutParameter">
+            <summary>
+                The name of the OwnershipTimeout parameter.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.DeleteCompletedOnlyParameter">
+            <summary>
+                The name of the DeleteCompletedOnly parameter for <see cref="F:Sitecore.Processing.Cursors.Sql.Constants.DeleteCursorsByTaskIdRoutine" />.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.SqlCommandColumnEncryptionEnabledParameter">
+            <summary>
+            The SQL command column encryption enabled parameter.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.ReaderDidNotReturnAppropriateResultExceptionMessage">
+            <summary>
+                The message for exception, thrown when reader did not return appropriate result.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Cursors.Sql.Constants.CursorsTableName">
+            <summary>
+                The Cursors table name.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Processing.Cursors.Sql.SqlCursorDataProvider">
+            <summary>
+                Represents a data provider to work with <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" /> instances in the SQL database.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Processing.Cursors.Sql.SqlCursorDataProvider.#ctor(Sitecore.Processing.Common.IConnectionStringResolver,System.String,System.TimeSpan,System.Guid,System.TimeSpan,Sitecore.Framework.TransientFaultHandling.IRetryerRegistry,System.String,System.Boolean)">
+            <summary>
+                Creates a new instance of<see cref="T:Sitecore.Processing.Cursors.Sql.SqlCursorDataProvider" /> class.
+            </summary>
+            <param name="connectionStringResolver">
+                The implementation of IConnectionStringResolver to get connection string from system by name.
+            </param>
+            <param name="connectionStringName">
+                The name of the connection string used to retrieve the actual connection string to the database.
+            </param>
+            <param name="commandTimeout">
+                The wait time before the execution attempt of a database command is terminated and an error is generated.
+            </param>
+            <param name="taskId">
+                The  unique identifier of the task associated with all the operations on <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" /> instances.
+            </param>
+            <param name="ownershipTimeout">
+                The timeout during which each agent has to update <see cref="P:Sitecore.Processing.Cursors.Abstractions.ICursor.Accessed" /> in the database.
+                If it didn't happen, cursor is considered abandoned.
+            </param>
+            <param name="retryerRegistry">
+                The retryer registry that is responsible for managing the creation and access to
+                a set of named <see cref="T:Sitecore.Framework.TransientFaultHandling.IRetryer"/> instances.
+            </param>
+            <param name="retryerName">
+                The name of a <see cref="T:Sitecore.Framework.TransientFaultHandling.IRetryer"/> that is registered for the sql provider.
+            </param>
+            <param name="sqlCommandColumnEncryptionEnabled">
+                If set to <c>true</c> SQL command column encryption is enabled.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+                Argument <paramref name="connectionStringName" /> is a <b>null</b> reference.
+            </exception>
+            <exception cref="T:System.ArgumentException"><paramref name="ownershipTimeout" /> is less than one millisecond.</exception>
+        </member>
+        <member name="P:Sitecore.Processing.Cursors.Sql.SqlCursorDataProvider.TaskId">
+            <summary>
+                The unique identifier of the task associated with all the operations on <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" /> instances.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Processing.Cursors.Sql.SqlCursorDataProvider.OwnershipTimeout">
+            <summary>
+                Gets the timeout during which each agent has to update <see cref="P:Sitecore.Processing.Cursors.Abstractions.ICursor.Accessed" /> in the
+                database.
+                If it didn't happen, cursor is considered abandoned.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Processing.Cursors.Sql.SqlCursorDataProvider.AddAsync(Sitecore.Processing.Cursors.Abstractions.ICursor)">
+            <summary>
+                Asynchronously adds new <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" /> to the data store.
+            </summary>
+            <param name="cursor">The <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" /> to add.</param>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task" /> representing asynchronous operation.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="cursor" /> is <c>null</c>.</exception>
+            <remarks>
+                <see cref="P:Sitecore.Processing.Cursors.Abstractions.ICursor.Created" />, <see cref="P:Sitecore.Processing.Cursors.Abstractions.ICursor.Accessed" /> and <see cref="P:Sitecore.Processing.Cursors.Abstractions.ICursor.ConcurrencyToken" /> in
+                the <paramref name="cursor" /> are ignored, set by the provider and can differ from specified.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Processing.Cursors.Sql.SqlCursorDataProvider.TryAcquireCursorAsync(Sitecore.Processing.Common.IAgentId)">
+            <summary>
+                Asynchronously attempts to acquire any available <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" />.
+            </summary>
+            <param name="agentId">The object with the set of agent characteristics that uniquely identify it.</param>
+            <returns>
+                Returns <see cref="T:System.Threading.Tasks.Task`1" /> with the <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" /> instance if attempt succeeded.
+                Otherwise, returns <see cref="T:System.Threading.Tasks.Task`1" /> with <c>null</c>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="agentId" /> is <c>null</c>.</exception>
+        </member>
+        <member name="M:Sitecore.Processing.Cursors.Sql.SqlCursorDataProvider.MarkCompletedAsync(System.Guid,System.Guid)">
+            <summary>
+                Asynchronously marks completed the <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" />.
+            </summary>
+            <param name="cursorId">The <see cref="P:Sitecore.Processing.Cursors.Abstractions.ICursor.Id" /> to complete.</param>
+            <param name="concurrencyToken">The <see cref="P:Sitecore.Processing.Cursors.Abstractions.ICursor.ConcurrencyToken" /> value to ensure we have the latest data for the cursor.</param>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task" /> representing asynchronous operation.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Cursors.Sql.SqlCursorDataProvider.UpdateProgressAsync(System.Guid,System.Guid,System.Byte[],System.Int64)">
+            <summary>
+                Asynchronously updates the progress of the <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" />.
+            </summary>
+            <param name="cursorId">The <see cref="P:Sitecore.Processing.Cursors.Abstractions.ICursor.Id" /> to update.</param>
+            <param name="concurrencyToken">The <see cref="P:Sitecore.Processing.Cursors.Abstractions.ICursor.ConcurrencyToken" /> value to ensure we have the latest data for the cursor.</param>
+            <param name="updatedBookmark">
+                The updated bookmark with maximum size of <see cref="F:Sitecore.Processing.Cursors.Abstractions.Constants.CursorBookmarkMaxSize" />
+                bytes, which represents the current position in the <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" />.
+            </param>
+            <param name="consumed">The updated amount of consumed work items.</param>
+            <returns>
+                Returns <see cref="T:System.Threading.Tasks.Task`1" /> with the <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" /> instance.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="updatedBookmark" /> is null.
+            </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+                <paramref name="consumed" /> is less than zero.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="updatedBookmark" /> is larger than <see cref="F:Sitecore.Processing.Cursors.Abstractions.Constants.CursorBookmarkMaxSize" /> bytes.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Processing.Cursors.Sql.SqlCursorDataProvider.UpdateSizeAsync(System.Guid,System.Guid,System.Byte[],System.Int64)">
+            <summary>
+                Asynchronously updates the size of the <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" />.
+            </summary>
+            <param name="cursorId">The <see cref="P:Sitecore.Processing.Cursors.Abstractions.ICursor.Id" /> to update.</param>
+            <param name="concurrencyToken">The <see cref="P:Sitecore.Processing.Cursors.Abstractions.ICursor.ConcurrencyToken" /> value to ensure we have the latest data for the cursor.</param>
+            <param name="updatedBookmark">
+                The updated bookmark with maximum size of <see cref="F:Sitecore.Processing.Cursors.Abstractions.Constants.CursorBookmarkMaxSize" />
+                bytes, which represents the current position in the <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" />.
+            </param>
+            <param name="updatedSize">The size of the <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" />.</param>
+            <returns>
+                Returns <see cref="T:System.Threading.Tasks.Task`1" /> with the <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" /> instance.
+            </returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+                <paramref name="updatedSize" /> is less or equal zero.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="updatedBookmark" /> is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="updatedBookmark" /> is larger than <see cref="F:Sitecore.Processing.Cursors.Abstractions.Constants.CursorBookmarkMaxSize" /> bytes.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Processing.Cursors.Sql.SqlCursorDataProvider.UpdateSplitSupportedAsync(System.Guid,System.Guid,System.Boolean)">
+            <summary>
+                Asynchronously updates the <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" /> to set whether splits are supported.
+            </summary>
+            <param name="cursorId">The <see cref="P:Sitecore.Processing.Cursors.Abstractions.ICursor.Id" /> to update.</param>
+            <param name="concurrencyToken">The <see cref="P:Sitecore.Processing.Cursors.Abstractions.ICursor.ConcurrencyToken" /> value to ensure the cursor data hasn't changed since reading it.</param>
+            <param name="isSplitSupported">Indicates whether the cursor can be split.</param>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task" /> containing updated <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" /> instance.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Cursors.Sql.SqlCursorDataProvider.SaveSplitAsync(System.Guid,System.Guid,System.Byte[],System.Single,System.Int64,System.Collections.Generic.IReadOnlyList{Sitecore.Processing.Cursors.Abstractions.ICursor})">
+            <summary>
+                Asynchronously saves the split of the cursor to the database.
+            </summary>
+            <param name="originalCursorId">The <see cref="P:Sitecore.Processing.Cursors.Abstractions.ICursor.Id" /> that was split.</param>
+            <param name="concurrencyToken">The <see cref="P:Sitecore.Processing.Cursors.Abstractions.ICursor.ConcurrencyToken" /> value to ensure we have the latest data for the cursor.</param>
+            <param name="updatedBookmark">
+                The updated bookmark with maximum size of <see cref="F:Sitecore.Processing.Cursors.Abstractions.Constants.CursorBookmarkMaxSize" /> bytes, which represents
+                the current position in the split
+                <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" />.
+            </param>
+            <param name="updatedPriority">The updated priority of the split <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" />.</param>
+            <param name="updatedSize">
+                The updated, approximate, total amount of items to work on in the split
+                <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" />.
+            </param>
+            <param name="newCursors">The <see cref="T:System.Collections.Generic.IReadOnlyList`1" /> that contains new cursors, received after split.</param>
+            <returns>
+                Returns <see cref="T:System.Threading.Tasks.Task`1" /> with the updated <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" /> instance.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="updatedBookmark" /> or <paramref name="newCursors" /> is
+                <c>null</c>.
+            </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+                <paramref name="updatedSize" /> is less than zero or
+                <paramref name="updatedPriority" /> is not in range between 0.0 and 1.0 inclusive.
+            </exception>
+            <exception cref="T:System.ArgumentException"><paramref name="newCursors" /> is empty.</exception>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="updatedBookmark" /> is larger than <see cref="F:Sitecore.Processing.Cursors.Abstractions.Constants.CursorBookmarkMaxSize" /> bytes.
+            </exception>
+            <remarks>
+                <see cref="P:Sitecore.Processing.Cursors.Abstractions.ICursor.Created" />, <see cref="P:Sitecore.Processing.Cursors.Abstractions.ICursor.Accessed" /> and <see cref="P:Sitecore.Processing.Cursors.Abstractions.ICursor.ConcurrencyToken" />
+                for each <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" /> in <paramref name="newCursors" /> are ignored,
+                set by the provider, and can differ from specified.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Processing.Cursors.Sql.SqlCursorDataProvider.TryRegisterSplitRequestAsync">
+            <summary>
+                Asynchronously makes attempt to register split of the <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" /> in the data store.
+            </summary>
+            <returns>
+                Returns <see cref="T:System.Threading.Tasks.Task`1" /> containing <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" /> instance with registered split if attempt
+                succeeded.
+                Otherwise, returns <see cref="T:System.Threading.Tasks.Task`1" /> with <c>null</c>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Processing.Cursors.Sql.SqlCursorDataProvider.DeleteByTaskAsync(System.Boolean)">
+            <summary>
+                Asynchronously deletes all the <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" /> instances.
+            </summary>
+            <param name="deleteCompletedOnly">
+                Indicates whether only completed cursors have to be removed (<c>true</c>) or not (
+                <c>false</c>).
+            </param>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task" /> representing asynchronous operation.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Cursors.Sql.SqlCursorDataProvider.GetCursorCountAsync">
+            <summary>
+                Asynchronously retrieves count of all the <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" /> instances.
+            </summary>
+            <returns>
+                Returns <see cref="T:System.Threading.Tasks.Task`1" /> with the <see cref="T:System.Int32" />, which represents amount of
+                <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" /> instances in the data store.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Processing.Cursors.Sql.SqlCursorDataProvider.GetTotalNumberOfConsumedItemsAsync">
+            <summary>
+                Asynchronously retrieves amount of the processed items throughout all the <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" /> instances.
+            </summary>
+            <returns>
+                Returns <see cref="T:System.Threading.Tasks.Task`1" /> with the <see cref="T:System.Int64" />, which represents amount of the processed
+                items throughout all the <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" /> instances in the data store.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Processing.Cursors.Sql.SqlCursorDataProvider.AreAllCursorsCompletedAsync">
+            <summary>
+                Asynchronously checks whether all the <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" /> instances are completed.
+                are completed (<see cref="P:Sitecore.Processing.Cursors.Abstractions.ICursor.IsCompleted" /> is <c>true</c>).
+            </summary>
+            <returns>
+                Returns <see cref="T:System.Threading.Tasks.Task`1" /> with the <see cref="T:System.Boolean" />, which is <c>true</c> if all the
+                <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" /> instances have <see cref="P:Sitecore.Processing.Cursors.Abstractions.ICursor.IsCompleted" /> is <c>true</c>.
+                Otherwise, returns <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Processing.Cursors.Sql.SqlCursorDataProvider.ReadCursorAsync(System.Data.Common.DbDataReader)">
+            <summary>
+                Creates a <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" /> object using data read from the specified <see cref="T:System.Data.Common.DbDataReader" /> object.
+            </summary>
+            <param name="reader">The <see cref="T:System.Data.Common.DbDataReader" /> object to read data from.</param>
+            <returns>The <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" /> initialized with the values read from <paramref name="reader" />.</returns>
+            <exception cref="T:System.ArgumentNullException">Argument <paramref name="reader" /> is a <b>null</b> reference.</exception>
+        </member>
+        <member name="M:Sitecore.Processing.Cursors.Sql.SqlCursorDataProvider.CreateAddCursorRoutineParams(Sitecore.Processing.Cursors.Abstractions.ICursor)">
+            <summary>
+                Creates an <see cref="T:System.Collections.Generic.IReadOnlyCollection`1" /> of <see cref="T:System.Data.SqlClient.SqlParameter" /> passed for execution to
+                <see cref="F:Sitecore.Processing.Cursors.Sql.Constants.AddCursorRoutine" /> stored procedure.
+            </summary>
+            <param name="cursor">The <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" /> that contains values to save to the database.</param>
+            <returns>
+                The <see cref="T:System.Collections.Generic.IReadOnlyCollection`1" /> of <see cref="T:System.Data.SqlClient.SqlParameter" /> passed for execution to
+                <see cref="F:Sitecore.Processing.Cursors.Sql.Constants.AddCursorRoutine" /> stored procedure.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Processing.Cursors.Sql.SqlCursorDataProvider.CreateTryAcquireCursorRoutineParams(System.Guid,Sitecore.Processing.Common.IAgentId,System.TimeSpan)">
+            <summary>
+                Creates an <see cref="T:System.Collections.Generic.IReadOnlyCollection`1" /> of <see cref="T:System.Data.SqlClient.SqlParameter" /> passed for execution to
+                <see cref="F:Sitecore.Processing.Cursors.Sql.Constants.TryAcquireCursorRoutine" /> stored procedure.
+            </summary>
+            <param name="taskId">The id of the task to work on.</param>
+            <param name="agentId">The <see cref="T:Sitecore.Processing.Common.IAgentId" /> that contains values to save to the database.</param>
+            <param name="ownershipTimeout">
+                The timeout during which each agent has to update
+                <see cref="P:Sitecore.Processing.Cursors.Abstractions.ICursor.Accessed" /> in the database.
+            </param>
+            <returns>
+                The <see cref="T:System.Collections.Generic.IReadOnlyCollection`1" /> of <see cref="T:System.Data.SqlClient.SqlParameter" /> passed for execution to
+                <see cref="F:Sitecore.Processing.Cursors.Sql.Constants.TryAcquireCursorRoutine" /> stored procedure.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Processing.Cursors.Sql.SqlCursorDataProvider.CreateMarkCompletedCursorRoutineParams(System.Guid,System.Guid)">
+            <summary>
+                Creates an <see cref="T:System.Collections.Generic.IReadOnlyCollection`1" /> of <see cref="T:System.Data.SqlClient.SqlParameter" /> passed for execution to
+                <see cref="F:Sitecore.Processing.Cursors.Sql.Constants.MarkCursorCompletedRoutine" /> stored procedure.
+            </summary>
+            <param name="cursorId">The id of the <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" /> to mark completed.</param>
+            <param name="concurrencyToken">The <see cref="P:Sitecore.Processing.Cursors.Abstractions.ICursor.ConcurrencyToken" /> value to ensure we have the latest data for the cursor.</param>
+            <returns>
+                The <see cref="T:System.Collections.Generic.IReadOnlyCollection`1" /> of <see cref="T:System.Data.SqlClient.SqlParameter" /> passed for execution to
+                <see cref="F:Sitecore.Processing.Cursors.Sql.Constants.MarkCursorCompletedRoutine" /> stored procedure.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Processing.Cursors.Sql.SqlCursorDataProvider.CreateUpdateCursorProgressRoutineParams(System.Guid,System.Byte[],System.Guid,System.Int64)">
+            <summary>
+                Creates an <see cref="T:System.Collections.Generic.IReadOnlyCollection`1" /> of <see cref="T:System.Data.SqlClient.SqlParameter" /> passed for execution to
+                <see cref="F:Sitecore.Processing.Cursors.Sql.Constants.UpdateCursorProgressRoutine" /> stored procedure.
+            </summary>
+            <param name="cursorId">The id of the <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" /> to update progress.</param>
+            <param name="bookmark">The bookmark, which represents the current position in the <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" />.</param>
+            <param name="consumed">The amount of consumed work items.</param>
+            <param name="concurrencyToken">The <see cref="P:Sitecore.Processing.Cursors.Abstractions.ICursor.ConcurrencyToken" /> value to ensure we have the latest data for the cursor.</param>
+            <returns>
+                The <see cref="T:System.Collections.Generic.IReadOnlyCollection`1" /> of <see cref="T:System.Data.SqlClient.SqlParameter" /> passed for execution to
+                <see cref="F:Sitecore.Processing.Cursors.Sql.Constants.UpdateCursorProgressRoutine" /> stored procedure.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Processing.Cursors.Sql.SqlCursorDataProvider.CreateUpdateCursorSizeParams(System.Guid,System.Guid,System.Byte[],System.Int64)">
+            <summary>
+                Creates an <see cref="T:System.Collections.Generic.IReadOnlyCollection`1" /> of <see cref="T:System.Data.SqlClient.SqlParameter" /> passed for execution to
+                <see cref="F:Sitecore.Processing.Cursors.Sql.Constants.UpdateCursorSizeRoutine" /> stored procedure.
+            </summary>
+            <param name="cursorId">The id of the <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" /> to update size.</param>
+            <param name="concurrencyToken">The <see cref="P:Sitecore.Processing.Cursors.Abstractions.ICursor.ConcurrencyToken" /> value to ensure we have the latest data for the cursor.</param>
+            <param name="bookmark">The bookmark, which represents the current position in the <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" />.</param>
+            <param name="size">The size of the <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" />.</param>
+            <returns>
+                The <see cref="T:System.Collections.Generic.IReadOnlyCollection`1" /> of <see cref="T:System.Data.SqlClient.SqlParameter" /> passed for execution to
+                <see cref="F:Sitecore.Processing.Cursors.Sql.Constants.UpdateCursorSizeRoutine" /> stored procedure.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Processing.Cursors.Sql.SqlCursorDataProvider.CreateUpdateCursorSplitSupportedParams(System.Guid,System.Guid,System.Boolean)">
+            <summary>
+                Creates an <see cref="T:System.Collections.Generic.IReadOnlyCollection`1" /> of <see cref="T:System.Data.SqlClient.SqlParameter" /> passed for execution to
+                <see cref="F:Sitecore.Processing.Cursors.Sql.Constants.UpdateCursorSplitSupportedRoutine" /> stored procedure.
+            </summary>
+            <param name="cursorId">The id of the <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" /> to update.</param>
+            <param name="concurrencyToken">The <see cref="P:Sitecore.Processing.Cursors.Abstractions.ICursor.ConcurrencyToken" /> value to ensure the cursor data hasn't changed since reading it.</param>
+            <param name="isSplitSupported">Indicates whether the cursor supports splits.</param>
+            <returns>
+                The <see cref="T:System.Collections.Generic.IReadOnlyCollection`1" /> of <see cref="T:System.Data.SqlClient.SqlParameter" /> passed for execution to
+                <see cref="F:Sitecore.Processing.Cursors.Sql.Constants.UpdateCursorSplitSupportedRoutine" /> stored procedure.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Processing.Cursors.Sql.SqlCursorDataProvider.CreateUpdateSplitCursorParams(System.Guid,System.Guid,System.Byte[],System.Int64,System.Single)">
+            <summary>
+                Creates an <see cref="T:System.Collections.Generic.IReadOnlyCollection`1" /> of <see cref="T:System.Data.SqlClient.SqlParameter" /> passed for execution to
+                <see cref="F:Sitecore.Processing.Cursors.Sql.Constants.UpdateCursorRoutine" /> stored procedure.
+            </summary>
+            <param name="cursorId">The id of the <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" /> that has been split.</param>
+            <param name="concurrencyToken">The <see cref="P:Sitecore.Processing.Cursors.Abstractions.ICursor.ConcurrencyToken" /> value to ensure we have the latest data for the cursor.</param>
+            <param name="updatedBookmark">
+                The updated bookmark, which represents the current position in the split
+                <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" />.
+            </param>
+            <param name="updatedSize">
+                The updated, approximate, total amount of items to work on in the split
+                <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" />.
+            </param>
+            <param name="updatedPriority">The updated priority of the split <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" />.</param>
+            <returns>
+                The <see cref="T:System.Collections.Generic.IReadOnlyCollection`1" /> of <see cref="T:System.Data.SqlClient.SqlParameter" /> passed for execution to
+                <see cref="F:Sitecore.Processing.Cursors.Sql.Constants.UpdateCursorRoutine" /> stored procedure.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Processing.Cursors.Sql.SqlCursorDataProvider.CreateParametersCollectionWithTaskId(System.Guid)">
+            <summary>
+                Creates an <see cref="T:System.Collections.Generic.IReadOnlyCollection`1" /> of <see cref="T:System.Data.SqlClient.SqlParameter" />
+                with <paramref name="taskId" /> parameter inside.
+            </summary>
+            <param name="taskId">The id of the task to work on.</param>
+            <returns>
+                The <see cref="T:System.Collections.Generic.IReadOnlyCollection`1" /> of <see cref="T:System.Data.SqlClient.SqlParameter" />
+                with <paramref name="taskId" /> parameter inside.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Processing.Cursors.Sql.SqlCursorDataProvider.CreateDeleteByTaskParams(System.Guid,System.Boolean)">
+            <summary>
+                Creates an <see cref="T:System.Collections.Generic.IReadOnlyCollection`1" /> of <see cref="T:System.Data.SqlClient.SqlParameter" /> passed for execution to
+                <see cref="F:Sitecore.Processing.Cursors.Sql.Constants.DeleteCursorsByTaskIdRoutine" /> stored procedure.
+            </summary>
+            <param name="taskId">The id of the task to work on.</param>
+            <param name="deleteCompletedOnly">
+                Indicates whether only completed cursors have to be removed (<c>true</c>) or not (
+                <c>false</c>).
+            </param>
+            <returns>
+                The <see cref="T:System.Collections.Generic.IReadOnlyCollection`1" /> of <see cref="T:System.Data.SqlClient.SqlParameter" /> passed for execution to
+                <see cref="F:Sitecore.Processing.Cursors.Sql.Constants.DeleteCursorsByTaskIdRoutine" /> stored procedure.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Processing.Cursors.Sql.SqlCursorDataProvider.ExecuteCursorRoutineAsync(System.Collections.Generic.IReadOnlyCollection{System.Data.SqlClient.SqlParameter},System.String,System.Boolean,System.Data.SqlClient.SqlCommandColumnEncryptionSetting)">
+            <summary>
+                Asynchronously executes routine that returns <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" /> instance.
+            </summary>
+            <param name="parameters">
+                A read-only collection of the <see cref="T:System.Data.SqlClient.SqlParameter" /> objects representing the parameters expected by
+                the stored procedure.
+            </param>
+            <param name="routineName">
+                A name of the stored procedure to execute.
+            </param>
+            <param name="throwIfNoCursor">
+                When true, exception is thrown if stored procedure does not return cursor.
+            </param>
+            <param name="sqlCommandColumnEncryptionSetting">
+                The SQL command column encryption setting.
+            </param>
+            <returns>
+                Returns <see cref="T:System.Threading.Tasks.Task`1" /> with the <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursor" /> instance if attempt succeeded.
+                Otherwise, if <paramref name="throwIfNoCursor" /> is false, returns <see cref="T:System.Threading.Tasks.Task`1" /> with <c>null</c>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Processing.Cursors.Sql.SqlCursorDataProvider.ExecuteScalarRoutineAsync``1(System.Collections.Generic.IReadOnlyCollection{System.Data.SqlClient.SqlParameter},System.String,System.Data.SqlClient.SqlCommandColumnEncryptionSetting)">
+            <summary>
+                Asynchronously executes routine that returns <typeparamref name="T" />.
+            </summary>
+            <param name="parameters">
+                A read-only collection of the <see cref="T:System.Data.SqlClient.SqlParameter" /> objects representing the parameters expected by
+                the stored procedure.
+            </param>
+            <param name="routineName">
+                A name of the stored procedure to execute.
+            </param>
+            <param name="sqlCommandColumnEncryptionSetting">
+                The SQL command column encryption setting.
+            </param>
+            <returns>
+                Returns <see cref="T:System.Threading.Tasks.Task`1" /> with the <typeparamref name="T" />.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Processing.Cursors.Sql.SqlCursorDataProvider.ExecuteNonQueryRoutineAsync(System.Collections.Generic.IReadOnlyCollection{System.Data.SqlClient.SqlParameter},System.String,System.Data.SqlClient.SqlCommandColumnEncryptionSetting)">
+            <summary>
+                Asynchronously executes routine that does not return any value.
+            </summary>
+            <param name="parameters">
+                A read-only collection of the <see cref="T:System.Data.SqlClient.SqlParameter" /> objects representing the parameters expected by
+                the stored procedure.
+            </param>
+            <param name="routineName">
+                A name of the stored procedure to execute.
+            </param>
+            <param name="sqlCommandColumnEncryptionSetting">
+                The SQL command column encryption setting.
+            </param>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task" /> representing asynchronous operation.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Cursors.Sql.SqlCursorDataProvider.ThrowIfRoutineException(System.Data.SqlClient.SqlCommand,System.Data.SqlClient.SqlException,System.String)">
+            <summary>
+                Throws exception if <paramref name="exception" /> is caused by return value from stored procedure.
+            </summary>
+            <param name="command">A command that has been used to execute stored procedure.</param>
+            <param name="exception">An exception, thrown during sending query to the database.</param>
+            <param name="routineName">Name of the stored procedure that had to be executed.</param>
+        </member>
+        <member name="T:Sitecore.Processing.Cursors.Sql.SqlCursorDataProviderFactory">
+            <summary>
+                Factory, which creates the <see cref="T:Sitecore.Processing.Cursors.Sql.SqlCursorDataProvider" /> instances.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Processing.Cursors.Sql.SqlCursorDataProviderFactory.#ctor(System.IServiceProvider,Sitecore.Processing.Common.IConnectionStringResolver,System.String,System.TimeSpan,System.TimeSpan,Sitecore.Framework.TransientFaultHandling.IRetryerRegistry,System.String,System.String,System.Boolean)">
+            <summary>
+                Creates a new instance of <see cref="T:Sitecore.Processing.Cursors.Sql.SqlCursorDataProviderFactory" /> class.
+            </summary>
+            <param name="serviceProvider">The <see cref="T:System.IServiceProvider"/> used to resolve services.</param>
+            <param name="resolver">An object to resolve the connection string itself using its name as an identifier.</param>
+            <param name="connectionStringName">
+                Name of the connection string used in <paramref name="resolver" /> to retrieve connection string to connect to
+                database.
+            </param>
+            <param name="commandTimeout">
+                The wait time before the execution attempt of a database command is terminated and an error is generated.
+            </param>
+            <param name="ownershipTimeout">
+                The timeout during which each agent has to update <see cref="P:Sitecore.Processing.Cursors.Abstractions.Cursor.Accessed" /> in the database.
+                If it didn't happen, cursor is considered abandoned.
+            </param>
+            <param name="retryerRegistry">
+                The retryer registry that is responsible for managing the creation and access to
+                a set of named <see cref="T:Sitecore.Framework.TransientFaultHandling.IRetryer"/> instances.
+            </param>
+            <param name="retryerName">
+                The name of a <see cref="T:Sitecore.Framework.TransientFaultHandling.IRetryer"/> that is registered for the sql provider.
+            </param>
+            <param name="cursorDataProviderDecoratorTypeName">
+                The type to use as a decorator around created <see cref= "T:Sitecore.Processing.Cursors.Abstractions.ICursorDataProvider" /> instances.
+            </param>
+            <param name="sqlCommandColumnEncryptionEnabled">
+                If set to <c>true</c> SQL command column encryption is enabled.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+                Argument <paramref name="resolver" /> is null.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+                Argument <paramref name="connectionStringName" /> is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+                Argument <paramref name="connectionStringName" /> is <see cref="F:System.String.Empty" /> or contains only white space.
+            </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+                <paramref name="ownershipTimeout" /> is less than or equal to <see cref="F:System.TimeSpan.Zero" />
+                or <paramref name="commandTimeout" /> is less than <see cref="F:System.TimeSpan.Zero" />.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+                Argument <paramref name="retryerRegistry" /> is a <b>null</b> reference.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+                Argument <paramref name="retryerName" /> is a <b>null</b> reference.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+                Argument <paramref name="retryerName" /> is empty or white space.
+            </exception>
+            <remarks>
+                The <paramref name="cursorDataProviderDecoratorTypeName"/> parameter is optional and can be passed as <c>null</c>.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Processing.Cursors.Sql.SqlCursorDataProviderFactory.#ctor(System.IServiceProvider,Sitecore.Processing.Common.IConnectionStringResolver,Sitecore.Framework.TransientFaultHandling.IRetryerRegistry,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+                Creates a new instance of<see cref="T:Sitecore.Processing.Cursors.Sql.SqlCursorDataProviderFactory" /> class.
+            </summary>
+            <param name="serviceProvider">The <see cref="T:System.IServiceProvider"/> used to resolve services.</param>
+            <param name="resolver">An object to resolve the connection string itself using its name as an identifier.</param>
+            <param name="retryerRegistry">
+                The retryer registry that is responsible for managing the creation and access to
+                a set of named <see cref="T:Sitecore.Framework.TransientFaultHandling.IRetryer"/> instances.
+            </param>
+            <param name="options">
+                The options provided by configuration to pass as constructor parameters to
+                <see cref="M:Sitecore.Processing.Cursors.Sql.SqlCursorDataProviderFactory.#ctor(System.IServiceProvider,Sitecore.Processing.Common.IConnectionStringResolver,System.String,System.TimeSpan,System.TimeSpan,Sitecore.Framework.TransientFaultHandling.IRetryerRegistry,System.String,System.String,System.Boolean)" />.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+                Argument <paramref name="retryerRegistry" /> is a <b>null</b> reference.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Processing.Cursors.Sql.SqlCursorDataProviderFactory.Create(System.Guid)">
+            <summary>
+                Creates an instance of the <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursorDataProvider" /> for specific task.
+            </summary>
+            <param name="taskId">The unique identifier of the task to create <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursorDataProvider" /> instance for.</param>
+            <returns>
+                The instance of the <see cref="T:Sitecore.Processing.Cursors.Abstractions.ICursorDataProvider" /> that can manage <see cref="T:Sitecore.Processing.Cursors.Abstractions.Cursor" />
+                instances for task, specified in <paramref name="taskId" />
+            </returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,331 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sitecore.Processing.Engine.Scripting.Mrs</name>
+    </assembly>
+    <members>
+        <member name="T:Sitecore.Processing.Engine.Scripting.Mrs.AccessTokenInfo">
+            <summary>
+            Contains information about a token used for authentication.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Scripting.Mrs.AccessTokenInfo.#ctor(Sitecore.MRSClient.Models.AccessTokenResponse)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Scripting.Mrs.AccessTokenInfo"/> class.
+            </summary>
+            <param name="tokenResponse">The token response.</param>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Scripting.Mrs.AccessTokenInfo.TokenCredentials">
+            <summary>
+            Gets the credentials for <see cref="T:Sitecore.MRSClient.MRSServiceClient"/>.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Scripting.Mrs.AccessTokenInfo.ExpiresOn">
+            <summary>
+            Gets the time the token expires.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Scripting.Mrs.IMrsScriptClient">
+            <summary>
+            A client for Microsoft Machine Learning Server that supports the operations required for script execution.
+            </summary>
+            <seealso cref="T:System.IDisposable" />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Scripting.Mrs.IMrsScriptClient.CreateSessionIdAsync(System.Threading.CancellationToken)">
+            <summary>
+            Creates a new session and returns its identifier.
+            </summary>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>A task that represents the asynchronous operation. The task result contains the identifier of created session.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Scripting.Mrs.IMrsScriptClient.ExecuteScriptAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Executes the specified script in the session with the specified identifier.
+            </summary>
+            <param name="sessionId">The session identifier.</param>
+            <param name="script">The script to execute.</param>
+            <param name="outputVariableName">An optional name of a variable whose value will be returned.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>A task that represents the asynchronous operation. The task result contains return value from the script if an output variable name was specified; <c>null</c> otherwise.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Scripting.Mrs.IMrsScriptClient.EndSessionAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Ends the session with the specified identifier.
+            </summary>
+            <param name="sessionId">The session identifier.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Scripting.Mrs.IMrsServiceClientFactory">
+            <summary>
+            Factory for creating instances of <see cref="T:Sitecore.MRSClient.IMRSServiceClient"/>.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Scripting.Mrs.IMrsServiceClientFactory.Credentials">
+            <summary>
+            Gets the credentials used for initial authorization.
+            </summary>
+            <value>
+            The credentials.
+            </value>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Scripting.Mrs.IMrsServiceClientFactory.CreateClient(Microsoft.Rest.ServiceClientCredentials)">
+            <summary>
+            Creates an <see cref="T:Sitecore.MRSClient.IMRSServiceClient"/> with the specified credentials.
+            </summary>
+            <param name="credentials">The credentials used for authentication.</param>
+            <returns>An instance of <see cref="T:Sitecore.MRSClient.IMRSServiceClient"/>.</returns>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Scripting.Mrs.MrsRScriptHost">
+            <summary>
+            A script host for Microsoft Machine Learning Server using the R language.
+            </summary>
+            <seealso cref="T:Sitecore.Processing.Engine.Scripting.Mrs.MrsScriptHost" />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Scripting.Mrs.MrsRScriptHost.#ctor(Sitecore.Processing.Engine.Scripting.Mrs.IMrsServiceClientFactory,Sitecore.Processing.Engine.Scripting.Abstractions.ScriptContextSettings,System.TimeSpan,System.IServiceProvider)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Scripting.Mrs.MrsRScriptHost" /> class.
+            </summary>
+            <param name="serviceClientFactory">A factory to create <see cref="T:Sitecore.MRSClient.IMRSServiceClient" />s given some credentials.</param>
+            <param name="contextSettings">The settings for the endpoints used to read and write data.</param>
+            <param name="refreshInterval">Sessions will be kept alive in the background if the refresh interval is non negative.</param>
+            <param name="serviceProvider">Optional provider used to get an <see cref="T:Microsoft.Extensions.Logging.ILogger"/>. Logging is disabled if this is not provided.</param>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Scripting.Mrs.MrsRScriptHost.#ctor(Sitecore.Processing.Common.IConnectionStringResolver,Sitecore.Processing.Engine.Scripting.Mrs.IMrsServiceClientFactory,System.IServiceProvider,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Scripting.Mrs.MrsRScriptHost"/> class.
+            </summary>
+            <remarks>
+            This constructor is intended to be used with DI configuration.
+            </remarks>
+            <param name="connectionStringResolver">The connection string resolver.</param>
+            <param name="serviceClientFactory">A factory to create <see cref="T:Sitecore.MRSClient.IMRSServiceClient" />s given some credentials.</param>
+            <param name="serviceProvider">Optional provider used to get an <see cref="T:Microsoft.Extensions.Logging.ILogger"/>. Logging is disabled if this is not provided.</param>
+            <param name="configuration">The configuration passed by dependency injection.</param>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Scripting.Mrs.MrsScriptClient">
+            <summary>
+            Implementation of <see cref="T:Sitecore.Processing.Engine.Scripting.Mrs.IMrsScriptClient"/> using an <see cref="T:Sitecore.MRSClient.IMRSServiceClient"/>.
+            </summary>
+            <seealso cref="T:Sitecore.Processing.Engine.Scripting.Mrs.IMrsScriptClient" />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Scripting.Mrs.MrsScriptClient.#ctor(Sitecore.Processing.Engine.Scripting.Mrs.IMrsServiceClientFactory,Sitecore.MRSClient.Models.RuntimeType)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Scripting.Mrs.MrsScriptClient"/> class.
+            </summary>
+            <param name="clientFactory">A factory for creating <see cref="T:Sitecore.MRSClient.IMRSServiceClient"/>s given credentials for authentication.</param>
+            <param name="runtimeType">Type of the runtime, i.e. script language.</param>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Scripting.Mrs.MrsScriptClient.RuntimeType">
+            <summary>
+            Gets the runtime type supported by this client.
+            </summary>
+            <value>
+            The type of the runtime.
+            </value>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Scripting.Mrs.MrsScriptClient.CreateSessionIdAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Scripting.Mrs.MrsScriptClient.ExecuteScriptAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Scripting.Mrs.MrsScriptClient.EndSessionAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Scripting.Mrs.MrsScriptClient.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Scripting.Mrs.MrsScriptClient.ExecuteAuthenticatedAsync``1(System.Func{Sitecore.MRSClient.IMRSServiceClient,System.Threading.Tasks.Task{``0}},System.Threading.CancellationToken)">
+            <summary>
+            Executes the specified action on an authenticated <see cref="T:Sitecore.MRSClient.IMRSServiceClient"/>.
+            </summary>
+            <typeparam name="TReturn">The type of the return value.</typeparam>
+            <param name="action">The action to execute.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>A task that represents the asynchronous operation. The task result contains result of the executed action.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Scripting.Mrs.MrsScriptClient.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+            <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Scripting.Mrs.MrsScriptClient.AuthenticateAsync(System.Threading.CancellationToken)">
+            <summary>
+            Attempts authenticating and returns the token if successful.
+            </summary>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>A task that represents the asynchronous operation. The task result contains the token.</returns>
+            <exception cref="T:System.Security.Authentication.AuthenticationException">Authentication failed.</exception>
+            <exception cref="T:Sitecore.Processing.Engine.Scripting.Abstractions.ScriptHostException">An unexpected error occurred while authenticating.</exception>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Scripting.Mrs.MrsScriptHost">
+            <summary>
+            A script host for Microsoft Machine Learning Server.
+            </summary>
+            <seealso cref="T:Sitecore.Processing.Engine.Scripting.ScriptHost" />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Scripting.Mrs.MrsScriptHost.#ctor(Sitecore.Processing.Engine.Scripting.Mrs.IMrsScriptClient,System.String,Sitecore.Processing.Engine.Scripting.Abstractions.ScriptContextSettings,Sitecore.Processing.Engine.Scripting.Abstractions.IIntegrationScript,System.TimeSpan,System.IServiceProvider)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Scripting.Mrs.MrsScriptHost"/> class.
+            </summary>
+            <param name="client">The client to communicate with Microsoft Machine Learning Server.</param>
+            <param name="scriptLanguage">The script language for sessions created in this host.</param>
+            <param name="contextSettings">The settings for the endpoints used to read and write data.</param>
+            <param name="integrationScript">The integration script to provide communication with the host.</param>
+            <param name="refreshInterval">Sessions will be kept alive in the background if the refresh interval is non negative.</param>
+            <param name="serviceProvider">Optional provider used to get an <see cref="T:Microsoft.Extensions.Logging.ILogger"/>. Logging is disabled if this is not provided.</param>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Scripting.Mrs.MrsScriptHost.#ctor(Sitecore.Processing.Engine.Scripting.Mrs.IMrsScriptClient,System.String,Sitecore.Processing.Common.IConnectionStringResolver,Sitecore.Processing.Engine.Scripting.Abstractions.IIntegrationScript,System.IServiceProvider,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Scripting.Mrs.MrsScriptHost"/> class from DI configuration.
+            </summary>
+            <param name="client">The client to communicate with Microsoft Machine Learning Server.</param>
+            <param name="scriptLanguage">The script language for sessions created in this host.</param>
+            <param name="connectionStringResolver">The connection string resolver.</param>
+            <param name="integrationScript">The integration script to provide communication with the host.</param>
+            <param name="serviceProvider">Optional provider used to get an <see cref="T:Microsoft.Extensions.Logging.ILogger"/>. Logging is disabled if this is not provided.</param>
+            <param name="configuration">The configuration passed by dependency injection.</param>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Scripting.Mrs.MrsScriptHost.CreateSessionAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Scripting.Mrs.MrsScriptSession">
+            <summary>
+            Represents a session in Microsoft Machine Learning Server.
+            </summary>
+            <seealso cref="T:Sitecore.Processing.Engine.Scripting.Abstractions.IScriptSession" />
+        </member>
+        <member name="F:Sitecore.Processing.Engine.Scripting.Mrs.MrsScriptSession._executionMutex">
+            <summary>
+            Prevents race conditions between normal script execution and background refreshing.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Engine.Scripting.Mrs.MrsScriptSession._sessionInitializationScriptExecuted">
+            <summary>
+            A flag ensuring that <see cref="P:Sitecore.Processing.Engine.Scripting.Abstractions.IIntegrationScript.SessionInitializationScript"/> will only be executed once.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Engine.Scripting.Mrs.MrsScriptSession._sessionInitialized">
+            <summary>
+            A flag indicating whether the session has been initialized with a key namespace.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Engine.Scripting.Mrs.MrsScriptSession._disposed">
+            <summary>
+            A flag indicating whether the session has been disposed.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Scripting.Mrs.MrsScriptSession.#ctor(Sitecore.Processing.Engine.Scripting.Mrs.MrsScriptHost,System.String,System.TimeSpan,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Scripting.Mrs.MrsScriptSession" /> class.
+            </summary>
+            <param name="host">The MRS host.</param>
+            <param name="sessionId">The identifier of this session.</param>
+            <param name="refreshInterval">The session will be kept alive in the background if the refresh interval is non negative.</param>
+            <param name="logger">An <see cref="T:Microsoft.Extensions.Logging.ILogger"/> to record exceptions if background refresh fails, or ending the session unexpectedly fails.</param>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Scripting.Mrs.MrsScriptSession.Expired">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Scripting.Mrs.MrsScriptSession.RefreshTask">
+            <remarks>
+            Made internal to enable inference in unit tests.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Scripting.Mrs.MrsScriptSession.InitializeContextAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Scripting.Mrs.MrsScriptSession.ExecuteScriptAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Scripting.Mrs.MrsScriptSession.DisposeAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Scripting.Mrs.MrsServiceClientFactory">
+            <summary>
+            Factory of <see cref="T:Sitecore.MRSClient.IMRSServiceClient"/> objects.
+            </summary>
+            <seealso cref="T:Sitecore.Processing.Engine.Scripting.Mrs.IMrsServiceClientFactory" />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Scripting.Mrs.MrsServiceClientFactory.#ctor(System.Uri)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Scripting.Mrs.MrsServiceClientFactory"/>.
+            </summary>
+            <param name="uri">The URL of the Microsoft Machine Learning Server including username and password.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="uri"/> is <see langword="null"/>.</exception>
+            <remarks>
+                The <see cref="T:Sitecore.MRSClient.IMRSServiceClient"/> created by this factory does not enforce <see cref="F:System.Uri.UriSchemeHttps"/>
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Scripting.Mrs.MrsServiceClientFactory.#ctor(Sitecore.Processing.Common.IConnectionStringResolver,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Scripting.Mrs.MrsServiceClientFactory"/>.
+            </summary>
+            <remarks>
+            This constructor is intended to be used with DI configuration.
+            </remarks>
+            <param name="connectionStringResolver">The connection string resolver.</param>
+            <param name="configuration">The configuration passed by dependency injection.</param>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Scripting.Mrs.MrsServiceClientFactory.#ctor(System.Uri,System.Boolean,System.Boolean,System.Collections.Generic.IReadOnlyList{System.String})">
+            <summary>
+                Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Scripting.Mrs.MrsServiceClientFactory"/>.
+            </summary>
+            <param name="uri">The URL of the Microsoft Machine Learning Server including username and password.</param>
+            <param name="enforceHttps">
+                Indicates whether only <see cref="F:System.Uri.UriSchemeHttps"/> is allowed as a value of <see cref="P:System.Uri.Scheme"/>
+                of <paramref name="uri"/>.
+            </param>
+            <param name="allowInvalidCertificates">
+                Indicates whether <see cref="T:Sitecore.MRSClient.IMRSServiceClient"/> created by <see cref="T:Sitecore.Processing.Engine.Scripting.Mrs.MrsServiceClientFactory"/> accepts
+                self-signed and invalid certificates or not.
+            </param>
+            <param name="acceptedThumbprints">
+                The list of certificate thumbprints that are accepted during server certificate validation.
+            </param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="uri"/> is <see langword="null"/>.</exception>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Scripting.Mrs.MrsServiceClientFactory.#ctor(System.Uri,System.Boolean,System.Boolean,System.Collections.Generic.IReadOnlyList{System.String},System.TimeSpan)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Scripting.Mrs.MrsServiceClientFactory"/>.
+            </summary>
+            <param name="uri">The URL of the Microsoft Machine Learning Server including username and password.</param>
+            <param name="enforceHttps">
+                Indicates whether only <see cref="F:System.Uri.UriSchemeHttps"/> is allowed as a value of <see cref="P:System.Uri.Scheme"/>
+                of <paramref name="uri"/>.
+            </param>
+            <param name="allowInvalidCertificates">
+                Indicates whether <see cref="T:Sitecore.MRSClient.IMRSServiceClient"/> created by <see cref="T:Sitecore.Processing.Engine.Scripting.Mrs.MrsServiceClientFactory"/> accepts
+                self-signed and invalid certificates or not.
+            </param>
+            <param name="acceptedThumbprints">
+                The list of certificate thumbprints that are accepted during server certificate validation.
+            </param>
+            <param name="timeout">The <see cref="T:System.TimeSpan"/> for created <see cref="T:Sitecore.MRSClient.IMRSServiceClient"/> to wait before the request times out.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="uri"/> is <see langword="null"/>.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+                The <paramref name="timeout"/> specified is less than or equal to zero and is not
+                <see cref="F:System.Threading.Timeout.InfiniteTimeSpan" />.
+            </exception>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Scripting.Mrs.MrsServiceClientFactory.Disabled">
+            <summary>
+            Gets a value indicating whether this <see cref="T:Sitecore.Processing.Engine.Scripting.Mrs.MrsServiceClientFactory"/> is disabled.
+            This is the case if a connection string is not configured and the DI constructor is used.
+            </summary>
+            <value>
+              <c>true</c> if disabled; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Scripting.Mrs.MrsServiceClientFactory.Credentials">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Scripting.Mrs.MrsServiceClientFactory.CreateClient(Microsoft.Rest.ServiceClientCredentials)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

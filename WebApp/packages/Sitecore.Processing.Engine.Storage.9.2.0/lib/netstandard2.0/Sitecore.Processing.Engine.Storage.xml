@@ -1,0 +1,525 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sitecore.Processing.Engine.Storage</name>
+    </assembly>
+    <members>
+        <member name="T:Sitecore.Processing.Engine.Storage.Aes256EncryptionBlobTransformation">
+            <summary>
+            Encrypts blobs using AES-256
+            </summary>
+            <seealso cref="T:Sitecore.Processing.Engine.Storage.Abstractions.IBlobTransformation" />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Aes256EncryptionBlobTransformation.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Storage.Aes256EncryptionBlobTransformation"/> class.
+            </summary>
+            <param name="configuration">The configuration passed by dependency injection.</param>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Aes256EncryptionBlobTransformation.#ctor(System.Byte[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Storage.Aes256EncryptionBlobTransformation"/> class.
+            </summary>
+            <param name="key">The encryption key.</param>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Aes256EncryptionBlobTransformation.RemoveTransformation(System.Byte[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Aes256EncryptionBlobTransformation.ApplyTransformation(System.Byte[])">
+            <inheritdoc />
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Storage.AsyncEnumeratorBuilder`1">
+            <summary>
+                Utility class for creating <see cref="T:System.Collections.Generic.IAsyncEnumerator`1" />s.
+            </summary>
+            <seealso cref="T:System.IDisposable" />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.AsyncEnumeratorBuilder`1.#ctor">
+            <summary>
+                Prevents a default instance of the <see cref="T:Sitecore.Processing.Engine.Storage.AsyncEnumeratorBuilder`1" /> class from being created.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.AsyncEnumeratorBuilder`1.DefineMoveNext(System.Func{System.Threading.CancellationToken,System.Threading.Tasks.Task{System.Boolean}})">
+            <summary>
+            Defines the delegate for the <see cref="M:System.Collections.Generic.IAsyncEnumerator`1.MoveNext(System.Threading.CancellationToken)"/> method.
+            </summary>
+            <param name="moveNext">The move next delegate.</param>
+            <returns>This helper.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.AsyncEnumeratorBuilder`1.DefineCurrent(System.Func{`0})">
+            <summary>
+            Defines the delegate for the <see cref="P:System.Collections.Generic.IAsyncEnumerator`1.Current"/> property.
+            </summary>
+            <param name="getCurrent">The get current delegate.</param>
+            <returns>This helper.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.AsyncEnumeratorBuilder`1.RegisterDisposable``1(``0)">
+            <summary>
+            Registers an <see cref="T:System.IDisposable"/> that will be disposed with the <see cref="T:System.Collections.Generic.IAsyncEnumerator`1"/>.
+            </summary>
+            <typeparam name="TDisposable">The type of the disposable.</typeparam>
+            <param name="disposable">The disposable.</param>
+            <returns>The disposable.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.AsyncEnumeratorBuilder`1.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Storage.AsyncEnumeratorFactory">
+            <summary>
+                Utility class for creating <see cref="T:System.Collections.Generic.IAsyncEnumerator`1" />s.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.AsyncEnumeratorFactory.CreateEnumerator``1(System.Func{Sitecore.Processing.Engine.Storage.AsyncEnumeratorBuilder{``0},System.Threading.Tasks.Task})">
+            <summary>
+            Creates an <see cref="T:System.Collections.Generic.IAsyncEnumerator`1"/> using the factory specified.
+            </summary>
+            <param name="factory">The factory.</param>
+            <returns>The <see cref="T:System.Collections.Generic.IAsyncEnumerator`1"/>.</returns>
+            <exception cref="T:System.InvalidOperationException">
+            Move next method has not been defined
+            or
+            Current getter has not been defined
+            </exception>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Storage.BlobTableStore">
+            <summary>
+            An <see cref="T:Sitecore.Processing.Engine.Storage.Abstractions.ITableStore"/> that stores tables in an underlying <see cref="T:Sitecore.Processing.Engine.Storage.Abstractions.IBlobStore"/>.
+            </summary>
+            <seealso cref="T:Sitecore.Processing.Engine.Storage.Abstractions.ITableStore" />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobTableStore.#ctor(Sitecore.Processing.Engine.Storage.Abstractions.IBlobStore,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Storage.BlobTableStore" /> class.
+            </summary>
+            <param name="blobStore">The underlying blob store.</param>
+            <param name="maxRowsPerBlob">The maximum number of rows stored in a blob.</param>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Storage.BlobTableStore.MaxRowsPerBlob">
+            <summary>
+            Gets the maximum number of rows stored in a blob.
+            </summary>
+            <value>
+            The maximum number of rows stored in a blob.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Storage.BlobTableStore.WriteConcurrencyLevel">
+            <summary>
+            Gets or sets the maximum number of concurrent writes while storing blobs for a table.
+            </summary>
+            <value>
+            The write concurrency level.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Storage.BlobTableStore.ReadConcurrencyLevel">
+            <summary>
+            Gets or sets the maximum number of concurrent reads while reading blobs for a table.
+            </summary>
+            <value>
+            The read concurrency level.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Storage.BlobTableStore.LeaseTimeout">
+            <summary>
+            Gets or sets the lease timeout when putting table data.
+            </summary>
+            <value>
+            The lease timeout.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Storage.BlobTableStore.AcquireLeaseRetries">
+            <summary>
+            Gets or sets the maximum number of times acquiring a lease is retried.
+            </summary>
+            <value>
+            The maximum number of times acquiring a lease is retried.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Storage.BlobTableStore.MergeConcurrencyLevel">
+            <summary>
+            Gets or sets the maximum number of tables that are merged at a time.
+            If this limit is exceeded multiple temporary merge tables will be created.
+            </summary>
+            <value>
+            The merge table count limit.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Storage.BlobTableStore.SchemaName">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobTableStore.GetRowsAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobTableStore.GetRowsAsync(System.String,System.Int64,System.Int64,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobTableStore.PutTableAsync(Sitecore.Processing.Engine.Projection.IDataRowEnumerator,System.TimeSpan,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobTableStore.GetTableStatisticsAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobTableStore.GetTablesAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobTableStore.RemoveAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobTableStore.RemoveAllAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobTableStore.MergeTablesAsync(Sitecore.Processing.Engine.Projection.TableDefinition,System.Collections.Generic.IReadOnlyList{System.String},System.TimeSpan,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobTableStore.PurgeExpiredAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobTableStore.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobTableStore.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+            <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobTableStore.RemoveInternalAsync(System.String,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Removes the table without locking.
+            </summary>
+            <param name="tableName">Name of the table.</param>
+            <param name="keepData">if set to <c>true</c> data blobs are not deleted. This extra complexity is needed to avoid copying blobs in the <see cref="M:Sitecore.Processing.Engine.Storage.BlobTableStore.CombineTablesAsync(Sitecore.Processing.Engine.Projection.TableDefinition,System.Collections.Generic.IReadOnlyList{System.String},System.TimeSpan,System.Threading.CancellationToken)"/> method.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Storage.BlobTableStore.RowDataBlobGroup">
+            <summary>
+            Represents a sub group of data blobs with the same prefix in a <see cref="T:Sitecore.Processing.Engine.Storage.BlobTableStore.RowDataBlobMap"/>.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Storage.BlobTableStore.RowDataBlobGroup.Prefix">
+            <summary>
+            Gets the prefix used for the blobs in this group.
+            </summary>
+            <value>
+            The prefix.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Storage.BlobTableStore.RowDataBlobGroup.BlobCount">
+            <summary>
+            Gets the number of blobs in this group.
+            </summary>
+            <value>
+            The blob count.
+            </value>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Storage.BlobTableStore.RowDataBlobMap">
+            <summary>
+            Represents how the blobs containing row data for a table are organized.
+            </summary>
+            <remarks>
+            The data for tables is split into multiple blobs. Each blob may contain one or more rows, and groups may have different prefixes to support efficient merge of unsorted tables.
+            The data is stored like
+            Group1_0
+            Group1_1
+            Group1_2
+            Group2_0
+            Group3_0
+            Group3_1
+            ...
+            </remarks>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Storage.BlobTableStore.RowDataBlobMap.BlobGroupIndexes">
+            <summary>
+            Gets the offsets for each blob group.
+            </summary>
+            <value>
+            The blob group offsets.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Storage.BlobTableStore.RowDataBlobMap.RowCounts">
+            <summary>
+                Gets the number of rows in each blob.
+            </summary>
+            <value>
+                The row counts.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Storage.BlobTableStore.RowDataBlobMap.RowOffsets">
+            <summary>
+                Gets the row offset (start row index) for each blob.
+            </summary>
+            <value>
+                The offsets.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Storage.BlobTableStore.RowDataBlobMap.BlobCount">
+            <summary>
+                Gets the total number of blobs used to store the data.
+            </summary>
+            <value>
+                The blob count.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Storage.BlobTableStore.RowDataBlobMap.BlobGroups">
+            <summary>
+                Gets the prefixes used for blob groups and the number of blobs in each.
+            </summary>
+            <value>
+                The blob groups.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Storage.BlobTableStore.RowDataBlobMap.BlobKeys">
+            <summary>
+            Gets an enumerator for all the blobs used to store row data.
+            </summary>
+            <value>
+            The blob keys.
+            </value>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobTableStore.RowDataBlobMap.GetBlobKey(System.Guid,System.Int64)">
+            <summary>
+            Gets the key for the blob with the specified prefix and relative offset to this prefix.
+            </summary>
+            <param name="prefix">The prefix.</param>
+            <param name="relativeOffset">The relative offset.</param>
+            <returns>The blob key.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobTableStore.RowDataBlobMap.GetBlobIndex(System.Int64)">
+            <summary>
+            Gets the index of the blob containing the row with the specified offset.
+            </summary>
+            <param name="rowOffset">The row offset.</param>
+            <returns>The blob index.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobTableStore.RowDataBlobMap.GetBlobKey(System.Int64)">
+            <summary>
+            Gets the key for the blob at the specified index.
+            </summary>
+            <param name="blobIndex">The blob index.</param>
+            <returns>The key.</returns>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Storage.BlobStoreBase">
+            <summary>
+            Base class for implementations of <see cref="T:Sitecore.Processing.Engine.Storage.Abstractions.IBlobStore"/>.
+            </summary>
+            <seealso cref="T:Sitecore.Processing.Engine.Storage.Abstractions.IBlobStore" />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobStoreBase.#ctor(Sitecore.Processing.Engine.Storage.Abstractions.IBlobTransformation[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Storage.BlobStoreBase"/> class.
+            </summary>
+            <param name="transformations">The transformations to apply to blobs.</param>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Storage.BlobStoreBase.KeyNamespace">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Storage.BlobStoreBase.MaximumBlobSize">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Storage.BlobStoreBase.Transformations">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobStoreBase.GetKeysAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobStoreBase.ExistsAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobStoreBase.UpdateTimeToLiveAsync(System.String,System.TimeSpan,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobStoreBase.UpdateTimeToLiveIfMatchAsync(System.String,System.String,System.TimeSpan,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobStoreBase.RemoveAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobStoreBase.RemoveIfMatchAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobStoreBase.RemoveAllAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobStoreBase.PurgeExpiredAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobStoreBase.TryGetAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobStoreBase.GetIfNoneMatchAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobStoreBase.PutAsync(System.String,System.Byte[],System.TimeSpan,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobStoreBase.PutIfMatchAsync(System.String,System.Byte[],System.String,System.TimeSpan,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobStoreBase.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobStoreBase.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+            <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobStoreBase.TryGetRawAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+                Gets the raw blob with the specified key as it is stored (before transformations are removed) if it exists.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+                A task that represents the asynchronous operation. The task result contains the blob; or <c>null</c> if the blob
+                does not exist.
+            </returns>
+            <remarks>
+                Maximum length of <paramref name="key"/> is defined in <see cref="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.BlobStoreMaxKeyLength"/>.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobStoreBase.GetRawIfNoneMatchAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+                Gets the blob with the specified key as it is stored (before transformations are removed) and, if it exists and its version is different from the one specified.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="eTag">The ETag.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+                A task that represents the asynchronous operation. The task result contains the blob; or <c>null</c> if the blob
+                has not changed.
+            </returns>
+            <remarks>
+                Maximum length of <paramref name="key"/> is defined in <see cref="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.BlobStoreMaxKeyLength"/>.
+                Maximum length of <paramref name="eTag"/> is defined in <see cref="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.BlobStoreMaxETagLength"/>.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobStoreBase.PutRawAsync(System.String,System.Byte[],System.TimeSpan,System.Threading.CancellationToken)">
+            <summary>
+                Puts a blob (after transformations have been applied) with the specified key. If it already exists it will be overwritten.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="data">The data.</param>
+            <param name="timeToLive">The time to live. The blob will be deleted approximately after this time.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+                A task that represents the asynchronous operation. The task result contains the ETag of the stored blob.
+            </returns>
+            <remarks>
+                Maximum length of <paramref name="key"/> is defined in <see cref="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.BlobStoreMaxKeyLength"/>.
+                Maximum size of <paramref name="timeToLive"/> (in days) is defined in <see cref="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.BlobStoreMaxTimeToLiveDays"/>.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobStoreBase.PutRawIfMatchAsync(System.String,System.Byte[],System.String,System.TimeSpan,System.Threading.CancellationToken)">
+            <summary>
+                Puts a blob (after transformations have been applied) with the specified key if its ETag matches the one specified.
+                If the blob should be created only if it does not already exist, use a <c>null</c> ETag.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="data">The data.</param>
+            <param name="eTag">The ETag to match.</param>
+            <param name="timeToLive">The time to live. The blob will be deleted approximately after this time.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+                A task that represents the asynchronous operation. The task result contains the ETag of the stored blob, or
+                <c>null</c> if the specified ETag did not match.
+            </returns>
+            <remarks>
+                Maximum length of <paramref name="key"/> is defined in <see cref="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.BlobStoreMaxKeyLength"/>.
+                Maximum length of <paramref name="eTag"/> is defined in <see cref="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.BlobStoreMaxETagLength"/>.
+                Maximum size of <paramref name="timeToLive"/> (in days) is defined in <see cref="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.BlobStoreMaxTimeToLiveDays"/>.
+            </remarks>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Storage.BlobTableStoreFactory">
+            <summary>
+            An <see cref="T:Sitecore.Processing.Engine.Storage.Abstractions.ITableStoreFactory"/> that instantiates <see cref="T:Sitecore.Processing.Engine.Storage.BlobTableStore"/>s.
+            </summary>
+            <seealso cref="T:Sitecore.Processing.Engine.Storage.Abstractions.ITableStoreFactory" />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobTableStoreFactory.#ctor(System.IServiceProvider,Sitecore.Processing.Engine.Storage.Abstractions.IBlobStoreFactory,System.Int32,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Storage.BlobTableStoreFactory"/> class.
+            </summary>
+            <param name="serviceProvider">The <see cref="T:System.IServiceProvider"/> used to resolve services.</param>
+            <param name="blobStoreFactory">The underlying blob store factory.</param>
+            <param name="maxRowsPerBlob">The maximum rows per blob.</param>
+            <param name="tableStoreDecoratorTypeName">The type to use as a decorator around created <see cref="T:Sitecore.Processing.Engine.Storage.Abstractions.IBlobStore"/> instances.</param>
+            <exception cref="T:System.ArgumentNullException">blobStoreFactory</exception>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobTableStoreFactory.#ctor(System.IServiceProvider,Sitecore.Processing.Engine.Storage.Abstractions.IBlobStoreFactory,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Storage.BlobTableStoreFactory"/> class.
+            </summary>
+            <param name="serviceProvider">The <see cref="T:System.IServiceProvider"/> used to resolve services.</param>
+            <param name="blobStoreFactory">The underlying blob store factory.</param>
+            <param name="configuration">The configuration passed by dependency injection.</param>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.BlobTableStoreFactory.Create(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Storage.ConcurrentTaskManager">
+            <summary>
+            Handles concurrent execution of tasks with a specified maximum level of concurrency.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Storage.DeflateCompressionBlobTransformation">
+            <summary>
+            An <see cref="T:Sitecore.Processing.Engine.Storage.Abstractions.IBlobTransformation"/> that compresses blobs using the deflate algorithm.
+            </summary>
+            <seealso cref="T:Sitecore.Processing.Engine.Storage.Abstractions.IBlobTransformation" />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.DeflateCompressionBlobTransformation.RemoveTransformation(System.Byte[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.DeflateCompressionBlobTransformation.ApplyTransformation(System.Byte[])">
+            <inheritdoc />
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Storage.MergeCleanUpFailedException">
+            <summary>
+            The exception that is thrown when merging tables with <see cref="M:Sitecore.Processing.Engine.Storage.BlobTableStore.MergeTablesAsync(Sitecore.Processing.Engine.Projection.TableDefinition,System.Collections.Generic.IReadOnlyList{System.String},System.TimeSpan,System.Threading.CancellationToken)"/> succeeds, but cleaning up the source tables fails.
+            When this exception is thrown it is safe to assume the tables are merged.
+            </summary>
+            <seealso cref="T:System.Exception" />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.MergeCleanUpFailedException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Storage.MergeCleanUpFailedException"/> class.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.MergeCleanUpFailedException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Storage.MergeCleanUpFailedException"/> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.MergeCleanUpFailedException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Storage.MergeCleanUpFailedException"/> class.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception, or a null reference (Nothing in Visual Basic) if no inner exception is specified.</param>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.MergeCleanUpFailedException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Storage.MergeCleanUpFailedException"/> class.
+            </summary>
+            <param name="serializationInfo">The serialization information.</param>
+            <param name="streamingContext">The streaming context.</param>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Storage.TsvDataRowFormatter">
+            <summary>
+                Formats <see cref="T:Sitecore.Processing.Engine.Projection.IDataRow"/>s as tab-separated values.
+            </summary>
+            <seealso cref="T:Sitecore.Processing.Engine.Storage.Abstractions.IDataRowFormatter" />
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Storage.TsvDataRowFormatter.Id">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Storage.TsvDataRowFormatter.ContentType">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.TsvDataRowFormatter.WriteRowsAsync(Sitecore.Processing.Engine.Projection.IDataRowEnumerator,System.IO.Stream,System.IFormatProvider)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>
