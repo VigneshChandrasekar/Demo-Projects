@@ -1,0 +1,321 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sitecore.XConnect.Service.Plugins.MarketingAutomation</name>
+    </assembly>
+    <members>
+        <member name="T:Sitecore.XConnect.Service.Plugins.MarketingAutomation.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Service.Plugins.MarketingAutomation.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Service.Plugins.MarketingAutomation.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Service.Plugins.MarketingAutomation.Resources.FailedToQueueUp_X_AutomationPoolWorkItemsForProcessing">
+            <summary>
+              Looks up a localized string similar to Failed to queue up {0} automation pool work items for processing. {1}.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Service.Plugins.MarketingAutomation.Resources.FailedToQueueUpAutomationPoolWorkItemsForProcessing">
+            <summary>
+              Looks up a localized string similar to Failed to queue up automation pool work items for processing..
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Service.Plugins.MarketingAutomation.Resources.FailedToRemoveWorkItemsForDiedContacts">
+            <summary>
+              Looks up a localized string similar to Failed to remove work items for contacts that are died during contact merge..
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Service.Plugins.MarketingAutomation.Resources.FailedToUpdateEnrollmentsForDiedContacts">
+            <summary>
+              Looks up a localized string similar to Failed to update enrollments for contacts that are died during contact merge..
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Service.Plugins.MarketingAutomation.Resources.ObsoleteConstructorIsCalled">
+            <summary>
+              Looks up a localized string similar to Obsolete constructor of {0} is called..
+            </summary>
+        </member>
+        <member name="T:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher">
+            <summary>
+            Monitors events in XConnect on the C&amp;S server against contacts and raises work items for automation.
+            </summary>
+        </member>
+        <member name="F:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.DefaultPriorityOptionName">
+            <summary>
+            The option name to read the Default Priority property from.
+            </summary>
+        </member>
+        <member name="F:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.UnspecifiedPriority">
+            <summary>
+            The default priority to use when no priority has been specified.
+            </summary>
+        </member>
+        <member name="F:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.DelayScheduleOffset">
+            <summary>
+            The duration to offset the schedule for work items which should not be processed immediately.
+            </summary>
+            <remarks>Used to avoid a race condition between the engine and operations endpoint for live events.</remarks>
+        </member>
+        <member name="F:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher._disposed">
+            <summary>
+            If <c>true</c> the current instance is already disposed. 
+            </summary>
+        </member>
+        <member name="M:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Sitecore.Xdb.MarketingAutomation.Core.Pool.IAutomationPool,Microsoft.Extensions.DependencyInjection.IServiceScopeFactory,Microsoft.Extensions.Logging.ILogger{Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher" /> class.
+            </summary>
+            <param name="configuration">The configuration to use for this object.</param>
+            <param name="pool">The pool to log work items into.</param>
+            <param name="serviceScopeFactory">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory"/> used to create new service scopes.</param>
+            <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILogger`1" /> to log messages to.</param>
+        </member>
+        <member name="M:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.#ctor(Sitecore.Xdb.MarketingAutomation.Core.Pool.IAutomationPool,Microsoft.Extensions.DependencyInjection.IServiceScopeFactory,Microsoft.Extensions.Logging.ILogger{Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher},System.Byte)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher" /> class.
+            </summary>
+            <param name="pool">The pool to log work items into.</param>
+            <param name="serviceScopeFactory">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory"/> used to create new service scopes.</param>
+            <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILogger`1" /> to log messages to.</param>
+            <param name="defaultPriority">The default priority to set the work item as.</param>
+        </member>
+        <member name="P:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.DefaultPriority">
+            <summary>
+            The default priority to set the work item as.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.PoolAddRetryLimit">
+            <summary>
+            The retry limit to use when adding work to the automation pool.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.EnablePoolAddRetry">
+            <summary>
+            Determines whether add operations for the automation pool will retry failures.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.Pool">
+            <summary>
+            The pool to log work items into.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.ServiceScopeFactory">
+            <summary>
+            The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory"/> used to create new service scopes.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.Logger">
+            <summary>
+            The <see cref="T:Microsoft.Extensions.Logging.ILogger`1"/> to log messages to.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.ContextConfiguration">
+            <summary>
+            A <see cref="T:Sitecore.XConnect.XdbContextConfiguration"/> object that provides access to the configuration settings.
+            </summary>
+        </member>
+        <member name="M:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.Dispose">
+            <summary>
+            Perform cleanup before destroying this instance.
+            </summary>
+        </member>
+        <member name="M:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.Register(Sitecore.XConnect.XdbContextConfiguration)">
+            <summary>
+            Subscribes to events the current plugin listens to.
+            </summary>
+            <param name="config">A <see cref="T:Sitecore.XConnect.XdbContextConfiguration"/> object that provides access to the configuration settings.</param>
+        </member>
+        <member name="M:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.Unregister">
+            <summary>
+            Unsubscribes from events the current plugin listens to.
+            </summary>
+        </member>
+        <member name="M:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.SetPropertiesFromConfiguration(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Sets properties of this class from configuration options.
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.ReadDefaultPriorityFromConfiguration(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Reads the default priority from configuration.
+            </summary>
+            <param name="configuration">The configuration to read from.</param>
+            <returns>The priority read from configuration, or a default priority value if there was an error reading the configuration.</returns>
+        </member>
+        <member name="M:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.OnBatchExecutedAsync(System.Object,Sitecore.XConnect.Operations.XdbOperationBatchEventArgs)">
+            <summary>
+            An event handler for the XConnect batch executed event.
+            </summary>
+            <param name="sender">The sender of the event.</param>
+            <param name="args">The arguments to process.</param>
+        </member>
+        <member name="M:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.InspectForContactMerges(System.Collections.Generic.IEnumerable{Sitecore.XConnect.Operations.IXdbOperation})">
+            <summary>
+            Inspects operations batch for the contact merge operations.
+            </summary>
+            <param name="operationsBatch">The operations batch to inspect.</param>
+            <returns><see cref="T:System.Threading.Tasks.Task"/> to report status of the asynchronous operation.</returns>
+        </member>
+        <member name="M:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.InspectPoolForContactMerges(Sitecore.Xdb.MarketingAutomation.Core.Collections.IContactMergeCollection)">
+            <summary>
+            Inspects automation pool for contact merges.
+            </summary>
+            <param name="contactMerges">The contact merges to inspect with.</param>
+            <returns><see cref="T:System.Threading.Tasks.Task"/> to report status of the asynchronous operation.</returns>
+        </member>
+        <member name="M:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.InspectActivityEnrollmentsForContactMerges(Sitecore.Xdb.MarketingAutomation.Core.Collections.IContactMergeCollection)">
+            <summary>
+            Inspects activity enrollments for contact merges.
+            </summary>
+            <param name="contactMerges">The contact merges to inspect with.</param>
+            <returns><see cref="T:System.Threading.Tasks.Task"/> to report status of the asynchronous operation.</returns>
+        </member>
+        <member name="M:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.InspectForWorkItems(System.Collections.Generic.IEnumerable{Sitecore.XConnect.Operations.IXdbOperation})">
+            <summary>
+            Inspects operations batch for the operations to log to the automation pool.
+            </summary>
+            <param name="operationsBatch">The operations batch to inspect.</param>
+            <returns><see cref="T:System.Threading.Tasks.Task"/> to report to the status of the asynchronous operation.</returns>
+        </member>
+        <member name="M:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.CreateWorkItems(System.Collections.Generic.IEnumerable{Sitecore.XConnect.Operations.IXdbOperation})">
+            <summary>
+            Creates work items to add to the automation pool for processing.
+            </summary>
+            <param name="operationsBatch">The operations to process.</param>
+            <returns>The work items to process.</returns>
+        </member>
+        <member name="M:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.AddContactPurgeWorkItem(Sitecore.XConnect.Contact,Sitecore.Xdb.MarketingAutomation.Core.Pool.Collections.WorkItemCollection)">
+            <summary>
+            Adds a <see cref="T:Sitecore.Xdb.MarketingAutomation.Core.Pool.WorkItem"/> to the <see cref="T:Sitecore.Xdb.MarketingAutomation.Core.Pool.Collections.WorkItemCollection"/> for the provided contact for purging.
+            </summary>
+            <param name="contact">The <see cref="T:Sitecore.XConnect.Contact"/> to add the work item for.</param>
+            <param name="workItems">The <see cref="T:Sitecore.Xdb.MarketingAutomation.Core.Pool.Collections.WorkItemCollection"/> to add the work item to.</param>
+        </member>
+        <member name="M:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.AddContactProcessingWorkItem(Sitecore.XConnect.Contact,Sitecore.Xdb.MarketingAutomation.Core.Pool.Collections.WorkItemCollection,System.Boolean)">
+            <summary>
+            Adds a <see cref="T:Sitecore.Xdb.MarketingAutomation.Core.Pool.WorkItem"/> to the <see cref="T:Sitecore.Xdb.MarketingAutomation.Core.Pool.Collections.WorkItemCollection"/> for the provided contact.
+            </summary>
+            <param name="contact">The <see cref="T:Sitecore.XConnect.Contact"/> to add the work item for.</param>
+            <param name="workItems">The <see cref="T:Sitecore.Xdb.MarketingAutomation.Core.Pool.Collections.WorkItemCollection"/> to add the work item to.</param>
+            <param name="delaySchedule">Indicates whether the work item should be scheduled to be processed immediately or delayed.</param>
+        </member>
+        <member name="M:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.AddContactInteractionWorkItem(Sitecore.XConnect.Interaction,Sitecore.Xdb.MarketingAutomation.Core.Pool.Collections.WorkItemCollection)">
+            <summary>
+            Adds a <see cref="T:Sitecore.Xdb.MarketingAutomation.Core.Pool.WorkItem"/> to the <see cref="T:Sitecore.Xdb.MarketingAutomation.Core.Pool.Collections.WorkItemCollection"/> for the provided interaction.
+            </summary>
+            <param name="interaction">The <see cref="T:Sitecore.XConnect.Interaction"/> to add the work item for.</param>
+            <param name="workItems">The <see cref="T:Sitecore.Xdb.MarketingAutomation.Core.Pool.Collections.WorkItemCollection"/> to add the work item to.</param>
+        </member>
+        <member name="M:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.AddContactFacetReferenceWorkItem(Sitecore.XConnect.FacetReference,Sitecore.Xdb.MarketingAutomation.Core.Pool.Collections.WorkItemCollection)">
+            <summary>
+            Adds a <see cref="T:Sitecore.Xdb.MarketingAutomation.Core.Pool.WorkItem"/> to the <see cref="T:Sitecore.Xdb.MarketingAutomation.Core.Pool.Collections.WorkItemCollection"/> for the provided facet reference.
+            </summary>
+            <param name="facetReference">The <see cref="T:Sitecore.XConnect.FacetReference"/> to add the work item for.</param>
+            <param name="workItems">The <see cref="T:Sitecore.Xdb.MarketingAutomation.Core.Pool.Collections.WorkItemCollection"/> to add the work item to.</param>
+        </member>
+        <member name="M:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.AddWorkItem(Sitecore.Xdb.MarketingAutomation.Core.Pool.WorkItem,Sitecore.Xdb.MarketingAutomation.Core.Pool.Collections.WorkItemCollection)">
+            <summary>
+            Adds a <see cref="T:Sitecore.Xdb.MarketingAutomation.Core.Pool.WorkItem"/> to the <see cref="T:Sitecore.Xdb.MarketingAutomation.Core.Pool.Collections.WorkItemCollection"/>.
+            </summary>
+            <param name="workItem">The work item to add to <paramref name="workItems"/>.</param>
+            <param name="workItems">The <see cref="T:Sitecore.Xdb.MarketingAutomation.Core.Pool.Collections.WorkItemCollection" /> to add the work item to.</param>
+            <remarks>
+            If the work item is equal to another (same contact, data and interaction) but priority differs, take the work item with the higher priority.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.CreateContactPurgeWorkItem(System.Guid)">
+            <summary>
+            Creates contact purge work item to add to the automation pool for processing.
+            </summary>
+            <param name="contactId">The ID of the contact the work item is for.</param>
+            <returns>The work item to process.</returns>
+        </member>
+        <member name="M:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.CreateWorkItem(System.Guid,Sitecore.XConnect.Interaction,System.Boolean)">
+            <summary>
+            Creates a work item to add to the automation pool for processing.
+            </summary>
+            <param name="contactId">The ID of the contact the work item is for.</param>
+            <param name="interaction">The interaction to process. Can be <c>null</c>.</param>
+            <param name="delaySchedule">Indicates whether the work item should be scheduled to be processed immediately or delayed.</param>
+            <returns>The work item to process.</returns>
+        </member>
+        <member name="M:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.GetPriority(Sitecore.XConnect.Interaction)">
+            <summary>
+            Gets the priority to set for the work item for this interaction.
+            </summary>
+            <param name="interaction">The interaction to get the priority for.</param>
+            <returns>The priority to set on the work item.</returns>
+        </member>
+        <member name="M:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.ShouldProcessFacet(Sitecore.XConnect.FacetReference)">
+            <summary>
+            Determines whether the facet should be processed.
+            </summary>
+            <param name="facet">The facet to check.</param>
+            <returns>True if the facet should be processed, otherwise False.</returns>
+        </member>
+        <member name="M:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.ShouldProcessContactFacet(System.String)">
+            <summary>
+            Determines whether the contact facet should be processed.
+            </summary>
+            <param name="facetKey">The key of the contact facet to check.</param>
+            <returns>True if the facet should be processed, otherwise False.</returns>
+        </member>
+        <member name="M:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.ShouldProcessInteractionFacet(System.String)">
+            <summary>
+            Determines whether the interaction facet should be processed.
+            </summary>
+            <param name="facetKey">The key of the interaction facet to check.</param>
+            <returns>True if the facet should be processed, otherwise False.</returns>
+        </member>
+        <member name="M:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.FilterWorkItems(Sitecore.Xdb.MarketingAutomation.Core.Pool.Collections.WorkItemCollection)">
+            <summary>
+            Checks over <see cref="T:Sitecore.Xdb.MarketingAutomation.Core.Pool.Collections.WorkItemCollection"/> to see if any are redundant and can be removed.
+            </summary>
+            <param name="workItemCollection">The work item collection to filter.</param>
+        </member>
+        <member name="M:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.Dispose(System.Boolean)">
+            <summary>
+            Perform cleanup before destroying this instance.
+            </summary>
+            <param name="disposing">Determines if managed resources should be disposed.</param>
+        </member>
+        <member name="M:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher.AddWorkItemsToPoolAsync(Sitecore.Xdb.MarketingAutomation.Core.Pool.Collections.IWorkItemCollection)">
+            <summary>
+            Adds a collection of work items to the automation pool. Failures will be retried.
+            </summary>
+            <param name="workItemCollection">The work items to add to the pool.</param>
+            <returns>The final results for the work items.</returns>
+        </member>
+        <member name="T:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcherOptions">
+            <summary>
+            Options for the <see cref="T:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcher"/> class.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcherOptions.DefaultPriority">
+            <summary>
+            Gets or sets the default priority.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcherOptions.PoolAddRetryLimit">
+            <summary>
+            Gets or sets the retry limit when adding work items to the automation pool.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Service.Plugins.MarketingAutomation.XdbContactEventWatcherOptions.EnablePoolAddRetry">
+            <summary>
+            Gets or sets whether to use retry for adding work items to the automation pool.
+            </summary>
+        </member>
+    </members>
+</doc>

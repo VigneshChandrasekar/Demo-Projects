@@ -1,0 +1,584 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sitecore.Processing.Engine.Storage.Abstractions</name>
+    </assembly>
+    <members>
+        <member name="T:Sitecore.Processing.Engine.Storage.Abstractions.Blob">
+            <summary>
+                Represents a blob.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Abstractions.Blob.#ctor(System.Byte[],System.String,System.Nullable{System.DateTime})">
+            <summary>
+                Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Storage.Abstractions.Blob" /> class.
+            </summary>
+            <param name="data">The data.</param>
+            <param name="eTag">The ETag.</param>
+            <param name="expires">
+                The time when blob expires and is removed from the blobstore. <c>null</c> if the blob never
+                expires.
+            </param>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Storage.Abstractions.Blob.Data">
+            <summary>
+                Gets the data.
+            </summary>
+            <value>
+                The data.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Storage.Abstractions.Blob.ETag">
+            <summary>
+                Gets the version of this blob. Version is used for optimistic concurrency.
+            </summary>
+            <value>
+                The version.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Storage.Abstractions.Blob.Expires">
+            <summary>
+                The time when blob expires and is removed from the blobstore if any.
+            </summary>
+            <value>
+                The time when blob expires.
+            </value>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Storage.Abstractions.Sitecore.Processing.Engine.Storage.BlobTransformationException">
+            <summary>
+            The exception that is thrown when an <see cref="T:Sitecore.Processing.Engine.Storage.Abstractions.IBlobTransformation"/> fails.
+            Typically, this will be because the transformation was no applied to the data saved in the <see cref="T:Sitecore.Processing.Engine.Storage.Abstractions.IBlobStore"/>.
+            </summary>
+            <seealso cref="T:System.Exception" />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Abstractions.Sitecore.Processing.Engine.Storage.BlobTransformationException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Storage.Abstractions.Sitecore.Processing.Engine.Storage.BlobTransformationException"/> class.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Abstractions.Sitecore.Processing.Engine.Storage.BlobTransformationException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Storage.Abstractions.Sitecore.Processing.Engine.Storage.BlobTransformationException"/> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Abstractions.Sitecore.Processing.Engine.Storage.BlobTransformationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Storage.Abstractions.Sitecore.Processing.Engine.Storage.BlobTransformationException"/> class.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception, or a null reference (Nothing in Visual Basic) if no inner exception is specified.</param>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Abstractions.Sitecore.Processing.Engine.Storage.BlobTransformationException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Storage.Abstractions.Sitecore.Processing.Engine.Storage.BlobTransformationException"/> class.
+            </summary>
+            <param name="serializationInfo">The serialization information.</param>
+            <param name="streamingContext">The streaming context.</param>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Storage.Abstractions.Constants">
+            <summary>
+                The set of constants used throughout the Sitecore Processing Engine Storage Abstractions project.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.BlobStoreMaxKeyNamespaceLength">
+            <summary>
+                The maximum length of a namespace supported by <see cref="T:Sitecore.Processing.Engine.Storage.Abstractions.IBlobStore"/>.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.BlobStoreMaxKeyLength">
+            <summary>
+                The maximum length of a key supported by <see cref="T:Sitecore.Processing.Engine.Storage.Abstractions.IBlobStore"/>.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.BlobStoreMaxETagLength">
+            <summary>
+                The maximum length of an ETag supported by <see cref="T:Sitecore.Processing.Engine.Storage.Abstractions.IBlobStore"/>.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.BlobStoreMaxTimeToLiveDays">
+            <summary>
+                The maximum time to live (in days) supported by <see cref="T:Sitecore.Processing.Engine.Storage.Abstractions.IBlobStore"/>.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.TableStoreStatisticsBlobPrefix">
+            <summary>
+                The prefix used in <see cref="T:Sitecore.Processing.Engine.Storage.Abstractions.ITableStore"/> to store a blob with statistics of a table.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.TableStoreDataMapBlobPrefix">
+            <summary>
+                The prefix used in <see cref="T:Sitecore.Processing.Engine.Storage.Abstractions.ITableStore"/> to store a blob with data map of a table.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.TableStoreLeaseBlobPrefix">
+            <summary>
+                The prefix used in <see cref="T:Sitecore.Processing.Engine.Storage.Abstractions.ITableStore"/> to store a blob with leases of a table.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.TableStoreDataBlobPrefix">
+            <summary>
+                The prefix used in <see cref="T:Sitecore.Processing.Engine.Storage.Abstractions.ITableStore"/> to store a blob with data of a table.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.TableStoreTableNameMaxLength">
+            <summary>
+                The maximum length of a table name supported by <see cref="T:Sitecore.Processing.Engine.Storage.Abstractions.ITableStore"/>.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Storage.Abstractions.IBlobStore">
+            <summary>
+                A blob store that supports optimistic concurrency by means of ETags.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Storage.Abstractions.IBlobStore.KeyNamespace">
+            <summary>
+            Gets the namespace for the keys stored in this blob store.
+            </summary>
+            <remarks>
+            Namespaces are used to ensure isolation for multiple consumers.
+            Consumers with different namespaces will not overwrite each others blobs.
+            The maximum length of namespace is defined in <see cref="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.BlobStoreMaxKeyNamespaceLength"/>.
+            </remarks>
+            <value>
+            The namespace for the keys.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Storage.Abstractions.IBlobStore.MaximumBlobSize">
+            <summary>
+                Gets the maximum supported size of blobs.
+            </summary>
+            <value>
+                The maximum blob size.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Storage.Abstractions.IBlobStore.Transformations">
+            <summary>
+            Gets the transformations applied to blobs before they are stored.
+            </summary>
+            <value>
+            The transformations.
+            </value>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Abstractions.IBlobStore.GetKeysAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+                Gets the keys of the blobs in this blob store that start with the specified prefix.
+            </summary>
+            <param name="prefix">The prefix.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+                The keys.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Abstractions.IBlobStore.ExistsAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+                Determines whether a blob with the specified key exists.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+                A task that represents the asynchronous operation. The task result is <c>true</c> if the key exists; <c>false</c>
+                otherwise.
+            </returns>
+            <remarks>
+                Maximum length of <paramref name="key"/> is defined in <see cref="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.BlobStoreMaxKeyLength"/>.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Abstractions.IBlobStore.TryGetAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+                Gets the blob with the specified key if it exists.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+                A task that represents the asynchronous operation. The task result contains the blob; or <c>null</c> if the blob
+                does not exist.
+            </returns>
+            <remarks>
+                Maximum length of <paramref name="key"/> is defined in <see cref="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.BlobStoreMaxKeyLength"/>.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Abstractions.IBlobStore.GetIfNoneMatchAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+                Gets the blob with the specified key if it exists and its version is different from the one specified.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="eTag">The ETag.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+                A task that represents the asynchronous operation. The task result contains the blob; or <c>null</c> if the blob
+                has not changed.
+            </returns>
+            <remarks>
+                Maximum length of <paramref name="key"/> is defined in <see cref="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.BlobStoreMaxKeyLength"/>.
+                Maximum length of <paramref name="eTag"/> is defined in <see cref="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.BlobStoreMaxETagLength"/>.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Abstractions.IBlobStore.PutAsync(System.String,System.Byte[],System.TimeSpan,System.Threading.CancellationToken)">
+            <summary>
+                Puts a blob with the specified key. If it already exists it will be overwritten.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="data">The data.</param>
+            <param name="timeToLive">The time to live. The blob will be deleted approximately after this time.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+                A task that represents the asynchronous operation. The task result contains the ETag of the stored blob.
+            </returns>
+            <remarks>
+                Maximum length of <paramref name="key"/> is defined in <see cref="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.BlobStoreMaxKeyLength"/>.
+                Maximum size of <paramref name="timeToLive"/> (in days) is defined in <see cref="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.BlobStoreMaxTimeToLiveDays"/>.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Abstractions.IBlobStore.PutIfMatchAsync(System.String,System.Byte[],System.String,System.TimeSpan,System.Threading.CancellationToken)">
+            <summary>
+                Puts a blob with the specified key if its ETag matches the one specified.
+                If the blob should be created only if it does not already exist, use a <c>null</c> ETag.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="data">The data.</param>
+            <param name="eTag">The ETag to match.</param>
+            <param name="timeToLive">The time to live. The blob will be deleted approximately after this time.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+                A task that represents the asynchronous operation. The task result contains the ETag of the stored blob, or
+                <c>null</c> if the specified ETag did not match.
+            </returns>
+            <remarks>
+                Maximum length of <paramref name="key"/> is defined in <see cref="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.BlobStoreMaxKeyLength"/>.
+                Maximum length of <paramref name="eTag"/> is defined in <see cref="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.BlobStoreMaxETagLength"/>.
+                Maximum size of <paramref name="timeToLive"/> (in days) is defined in <see cref="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.BlobStoreMaxTimeToLiveDays"/>.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Abstractions.IBlobStore.UpdateTimeToLiveAsync(System.String,System.TimeSpan,System.Threading.CancellationToken)">
+            <summary>
+                Updates the time to live for the blob with the specified key.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="timeToLive">The time to live.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+                A task that represents the asynchronous operation. The task result is <c>true</c> if the time to live was updated;
+                <c>false</c> otherwise.
+            </returns>
+            <remarks>
+                Maximum length of <paramref name="key"/> is defined in <see cref="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.BlobStoreMaxKeyLength"/>.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Abstractions.IBlobStore.UpdateTimeToLiveIfMatchAsync(System.String,System.String,System.TimeSpan,System.Threading.CancellationToken)">
+            <summary>
+                Updates the time to live for the blob with the specified key if the ETag matches the one specified.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="eTag">The ETag to match.</param>
+            <param name="timeToLive">The time to live.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+                A task that represents the asynchronous operation. The task result is <c>true</c> if the time to live was updated;
+                <c>false</c> otherwise.
+            </returns>
+            <remarks>
+                Maximum length of <paramref name="key"/> is defined in <see cref="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.BlobStoreMaxKeyLength"/>.
+                Maximum length of <paramref name="eTag"/> is defined in <see cref="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.BlobStoreMaxETagLength"/>.
+                Maximum size of <paramref name="timeToLive"/> (in days) is defined in <see cref="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.BlobStoreMaxTimeToLiveDays"/>.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Abstractions.IBlobStore.RemoveAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+                Removes the blob with the specified key if it exists.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+                A task that represents the asynchronous operation. The task result is <c>true</c> if the blob was deleted;
+                <c>false</c> otherwise.
+            </returns>
+            <remarks>
+                Maximum length of <paramref name="key"/> is defined in <see cref="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.BlobStoreMaxKeyLength"/>.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Abstractions.IBlobStore.RemoveIfMatchAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+                Removes the blob with the specified key if it exists and its version matches the one specified.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="eTag">The ETag to match.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+                A task that represents the asynchronous operation. The task result is <c>true</c> if the blob was deleted;
+                <c>false</c> otherwise.
+            </returns>
+            <remarks>
+                Maximum length of <paramref name="key"/> is defined in <see cref="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.BlobStoreMaxKeyLength"/>.
+                Maximum length of <paramref name="eTag"/> is defined in <see cref="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.BlobStoreMaxETagLength"/>.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Abstractions.IBlobStore.RemoveAllAsync(System.Threading.CancellationToken)">
+            <summary>
+                Removes all blobs.
+            </summary>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+                A task that represents the asynchronous operation. The task result is <c>true</c> if all blobs were deleted;
+                <c>false</c> otherwise.
+                Please note: even if result is <c>false</c>, some of the blobs might have been deleted.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Abstractions.IBlobStore.PurgeExpiredAsync(System.Threading.CancellationToken)">
+            <summary>
+                Purges expired blobs.
+            </summary>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+                A task that represents the asynchronous operation.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Storage.Abstractions.IBlobStoreFactory">
+            <summary>
+            Instantiates <see cref="T:Sitecore.Processing.Engine.Storage.Abstractions.IBlobStore"/>s for different key namespaces.
+            </summary>
+            <remarks>
+            Namespaces are used to ensure isolation for multiple consumers if they use the same keys.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Abstractions.IBlobStoreFactory.Create(System.String)">
+            <summary>
+            Creates an <see cref="T:Sitecore.Processing.Engine.Storage.Abstractions.IBlobStore"/> for the specified namespace.
+            </summary>
+            <param name="keyNamespace">The namespace for the keys.</param>
+            <returns><see cref="T:Sitecore.Processing.Engine.Storage.Abstractions.IBlobStore"/> created for the specified namespace.</returns>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Storage.Abstractions.IBlobTransformation">
+            <summary>
+            Represents a transformation that is applied to blobs before they are stored.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Abstractions.IBlobTransformation.ApplyTransformation(System.Byte[])">
+            <summary>
+            Applies the transformation to the source data before it is saved.
+            </summary>
+            <param name="data">The data.</param>
+            <returns>The transformed data.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Abstractions.IBlobTransformation.RemoveTransformation(System.Byte[])">
+            <summary>
+            Removes the transformation from the data read from an <see cref="T:Sitecore.Processing.Engine.Storage.Abstractions.IBlobStore"/>.                
+            </summary>
+            <param name="data">The data.</param>
+            <returns>The data without the transformation.</returns>        
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Storage.Abstractions.IDataRowFormatter">
+            <summary>
+                Handles the serializing of <see cref="T:Sitecore.Processing.Engine.Projection.IDataRow"/>s to a <see cref="T:System.IO.Stream"/> in other formats than the native representation.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Storage.Abstractions.IDataRowFormatter.Id">
+            <summary>
+                Gets a string that uniquely identifies this <see cref="T:Sitecore.Processing.Engine.Storage.Abstractions.IDataRowFormatter"/>.
+            </summary>
+            <value>
+                The identifier.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Storage.Abstractions.IDataRowFormatter.ContentType">
+            <summary>
+                Gets the MIME type for the serialized content and optionally charset using HTTP Content-Type header format.
+            </summary>
+            <value>
+                The content type.
+            </value>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Abstractions.IDataRowFormatter.WriteRowsAsync(Sitecore.Processing.Engine.Projection.IDataRowEnumerator,System.IO.Stream,System.IFormatProvider)">
+            <summary>
+                Writes the <paramref name="rows"/> to the specified <paramref name="target"/> stream.
+            </summary>
+            <param name="rows">The rows.</param>
+            <param name="target">The target.</param>
+            <param name="cultureInfo">An object that supplies culture specific formatting.</param>
+            <returns>
+                A task that represents the asynchronous operation.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Storage.Abstractions.ITableStore">
+            <summary>
+                A storage for immutable tables, that is rows cannot be appended, changed or deleted individually.
+            </summary>
+            <remarks>
+                The <see cref="M:Sitecore.Processing.Engine.Storage.Abstractions.ITableStore.MergeTablesAsync(Sitecore.Processing.Engine.Projection.TableDefinition,System.Collections.Generic.IReadOnlyList{System.String},System.TimeSpan,System.Threading.CancellationToken)"/> operation can be used to combine rows from multiple tables.
+            </remarks>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Storage.Abstractions.ITableStore.SchemaName">
+            <summary>
+            Gets the schema name for the tables in this table store.
+            </summary>
+            <remarks>
+            Schemas are used to ensure isolation for multiple consumers.
+            Consumers with different schemas will not overwrite each others tables.
+            </remarks>
+            <value>
+            The schema name.
+            </value>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Abstractions.ITableStore.GetRowsAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+                Gets the rows from the table with the specified name.
+            </summary>
+            <param name="tableName">The name of the table.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+                A task that represents the asynchronous operation. The task result contains the rows enumerator.
+            </returns>
+            <remarks>
+                The maximum length of <paramref name="tableName"/> is defined in <see cref="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.TableStoreTableNameMaxLength"/>.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Abstractions.ITableStore.GetRowsAsync(System.String,System.Int64,System.Int64,System.Threading.CancellationToken)">
+            <summary>
+                Gets a subset of the rows from the table with the specified name.
+            </summary>
+            <param name="tableName">The name of the table.</param>
+            <param name="offset">The offset.</param>
+            <param name="limit">The count.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+                A task that represents the asynchronous operation. The task result contains the rows enumerator.
+            </returns>
+            <remarks>
+                The maximum length of <paramref name="tableName"/> is defined in <see cref="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.TableStoreTableNameMaxLength"/>.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Abstractions.ITableStore.PutTableAsync(Sitecore.Processing.Engine.Projection.IDataRowEnumerator,System.TimeSpan,System.Threading.CancellationToken)">
+            <summary>
+                Adds or overwrites the specified table.
+            </summary>
+            <param name="rows">The rows enumerator.</param>
+            <param name="timeToLive">The time to live. The table will be deleted approximately after this time.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+                A task that represents the asynchronous operation. The task result contains statistics for the table created.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Abstractions.ITableStore.GetTableStatisticsAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+                Gets statistics about the table with the specified name.
+            </summary>
+            <param name="tableName">The name of the table.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+                A task that represents the asynchronous operation. The task result contains statistics for the table.
+            </returns>
+            <remarks>
+                The maximum length of <paramref name="tableName"/> is defined in <see cref="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.TableStoreTableNameMaxLength"/>.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Abstractions.ITableStore.GetTablesAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+                Lists the tables stored in this <see cref="T:Sitecore.Processing.Engine.Storage.Abstractions.ITableStore" /> where the name starts with the specified prefix.
+            </summary>
+            <param name="prefix">The prefix.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+                A task that represents the asynchronous operation. The task result contains statistics for the tables.
+            </returns>
+            <remarks>
+                The maximum length of <paramref name="prefix"/> is defined in <see cref="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.TableStoreTableNameMaxLength"/>.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Abstractions.ITableStore.RemoveAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+                Deletes the table with the specified name.
+            </summary>
+            <param name="tableName">The name of the table.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+                A task that represents the asynchronous operation. The task result is <c>true</c> if table was removed;
+                <c>false</c> otherwise.
+            </returns>
+            <remarks>
+                The maximum length of <paramref name="tableName"/> is defined in <see cref="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.TableStoreTableNameMaxLength"/>.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Abstractions.ITableStore.RemoveAllAsync(System.Threading.CancellationToken)">
+            <summary>
+                Deletes all tables in this storage.
+            </summary>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+                A task that represents the asynchronous operation.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Abstractions.ITableStore.MergeTablesAsync(Sitecore.Processing.Engine.Projection.TableDefinition,System.Collections.Generic.IReadOnlyList{System.String},System.TimeSpan,System.Threading.CancellationToken)">
+            <summary>
+                Merges the rows from the specified tables into a single table with the name specified.
+            </summary>
+            <param name="target">The target.</param>
+            <param name="sourceTableNames">The names of the source tables to be merged.</param>
+            <param name="timeToLive">The time to live for the target table. The table will be deleted approximately after this time.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <remarks>
+                If the tables are sorted, the merged rows will also be sorted, and measures will be aggregated for duplicate rows.
+                If the tables are not sorted, each row from the source tables will also be in the target table, hence if keys are not unique, multiple rows may exist for the same key in the merged table.
+                If the target table has the same name as one of the sources this table will be overwritten with the merged result.
+                The merge operation will remove the source tables if merge succeeds. Do not remove these tables manually if the merge operation fails.
+            </remarks>
+            <returns>
+                A task that represents the asynchronous operation. The task result contains the statistics for the merged table.
+            </returns>
+            <remarks>
+                The maximum length of each table name in <paramref name="sourceTableNames"/> is defined in <see cref="F:Sitecore.Processing.Engine.Storage.Abstractions.Constants.TableStoreTableNameMaxLength"/>.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Abstractions.ITableStore.PurgeExpiredAsync(System.Threading.CancellationToken)">
+            <summary>
+                Purges expired tables.
+            </summary>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>
+                A task that represents the asynchronous operation.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Storage.Abstractions.ITableStoreFactory">
+            <summary>
+            Instantiates <see cref="T:Sitecore.Processing.Engine.Storage.Abstractions.ITableStore"/>s for different schema names.
+            </summary>
+            <remarks>
+            Schemas are used to ensure isolation for multiple consumers if they use the same table names.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Abstractions.ITableStoreFactory.Create(System.String)">
+            <summary>
+            Creates an <see cref="T:Sitecore.Processing.Engine.Storage.Abstractions.ITableStore"/> for the specified schema.
+            </summary>
+            <param name="schemaName">The schema for the tables.</param>
+            <returns><see cref="T:Sitecore.Processing.Engine.Storage.Abstractions.IBlobStore"/> created for the specified namespace.</returns>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Storage.Abstractions.TableStatistics">
+            <summary>
+                Statistics for the rows stored in a table.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Storage.Abstractions.TableStatistics.#ctor(System.Int64,Sitecore.Processing.Engine.Projection.TableDefinition)">
+            <summary>
+                Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Storage.Abstractions.TableStatistics" /> class.
+            </summary>
+            <param name="rowCount">The row count.</param>
+            <param name="definition">The definition.</param>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Storage.Abstractions.TableStatistics.RowCount">
+            <summary>
+                Gets the number of rows.
+            </summary>
+            <value>
+                The row count.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Storage.Abstractions.TableStatistics.Definition">
+            <summary>
+                Gets the definition of the table.
+            </summary>
+            <value>
+                The definition.
+            </value>
+        </member>
+    </members>
+</doc>

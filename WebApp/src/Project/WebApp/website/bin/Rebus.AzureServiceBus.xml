@@ -1,0 +1,231 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Rebus.AzureServiceBus</name>
+    </assembly>
+    <members>
+        <member name="T:Rebus.AzureServiceBus.AsbStringExtensions">
+            <summary>
+            Nifty extensions for making working with <see cref="T:Rebus.AzureServiceBus.AzureServiceBusTransport"/> easier
+            </summary>
+        </member>
+        <member name="M:Rebus.AzureServiceBus.AsbStringExtensions.ToValidAzureServiceBusTopicName(System.String)">
+            <summary>
+            Gets a valid topic name from the given topic string. This conversion is a one-way destructive conversion!
+            </summary>
+        </member>
+        <member name="T:Rebus.AzureServiceBus.AzureServiceBusTransport">
+            <summary>
+            Implementation of <see cref="T:Rebus.Transport.ITransport"/> that uses Azure Service Bus queues to send/receive messages.
+            </summary>
+        </member>
+        <member name="F:Rebus.AzureServiceBus.AzureServiceBusTransport.OutgoingMessagesKey">
+            <summary>
+            Outgoing messages are stashed in a concurrent queue under this key
+            </summary>
+        </member>
+        <member name="F:Rebus.AzureServiceBus.AzureServiceBusTransport.MagicSubscriptionPrefix">
+            <summary>
+            Subscriber "addresses" are prefixed with this bad boy so we can recognize them and publish to a topic client instead
+            </summary>
+        </member>
+        <member name="F:Rebus.AzureServiceBus.AzureServiceBusTransport.DefaultOutgoingBatchSize">
+            <summary>
+            Defines the maximum number of outgoing messages to batch together when sending/publishing
+            </summary>
+        </member>
+        <member name="M:Rebus.AzureServiceBus.AzureServiceBusTransport.#ctor(System.String,System.String,Rebus.Logging.IRebusLoggerFactory,Rebus.Threading.IAsyncTaskFactory)">
+            <summary>
+            Constructs the transport, connecting to the service bus pointed to by the connection string.
+            </summary>
+        </member>
+        <member name="M:Rebus.AzureServiceBus.AzureServiceBusTransport.GetSubscriberAddresses(System.String)">
+            <summary>
+            Gets "subscriber addresses" by getting one single magic "queue name", which is then
+            interpreted as a publish operation to a topic when the time comes to send to that "queue"
+            </summary>
+        </member>
+        <member name="M:Rebus.AzureServiceBus.AzureServiceBusTransport.RegisterSubscriber(System.String,System.String)">
+            <summary>
+            Registers this endpoint as a subscriber by creating a subscription for the given topic, setting up
+            auto-forwarding from that subscription to this endpoint's input queue
+            </summary>
+        </member>
+        <member name="M:Rebus.AzureServiceBus.AzureServiceBusTransport.UnregisterSubscriber(System.String,System.String)">
+            <summary>
+            Unregisters this endpoint as a subscriber by deleting the subscription for the given topic
+            </summary>
+        </member>
+        <member name="M:Rebus.AzureServiceBus.AzureServiceBusTransport.CreateQueue(System.String)">
+            <summary>
+            Creates a queue with the given address
+            </summary>
+        </member>
+        <member name="M:Rebus.AzureServiceBus.AzureServiceBusTransport.Send(System.String,Rebus.Messages.TransportMessage,Rebus.Transport.ITransactionContext)">
+            <inheritdoc />
+            <summary>
+            Sends the given message to the queue with the given <paramref name="destinationAddress" />
+            </summary>
+        </member>
+        <member name="M:Rebus.AzureServiceBus.AzureServiceBusTransport.Receive(Rebus.Transport.ITransactionContext,System.Threading.CancellationToken)">
+            <summary>
+            Receives the next message from the input queue. Returns null if no message was available
+            </summary>
+        </member>
+        <member name="P:Rebus.AzureServiceBus.AzureServiceBusTransport.Address">
+            <summary>
+            Gets the input queue name for this transport
+            </summary>
+        </member>
+        <member name="M:Rebus.AzureServiceBus.AzureServiceBusTransport.Initialize">
+            <summary>
+            Initializes the transport by ensuring that the input queue has been created
+            </summary>
+            <inheritdoc />
+        </member>
+        <member name="P:Rebus.AzureServiceBus.AzureServiceBusTransport.IsCentralized">
+            <summary>
+            Always returns true because Azure Service Bus topics and subscriptions are global
+            </summary>
+        </member>
+        <member name="P:Rebus.AzureServiceBus.AzureServiceBusTransport.AutomaticallyRenewPeekLock">
+            <summary>
+            Enables automatic peek lock renewal - only recommended if you truly need to handle messages for a very long time
+            </summary>
+        </member>
+        <member name="P:Rebus.AzureServiceBus.AzureServiceBusTransport.PartitioningEnabled">
+            <summary>
+            Gets/sets whether partitioning should be enabled on new queues. Only takes effect for queues created
+            after the property has been enabled
+            </summary>
+        </member>
+        <member name="P:Rebus.AzureServiceBus.AzureServiceBusTransport.DoNotCreateQueuesEnabled">
+            <summary>
+            Gets/sets whether to skip creating queues
+            </summary>
+        </member>
+        <member name="P:Rebus.AzureServiceBus.AzureServiceBusTransport.DefaultMessageTimeToLive">
+            <summary>
+            Gets/sets the default message TTL. Must be set before calling <see cref="M:Rebus.AzureServiceBus.AzureServiceBusTransport.Initialize"/>, because that is the time when the queue is (re)configured
+            </summary>
+        </member>
+        <member name="P:Rebus.AzureServiceBus.AzureServiceBusTransport.LockDuration">
+            <summary>
+            Gets/sets message peek lock duration
+            </summary>
+        </member>
+        <member name="P:Rebus.AzureServiceBus.AzureServiceBusTransport.AutoDeleteOnIdle">
+            <summary>
+            Gets/sets auto-delete-on-idle duration
+            </summary>
+        </member>
+        <member name="P:Rebus.AzureServiceBus.AzureServiceBusTransport.DuplicateDetectionHistoryTimeWindow">
+            <summary>
+            Gets/sets the duplicate detection window
+            </summary>
+        </member>
+        <member name="M:Rebus.AzureServiceBus.AzureServiceBusTransport.PurgeInputQueue">
+            <summary>
+            Purges the input queue by receiving all messages as quickly as possible
+            </summary>
+        </member>
+        <member name="M:Rebus.AzureServiceBus.AzureServiceBusTransport.PrefetchMessages(System.Int32)">
+            <summary>
+            Configures the transport to prefetch the specified number of messages into an in-mem queue for processing, disabling automatic peek lock renewal
+            </summary>
+        </member>
+        <member name="M:Rebus.AzureServiceBus.AzureServiceBusTransport.Dispose">
+            <summary>
+            Disposes all resources associated with this particular transport instance
+            </summary>
+        </member>
+        <member name="T:Rebus.Config.AzureServiceBusConfigurationExtensions">
+            <summary>
+            Configuration extensions for the Azure Service Bus transport
+            </summary>
+        </member>
+        <member name="M:Rebus.Config.AzureServiceBusConfigurationExtensions.UseAzureServiceBusAsOneWayClient(Rebus.Config.StandardConfigurer{Rebus.Transport.ITransport},System.String)">
+            <summary>
+            Configures Rebus to use Azure Service Bus to transport messages as a one-way client (i.e. will not be able to receive any messages)
+            </summary>
+        </member>
+        <member name="M:Rebus.Config.AzureServiceBusConfigurationExtensions.UseAzureServiceBus(Rebus.Config.StandardConfigurer{Rebus.Transport.ITransport},System.String,System.String)">
+            <summary>
+            Configures Rebus to use Azure Service Bus queues to transport messages, connecting to the service bus instance pointed to by the connection string
+            (or the connection string with the specified name from the current app.config)
+            </summary>
+        </member>
+        <member name="T:Rebus.Config.AzureServiceBusTransportSettings">
+            <summary>
+            Allows for configuring additional options for the Azure Service Bus transport
+            </summary>
+        </member>
+        <member name="M:Rebus.Config.AzureServiceBusTransportSettings.EnablePartitioning">
+            <summary>
+            Enables partitioning whereby Azure Service Bus will be able to distribute messages between message stores and this way increase throughput.
+            Partitioning cannot be enabled after a queue is created, so it must be enabled before Rebus creates the input queue.
+            </summary>
+        </member>
+        <member name="M:Rebus.Config.AzureServiceBusTransportSettings.SetDuplicateDetectionHistoryTimeWindow(System.TimeSpan)">
+            <summary>
+            Configures the duplicate detection history window on the input queue. Please note that this setting cannot be changed after the queue is created,
+            so it must be configured before Rebus creates the input queue the first time. The value must be at least 20 seconds and at most 1 day.
+            </summary>
+        </member>
+        <member name="M:Rebus.Config.AzureServiceBusTransportSettings.SetAutoDeleteOnIdle(System.TimeSpan)">
+            <summary>
+            Configures the auto-delete-on-idle duration of the input queue. This will make Azure Service Bus automatically delete
+            the queue when the time has elapsed without any activity.
+            </summary>
+        </member>
+        <member name="M:Rebus.Config.AzureServiceBusTransportSettings.SetDefaultMessageTimeToLive(System.TimeSpan)">
+            <summary>
+            Configures the default TTL on the input queue. This is the longest messages get to stay in the input queue.
+            If a shorter TTL is set on the message when sending it, that TTL is used instead.
+            </summary>
+        </member>
+        <member name="M:Rebus.Config.AzureServiceBusTransportSettings.SetMessagePeekLockDuration(System.TimeSpan)">
+            <summary>
+            Configures the message peek lock duration for received messages. 
+            </summary>
+        </member>
+        <member name="M:Rebus.Config.AzureServiceBusTransportSettings.EnablePrefetching(System.Int32)">
+            <summary>
+            Enables prefetching whereby a batch of messages will be prefetched instead of only one at a time.
+            By enabling prefetching, the automatic peek lock renewal will be disabled, because it is assumed
+            that prefetching will be enabled only in cases where messages can be processed fairly quickly.
+            </summary>
+        </member>
+        <member name="M:Rebus.Config.AzureServiceBusTransportSettings.AutomaticallyRenewPeekLock">
+            <summary>
+            Enables automatic peek lock renewal. Only enable this if you intend on handling messages for a long long time, and
+            DON'T intend on handling messages quickly - it will have an impact on message receive, so only enable it if you
+            need it. You should usually strive after keeping message processing times low, much lower than the 5 minute lease
+            you get with Azure Service Bus.
+            </summary>
+        </member>
+        <member name="M:Rebus.Config.AzureServiceBusTransportSettings.DoNotCreateQueues">
+            <summary>
+            Skips queue creation. Can be used when the connection string does not have manage rights to the queue object, e.g.
+            when a read-only shared-access signature is used to access an input queue. Please note that the signature MUST
+            have write access to the configured error queue, unless Azure Service Bus' own dead-lettering is activated on the 
+            input queue (which is probably the preferred approach with this option)
+            </summary>
+        </member>
+        <member name="M:Rebus.Internals.AsyncHelpers.RunSync(System.Func{System.Threading.Tasks.Task})">
+            <summary>
+            Executes a task synchronously on the calling thread by installing a temporary synchronization context that queues continuations
+             </summary>
+        </member>
+        <member name="T:Rebus.Internals.AsyncHelpers.CustomSynchronizationContext">
+            <summary>
+            Synchronization context that can be "pumped" in order to have it execute continuations posted back to it
+            </summary>
+        </member>
+        <member name="M:Rebus.Internals.AsyncHelpers.CustomSynchronizationContext.Run">
+            <summary>
+            Enqueues the function to be executed and executes all resulting continuations until it is completely done
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,583 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sitecore.Processing.Tasks.Sql</name>
+    </assembly>
+    <members>
+        <member name="T:Sitecore.Processing.Tasks.Sql.Constants">
+            <summary>
+                Represents a collection of constants used throughout the project.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.TasksDbSchema">
+            <summary>
+                The schema name for Sitecore.Processing.Tasks database.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.ColumnId">
+            <summary>
+                The name of the Id column.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.ColumnCreated">
+            <summary>
+                The name of the Created column.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.ColumnProgress">
+            <summary>
+                The name of the Progress column.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.ColumnStatus">
+            <summary>
+                The name of the Status column.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.ColumnUpdated">
+            <summary>
+                The name of the Updated column.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.ColumnConcurrencyToken">
+            <summary>
+                The name of the ConcurrencyToken column.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.ColumnExpiration">
+            <summary>
+                The name of the Expiration column.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.ColumnTaskId">
+            <summary>
+            The name of the TaskId column.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.ColumnType">
+            <summary>
+                The name of the Type column.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.ColumnTotal">
+            <summary>
+                The name of the Total column.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.ColumnDescription">
+            <summary>
+                The name of the Description column.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.ColumnError">
+            <summary>
+                The name of the Error column.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.ColumnAdded">
+            <summary>
+                The name of the Added column.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.ColumnOptions">
+            <summary>
+                The name of the Options column.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.ColumnPrerequisiteTaskId">
+            <summary>
+                The name of the PrerequisiteTaskId column.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.IdDelimiter">
+            <summary>
+                The delimiter used in ID strings.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.ParameterSplitThreshold">
+            <summary>
+                The name of the SplitThreshold stored procedure parameter.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.ParameterOwnershipTimeout">
+            <summary>
+                The name of the OwnershipTimeout stored procedure parameter.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.ParameterPrerequisiteTaskIds">
+            <summary>
+                The name of the PrerequisiteTaskIds parameter.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.ParameterConcurrencyToken">
+            <summary>
+                The name of the ConcurrencyToken parameter.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.MinimumAge">
+            <summary>
+                The name of the MinimumAgeSeconds parameter.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.TasksDbConnectionName">
+            <summary>
+                Name of the connection string for Tasks database.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.TasksTableName">
+            <summary>
+                The Tasks table name.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.TaskDependenciesTableName">
+            <summary>
+            The TaskDependencies table name.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.RoutineCausedExceptionFormat">
+            <summary>
+                The format string for exception message, describing which routine caused exception.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.AddTaskRoutine">
+            <summary>
+                The name of the AddTask stored procedure routine.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.GetTaskRoutine">
+            <summary>
+                The name of the GetTaskById stored procedure routine.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.GetDependentTaskIdsRoutine">
+            <summary>
+                The name of the GetDependentTaskIds stored procedure routine.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.IncrementTaskProgressRoutine">
+            <summary>
+                The name of the IncrementTaskProgressById stored procedure routine.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.PickDeferredTaskRoutine">
+            <summary>
+                The name of the PickDeferredTask stored procedure routine.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.PickDistributedTaskInProgressRoutine">
+            <summary>
+                The name of the PickDistributedTaskInProgress stored procedure routine.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.PickPendingDistributedTaskRoutine">
+            <summary>
+                The name of the PickDistributedTaskPending stored procedure routine.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.RemoveExpiredTasksRoutine">
+            <summary>
+                The name of the RemoveExpiredTasks stored procedure routine.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.RemoveTaskRoutine">
+            <summary>
+                The name of the RemoveTaskById stored procedure routine.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.UpdateTaskStatusRoutine">
+            <summary>
+                The name of the UpdateTaskStatusById stored procedure routine.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.UpdateTaskTotalRoutine">
+            <summary>
+                The name of the UpdateTaskTotalById stored procedure routine.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.AddExceptionMessage">
+            <summary>
+                The message returned when an error occurred adding a processing task.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.GetExceptionMessage">
+            <summary>
+                The message returned when an error occurred getting a processing task.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.GetDependentTaskIdsExceptionMessage">
+            <summary>
+                The message returned when an error occurred getting dependent task IDs.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.PickDistributedPendingExceptionMessage">
+            <summary>
+                The message returned when an error occurred getting a distributed processing task with pending status.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.PickDistributedInProgressExceptionMessage">
+            <summary>
+                The message returned when an error occurred getting a distributed processing task with processing status.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.PickDeferredExceptionMessage">
+            <summary>
+                The message returned when an error occurred getting a deferred task.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.RemoveExceptionMessage">
+            <summary>
+                The message returned when an error occurred removing a processing task.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.CleanExpiredExceptionMessage">
+            <summary>
+                The message returned when an error occurred removing an expired processing task.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.IncrementProgressExceptionMessage">
+            <summary>
+                The message returned when an error occurred incrementing the progress of a processing task.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.UpdateStatusExceptionMessage">
+            <summary>
+                The message returned when an error occurred updating processing task status.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.UpdateTotalExceptionMessage">
+            <summary>
+                The message returned when an error occurred updating processing task total.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.ProcessingTaskReaderExceptionMessage">
+            <summary>
+                The message returned when an error occurred getting a processing task.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.CommandTimeoutConfigurationKey">
+            <summary>
+                The name of the CommandTimeoutConfigurationKey constant.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.ConnectionStringNameConfigurationKey">
+            <summary>
+                The name of the ConnectionStringNameConfigurationKey constant.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.RetryerNameConfigurationKey">
+            <summary>
+                The name of the RetryerNameConfigurationKey constant.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.OwnershipTimeoutConfigurationKey">
+            <summary>
+                The name of the OwnershipTimeoutConfigurationKey constant.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.MinimumRangeSizeConfigurationKey">
+            <summary>
+                The name of the MinimumRangeSizeConfigurationKey constant.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Tasks.Sql.Constants.SqlCommandColumnEncryptionEnabledConfigurationKey">
+            <summary>
+            The SQL command column encryption enabled configuration key constant.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Processing.Tasks.Sql.SqlTaskDataProvider">
+            <summary>
+                Represents a data provider to work with <see cref="T:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData" /> in the SQL database.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Processing.Tasks.Sql.SqlTaskDataProvider.#ctor(Sitecore.Processing.Common.IConnectionStringResolver,Sitecore.Framework.TransientFaultHandling.IRetryerRegistry,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+                Creates a new instance of <see cref="T:Sitecore.Processing.Tasks.Sql.SqlTaskDataProvider" /> class using dependency injection configuration.
+            </summary>
+            <param name="resolver">
+                Type to resolve connection string.
+            </param>
+            <param name="retryerRegistry">
+                The retryer registry that is responsible for managing the creation and access to
+                a set of named <see cref="T:Sitecore.Framework.TransientFaultHandling.IRetryer"/> instances.
+            </param>
+            <param name="configuration">
+                The configuration passed by dependency injection.
+            </param>
+        </member>
+        <member name="M:Sitecore.Processing.Tasks.Sql.SqlTaskDataProvider.#ctor(Sitecore.Processing.Common.IConnectionStringResolver,System.String,System.TimeSpan,System.TimeSpan,System.Int32,Sitecore.Framework.TransientFaultHandling.IRetryerRegistry,System.String,System.Boolean)">
+            <summary>
+                Creates a new instance of <see cref="T:Sitecore.Processing.Tasks.Sql.SqlTaskDataProvider" /> class.
+            </summary>
+            <param name="resolver">
+                Implementation of <see cref="T:Sitecore.Processing.Common.IConnectionStringResolver" /> used to get connection string from system using required
+                connection string name parameter.
+            </param>
+            <param name="connectionStringName">
+                Name of the connection string used to establish connection with database.
+            </param>
+            <param name="commandTimeout">
+                The wait time before the execution attempt of a database command is terminated and an error is generated.
+            </param>
+            <param name="ownershipTimeout">
+                The timeout during which each agent has to update <see cref="P:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData.Updated" /> in the database.
+                If it didn't happen, task is considered abandoned.
+            </param>
+            <param name="minimumRangeSize">
+                The minimum size of a range to be split.
+            </param>
+            <param name="retryerRegistry">
+                The retryer registry that is responsible for managing the creation and access to
+                a set of named <see cref="T:Sitecore.Framework.TransientFaultHandling.IRetryer"/> instances.
+            </param>
+            <param name="retryerName">
+                The name of a <see cref="T:Sitecore.Framework.TransientFaultHandling.IRetryer"/> that is registered for the sql provider.
+            </param>
+            <param name="sqlCommandColumnEncryptionEnabled">
+                If set to <c>true</c> SQL command column encryption is enabled.
+            </param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+                Argument <paramref name="ownershipTimeout" /> less or equal to <see cref="F:System.TimeSpan.Zero" />.
+            </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+                Argument <paramref name="minimumRangeSize" /> less or equal to 0.
+            </exception>
+        </member>
+        <member name="P:Sitecore.Processing.Tasks.Sql.SqlTaskDataProvider.OwnershipTimeout">
+            <summary>
+                Gets the timeout during which each agent has to update <see cref="P:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData.Updated" /> in the database.
+                If it didn't happen task is considered abandoned.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Processing.Tasks.Sql.SqlTaskDataProvider.MinimumRangeSize">
+            <summary>
+                Gets minimum size of a range to be split.
+            </summary>
+            <value>
+                The minimum size of a range to be split.
+            </value>
+        </member>
+        <member name="M:Sitecore.Processing.Tasks.Sql.SqlTaskDataProvider.AddAsync(Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData)">
+            <summary>
+                Asynchronously adds given <see cref="T:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData" /> to the data store.
+            </summary>
+            <param name="task">
+                An object describing the task to be executed by the agents.
+            </param>
+            <returns>
+                The <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous operation.
+            </returns>
+            <remarks>
+                <see cref="P:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData.Created" />, <see cref="P:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData.Updated" /> and <see cref="P:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData.ConcurrencyToken" /> in
+                the <paramref name="task" /> are ignored, set by the provider, and can differ from specified.
+            </remarks>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="task" /> is <b>null</b>.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+                <see cref="P:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData.Status" /> in <paramref name="task" /> is different from
+                <see cref="F:Sitecore.Processing.Tasks.Abstractions.ProcessingTaskStatus.Pending" />.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Processing.Tasks.Sql.SqlTaskDataProvider.GetAsync(System.Guid)">
+            <summary>
+                Asynchronously gets the <see cref="T:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData" /> by its unique identifier.
+            </summary>
+            <param name="id">
+                The unique identifier of <see cref="T:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData" /> to look for.
+            </param>
+            <returns>
+                The <see cref="T:System.Threading.Tasks.Task`1" /> with an <see cref="T:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData" /> instance containing information about the
+                requested task.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Processing.Tasks.Sql.SqlTaskDataProvider.PickDistributedTaskInProgressAsync">
+            <summary>
+                Asynchronously picks an <see cref="T:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData" /> with <see cref="P:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData.TaskType" /> equal
+                to <see cref="F:Sitecore.Processing.Tasks.Abstractions.ProcessingTaskType.DistributedProcessing" />
+                and <see cref="P:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData.Status" /> equal to <see cref="F:Sitecore.Processing.Tasks.Abstractions.ProcessingTaskStatus.Processing" />, that has
+                enough work items to split.
+            </summary>
+            <returns>
+                The <see cref="T:System.Threading.Tasks.Task`1" /> with an <see cref="T:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData" /> instance that represents distributed
+                processing task that is actively processed.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Processing.Tasks.Sql.SqlTaskDataProvider.PickDistributedTaskPendingAsync">
+            <summary>
+                Asynchronously gets an <see cref="T:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData" /> with <see cref="P:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData.TaskType" /> equal to
+                <see cref="F:Sitecore.Processing.Tasks.Abstractions.ProcessingTaskType.DistributedProcessing" />
+                and <see cref="P:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData.Status" /> equal to <see cref="F:Sitecore.Processing.Tasks.Abstractions.ProcessingTaskStatus.Pending" />.
+            </summary>
+            <returns>
+                The <see cref="T:System.Threading.Tasks.Task`1" /> with an <see cref="T:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData" /> instance that represents distributed
+                processing task that is not started yet.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Processing.Tasks.Sql.SqlTaskDataProvider.RemoveAsync(System.Guid)">
+            <summary>
+                Asynchronously removes the specified task from the data store.
+            </summary>
+            <param name="taskId">
+                The unique identifier of the <see cref="T:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData" /> to remove.
+            </param>
+            <returns>
+                The <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous operation.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Processing.Tasks.Sql.SqlTaskDataProvider.PickDeferredActionAsync">
+            <summary>
+                Asynchronously picks an available <see cref="T:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData" /> with
+                <see cref="P:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData.TaskType" /> equal to <see cref="F:Sitecore.Processing.Tasks.Abstractions.ProcessingTaskType.DeferredAction" />,
+                disregarding any locked tasks and locking the task for other workers.
+            </summary>
+            <returns>
+                The <see cref="T:System.Threading.Tasks.Task`1" /> with an <see cref="T:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData" /> instance that represents single-threaded
+                processing task.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Processing.Tasks.Sql.SqlTaskDataProvider.CleanUpAsync(System.TimeSpan)">
+            <summary>
+                Asynchronously cleans up all tasks from the data store with <see cref="P:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData.Status" />
+                equal to <see cref="F:Sitecore.Processing.Tasks.Abstractions.ProcessingTaskStatus.Failed" />, <see cref="F:Sitecore.Processing.Tasks.Abstractions.ProcessingTaskStatus.Completed" />, or
+                <see cref="F:Sitecore.Processing.Tasks.Abstractions.ProcessingTaskStatus.Expired" />.
+            </summary>
+            <param name="minimumAge">
+                The minimum age of the eligible tasks to be cleaned up.
+            </param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+                <paramref name="minimumAge"/> should be greater or equal to 00:00:00. 
+            </exception>
+            <returns>
+                The <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous operation.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Processing.Tasks.Sql.SqlTaskDataProvider.IncrementProgressAsync(System.Guid,System.Int64)">
+            <summary>
+                Asynchronously increments <see cref="P:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData.Progress" />.
+            </summary>
+            <param name="taskId">
+                Id of the <see cref="T:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData" /> to be updated.
+            </param>
+            <param name="progress">
+                Value to be added to the <see cref="P:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData.Progress" />.
+            </param>
+            <returns>
+                The <see cref="T:System.Threading.Tasks.Task`1" /> with an <see cref="T:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData" /> instance that represents processing task.
+            </returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+                <paramref name="progress" /> is less than 1.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Processing.Tasks.Sql.SqlTaskDataProvider.UpdateStatusAsync(System.Guid,System.Guid,Sitecore.Processing.Tasks.Abstractions.ProcessingTaskStatus,System.String)">
+            <summary>
+                Asynchronously updates the status of the <see cref="T:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData" />.
+            </summary>
+            <param name="taskId">
+                Id of the <see cref="T:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData" /> to be updated.
+            </param>
+            <param name="concurrencyToken">
+                The <see cref="P:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData.ConcurrencyToken" /> value to ensure we have the latest data for the task.
+            </param>
+            <param name="status">
+                Status to be assigned to the task.
+            </param>
+            <param name="errorText">
+                Optional text of the exception associated with the status.
+            </param>
+            <returns>
+                The <see cref="T:System.Threading.Tasks.Task`1" /> with an <see cref="T:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData" /> instance that represents processing task.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Processing.Tasks.Sql.SqlTaskDataProvider.UpdateTotalAsync(System.Guid,System.Guid,System.Nullable{System.Int64})">
+            <summary>
+                Asynchronously updates the total count of the <see cref="T:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData" />.
+            </summary>
+            <param name="taskId">
+                Id of the <see cref="T:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData" /> to be updated.
+            </param>
+            <param name="concurrencyToken">
+                The <see cref="P:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData.ConcurrencyToken" /> value to ensure we have the latest data for the task.
+            </param>
+            <param name="totalCount">
+                Total count of items to be processed by <see cref="T:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData" /> if <see cref="P:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData.TaskType" /> property has
+                value <see cref="F:Sitecore.Processing.Tasks.Abstractions.ProcessingTaskType.DistributedProcessing" />.
+            </param>
+            <returns>
+                The <see cref="T:System.Threading.Tasks.Task`1" /> with an <see cref="T:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData" /> instance that represents processing task.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Processing.Tasks.Sql.SqlTaskDataProvider.GetDependentTaskIdsAsync(System.Guid)">
+            <summary>
+                Asynchronously gets IDs of the tasks that are dependent on the provided task, either explicitly or transitively.
+            </summary>
+            <param name="taskId">
+                The unique identifier of the task to get the dependencies for.
+            </param>
+            <returns>
+                The <see cref="T:System.Threading.Tasks.Task`1" /> with the IDs of the tasks that are dependent on the task.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Processing.Tasks.Sql.SqlTaskDataProvider.ReadTaskAsync(System.Data.Common.DbDataReader)">
+            <summary>
+                Creates an <see cref="T:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData" /> object using data read from the specified <see cref="T:System.Data.Common.DbDataReader" />
+                object.
+            </summary>
+            <param name="reader">
+                The <see cref="T:System.Data.Common.DbDataReader" /> object to read data from.
+            </param>
+            <returns>
+                The <see cref="T:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData" /> initialized with the values read from <paramref name="reader" />.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+                Argument <paramref name="reader" /> is a <b>null</b> reference.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Processing.Tasks.Sql.SqlTaskDataProvider.CreateSqlParametersForAddTaskRoutine(Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData)">
+            <summary>
+                Creates an <see cref="T:System.Collections.Generic.List`1" /> of <see cref="T:System.Data.SqlClient.SqlParameter" /> passed for execution to
+                <see cref="F:Sitecore.Processing.Tasks.Sql.Constants.AddTaskRoutine" /> stored procedure.
+            </summary>
+            <param name="task">
+                The <see cref="T:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData" /> that contains values to save in the database.
+            </param>
+            <returns>
+                The <see cref="T:System.Collections.Generic.List`1" /> of <see cref="T:System.Data.SqlClient.SqlParameter" /> passed for execution to
+                <see cref="F:Sitecore.Processing.Tasks.Sql.Constants.AddTaskRoutine" /> stored procedure.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Processing.Tasks.Sql.SqlTaskDataProvider.ExecuteReadTaskRoutine(System.String,System.Collections.Generic.IReadOnlyCollection{System.Data.SqlClient.SqlParameter},System.String,System.Data.SqlClient.SqlCommandColumnEncryptionSetting)">
+            <summary>
+                Executes routine specified in <paramref name="routineName" /> with <paramref name="parameters" /> and returns
+                <see cref="T:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData" /> object from the result reader.
+            </summary>
+            <param name="routineName">The name of the routine to execute.</param>
+            <param name="parameters">The parameters to pass for routine execution.</param>
+            <param name="exceptionMessage">The message of to add to the thrown exception if routine execution failed.</param>
+            <param name="sqlCommandColumnEncryptionSetting">The SQL command column encryption setting.</param>
+            <returns><see cref="T:System.Threading.Tasks.Task`1" /> with <see cref="T:Sitecore.Processing.Tasks.Abstractions.IProcessingTaskData" /> retrieved from the executed routine.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Tasks.Sql.SqlTaskDataProvider.ExecuteReaderRoutine``1(System.String,System.Collections.Generic.IReadOnlyCollection{System.Data.SqlClient.SqlParameter},System.String,System.Data.SqlClient.SqlCommandColumnEncryptionSetting,System.Func{System.Data.Common.DbDataReader,System.Threading.Tasks.Task{``0}})">
+            <summary>
+                Executes routine specified in <paramref name="routineName" /> with <paramref name="parameters" /> and reads
+                <typeparamref name="TResult"/> from the <see cref="T:System.Data.Common.DbDataReader"/>.
+            </summary>
+            <param name="routineName">The name of the routine to execute.</param>
+            <param name="parameters">The parameters to pass for routine execution.</param>
+            <param name="exceptionMessage">The message of to add to the thrown exception if routine execution failed.</param>
+            <param name="sqlCommandColumnEncryptionSetting">The SQL command column encryption setting.</param>
+            <param name="readResultFunc">The function that is used to read <typeparamref name="TResult"/> from the provided <see cref="T:System.Data.Common.DbDataReader"/>.</param>
+            <returns><see cref="T:System.Threading.Tasks.Task`1" /> with <typeparamref name="TResult"/> retrieved from the executed routine.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Tasks.Sql.SqlTaskDataProvider.ExecuteNonQueryRoutine(System.Collections.Generic.IReadOnlyCollection{System.Data.SqlClient.SqlParameter},System.String,System.String,System.Data.SqlClient.SqlCommandColumnEncryptionSetting)">
+            <summary>
+                Executes SQL routine specified in <paramref name="routineName" /> with <paramref name="parameters" />
+                and does not return a result
+            </summary>
+            <param name="routineName">The name of the routine to execute.</param>
+            <param name="parameters">The parameters to pass for routine execution.</param>
+            <param name="exceptionMessage">The message of to add to the thrown exception if routine execution failed.</param>
+            <param name="sqlCommandColumnEncryptionSetting">The SQL command column encryption setting.</param>
+            <returns><see cref="T:System.Threading.Tasks.Task" /> from the asynchronously executed routine.</returns>
+        </member>
+    </members>
+</doc>

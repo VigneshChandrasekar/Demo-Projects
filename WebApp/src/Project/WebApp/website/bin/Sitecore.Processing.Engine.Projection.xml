@@ -1,0 +1,1590 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sitecore.Processing.Engine.Projection</name>
+    </assembly>
+    <members>
+        <member name="T:Sitecore.Processing.Engine.Projection.BufferExtensions">
+            <summary>
+                Methods to get and set values of various data types in a byte array.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Projection.CollectionContext">
+            <summary>
+                Provides meta information about the items being collected in a <see cref="T:Sitecore.Processing.Engine.Projection.IRowCollector`1" />
+            </summary>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.CollectionContext.#ctor">
+            <summary>
+                Prevents a default instance of the <see cref="T:Sitecore.Processing.Engine.Projection.CollectionContext" /> class from being created.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.CollectionContext.Current">
+            <summary>
+                Gets the current collection context.
+            </summary>
+            <value>
+                The current collection context.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.CollectionContext.ParentRow">
+            <summary>
+                Gets the parent row currently being collected.
+            </summary>
+            <value>
+                The parent row.
+            </value>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.CollectionContext.Enter(Sitecore.Processing.Engine.Projection.IDataRow)">
+            <summary>
+                Adds the specified row as a parent row in the current context
+            </summary>
+            <param name="row">The row.</param>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.CollectionContext.Exit(Sitecore.Processing.Engine.Projection.IDataRow)">
+            <summary>
+                Removes the specified row as a parent row in the current context.
+            </summary>
+            <param name="row">The row.</param>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Projection.DataRow">
+            <summary>
+                An implementation of <see cref="T:Sitecore.Processing.Engine.Projection.IDataRow" /> that stores its data in a byte buffer for efficient wire transfer.
+            </summary>
+            <seealso cref="T:Sitecore.Processing.Engine.Projection.IDataRow" />
+        </member>
+        <member name="F:Sitecore.Processing.Engine.Projection.DataRow.BitsPerLong">
+            <summary>
+                The number of bits in a long (int64).
+                Bitvectors are added to the row representation if it has nullable fields.
+                These bitvectors are one or more int64s, the first 64 nullable fields have their flag in the first int64, the next
+                64 in the next int64, etc.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.DataRow.#ctor(Sitecore.Processing.Engine.Projection.RowSchema)">
+            <summary>
+                Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Projection.DataRow" /> class.
+            </summary>
+            <param name="schema">The schema.</param>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.DataRow.#ctor(Sitecore.Processing.Engine.Projection.RowSchema,System.Byte[],System.Int32)">
+            <summary>
+                Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Projection.DataRow" /> class with existing data at the specified offset in the
+                buffer.
+            </summary>
+            <param name="schema">The schema.</param>
+            <param name="buffer">The buffer.</param>
+            <param name="bufferOffset">The buffer offset.</param>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.DataRow.BufferSize">
+            <summary>
+                Gets the size in bytes occupied in the buffer by this row.
+            </summary>
+            <value>
+                The size of the buffer.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.DataRow.Schema">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.DataRow.Item(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.DataRow.Item(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.DataRow.GetString(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.DataRow.SetString(System.Int32,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.DataRow.GetGuid(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.DataRow.SetGuid(System.Int32,System.Guid)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.DataRow.GetDateTime(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.DataRow.SetDateTime(System.Int32,System.DateTime)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.DataRow.GetInt64(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.DataRow.SetInt64(System.Int32,System.Int64)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.DataRow.AddInt64(System.Int32,System.Int64)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.DataRow.GetDouble(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.DataRow.SetDouble(System.Int32,System.Double)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.DataRow.AddDouble(System.Int32,System.Double)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.DataRow.IsNull(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.DataRow.SetNull(System.Int32,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.DataRow.WriteTo(System.IO.Stream)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.DataRow.ToString">
+            <inheritdoc />
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Projection.DataRowKeyComparer">
+            <summary>
+                Compares <see cref="T:Sitecore.Processing.Engine.Projection.IDataRow" />s by their key fields in the order they are
+                defined in the <see cref="T:Sitecore.Processing.Engine.Projection.RowSchema" />.
+                Rows compared using this comparer must have the same schemas. Otherwise the result is undefined.
+            </summary>
+            <seealso cref="T:System.Collections.Generic.Comparer`1" />
+            <seealso cref="T:System.Collections.Generic.IEqualityComparer`1" />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.DataRowKeyComparer.#ctor(Sitecore.Processing.Engine.Projection.RowSchema)">
+            <summary>
+                Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Projection.DataRowKeyComparer" /> class.
+            </summary>
+            <param name="schema">The schema.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="schema" /> is <c>null</c>.</exception>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.DataRowKeyComparer.Equals(Sitecore.Processing.Engine.Projection.IDataRow,Sitecore.Processing.Engine.Projection.IDataRow)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.DataRowKeyComparer.GetHashCode(Sitecore.Processing.Engine.Projection.IDataRow)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.DataRowKeyComparer.Compare(Sitecore.Processing.Engine.Projection.IDataRow,Sitecore.Processing.Engine.Projection.IDataRow)">
+            <inheritdoc />
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Projection.FieldDataType">
+            <summary>
+                The data type of the field value in a <see cref="T:Sitecore.Processing.Engine.Projection.RowSchema" />.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Engine.Projection.FieldDataType.Guid">
+            <summary>
+                A unique identifier.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Engine.Projection.FieldDataType.String">
+            <summary>
+                A variable length string.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Engine.Projection.FieldDataType.Int64">
+            <summary>
+                A 64 bit integer.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Engine.Projection.FieldDataType.Double">
+            <summary>
+                A 64 bit floating point number.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Engine.Projection.FieldDataType.DateTime">
+            <summary>
+                Date and time.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Projection.FieldDefinition">
+            <summary>
+                The definition of a field in a <see cref="T:Sitecore.Processing.Engine.Projection.RowSchema" />.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.FieldDefinition.#ctor(System.String,Sitecore.Processing.Engine.Projection.FieldKind,Sitecore.Processing.Engine.Projection.FieldDataType)">
+            <summary>
+                Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Projection.FieldDefinition" /> class.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="kind">The kind.</param>
+            <param name="dataType">Type of the data.</param>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.FieldDefinition.#ctor(System.String,Sitecore.Processing.Engine.Projection.FieldKind,Sitecore.Processing.Engine.Projection.FieldDataType,System.Boolean)">
+            <summary>
+                Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Projection.FieldDefinition" /> class.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="kind">The kind.</param>
+            <param name="dataType">Type of the data.</param>
+            <param name="nullable">if set to <c>true</c> the field value can be null.</param>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.FieldDefinition.Name">
+            <summary>
+                Gets the name of the field.
+            </summary>
+            <value>
+                The name of the field.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.FieldDefinition.Kind">
+            <summary>
+                Gets the kind of the field.
+            </summary>
+            <value>
+                The kind of the field.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.FieldDefinition.DataType">
+            <summary>
+                Gets the data type of the field.
+            </summary>
+            <value>
+                The type of the data.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.FieldDefinition.Nullable">
+            <summary>
+                Gets a value indicating whether this <see cref="T:Sitecore.Processing.Engine.Projection.FieldDefinition" /> is nullable.
+            </summary>
+            <value>
+                <c>true</c> if nullable; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.FieldDefinition.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.FieldDefinition.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Projection.FieldKind">
+            <summary>
+                The kind of a field in a <see cref="T:Sitecore.Processing.Engine.Projection.RowSchema" />.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Engine.Projection.FieldKind.Key">
+            <summary>
+                The field is a key. Rows are grouped by keys and measures are summed by keys.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Engine.Projection.FieldKind.Attribute">
+            <summary>
+                The field is an attribute that provides additional information for the key.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Processing.Engine.Projection.FieldKind.Measure">
+            <summary>
+                The field is a measure. Measures are summed by keys.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Projection.GuidSelector`1">
+            <summary>
+                Selects a <see cref="F:Sitecore.Processing.Engine.Projection.FieldDataType.Guid"/> value for a field using a lambda expression.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.GuidSelector`1.#ctor(Sitecore.Processing.Engine.Projection.FieldDefinition,System.Func{`0,System.Guid})">
+            <summary>
+                Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Projection.GuidSelector`1" /> class.
+            </summary>
+            <param name="field">The field.</param>
+            <param name="selector">The selector.</param>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.GuidSelector`1.Field">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.GuidSelector`1.SetValue(Sitecore.Processing.Engine.Projection.IDataRow,System.Int32,`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.GuidSelector`1.AddValue(Sitecore.Processing.Engine.Projection.IDataRow,System.Int32,`0)">
+            <inheritdoc />
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Projection.NullableGuidSelector`1">
+            <summary>
+                Selects a <see cref="F:Sitecore.Processing.Engine.Projection.FieldDataType.Guid"/> value for a field using a lambda expression.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.NullableGuidSelector`1.#ctor(Sitecore.Processing.Engine.Projection.FieldDefinition,System.Func{`0,System.Nullable{System.Guid}})">
+            <summary>
+                Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Projection.NullableGuidSelector`1" /> class.
+            </summary>
+            <param name="field">The field.</param>
+            <param name="selector">The selector.</param>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.NullableGuidSelector`1.Field">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.NullableGuidSelector`1.SetValue(Sitecore.Processing.Engine.Projection.IDataRow,System.Int32,`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.NullableGuidSelector`1.AddValue(Sitecore.Processing.Engine.Projection.IDataRow,System.Int32,`0)">
+            <inheritdoc />
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Projection.Int64Selector`1">
+            <summary>
+                Selects a <see cref="F:Sitecore.Processing.Engine.Projection.FieldDataType.Int64"/> value for a field using a lambda expression.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.Int64Selector`1.#ctor(Sitecore.Processing.Engine.Projection.FieldDefinition,System.Func{`0,System.Int64})">
+            <summary>
+                Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Projection.Int64Selector`1" /> class.
+            </summary>
+            <param name="field">The field.</param>
+            <param name="selector">The selector.</param>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.Int64Selector`1.Field">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.Int64Selector`1.SetValue(Sitecore.Processing.Engine.Projection.IDataRow,System.Int32,`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.Int64Selector`1.AddValue(Sitecore.Processing.Engine.Projection.IDataRow,System.Int32,`0)">
+            <inheritdoc />
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Projection.NullableInt64Selector`1">
+            <summary>
+                Selects a <see cref="F:Sitecore.Processing.Engine.Projection.FieldDataType.Int64"/> value for a field using a lambda expression.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.NullableInt64Selector`1.#ctor(Sitecore.Processing.Engine.Projection.FieldDefinition,System.Func{`0,System.Nullable{System.Int64}})">
+            <summary>
+                Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Projection.NullableInt64Selector`1" /> class.
+            </summary>
+            <param name="field">The field.</param>
+            <param name="selector">The selector.</param>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.NullableInt64Selector`1.Field">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.NullableInt64Selector`1.SetValue(Sitecore.Processing.Engine.Projection.IDataRow,System.Int32,`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.NullableInt64Selector`1.AddValue(Sitecore.Processing.Engine.Projection.IDataRow,System.Int32,`0)">
+            <inheritdoc />
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Projection.DoubleSelector`1">
+            <summary>
+                Selects a <see cref="F:Sitecore.Processing.Engine.Projection.FieldDataType.Double"/> value for a field using a lambda expression.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.DoubleSelector`1.#ctor(Sitecore.Processing.Engine.Projection.FieldDefinition,System.Func{`0,System.Double})">
+            <summary>
+                Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Projection.DoubleSelector`1" /> class.
+            </summary>
+            <param name="field">The field.</param>
+            <param name="selector">The selector.</param>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.DoubleSelector`1.Field">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.DoubleSelector`1.SetValue(Sitecore.Processing.Engine.Projection.IDataRow,System.Int32,`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.DoubleSelector`1.AddValue(Sitecore.Processing.Engine.Projection.IDataRow,System.Int32,`0)">
+            <inheritdoc />
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Projection.NullableDoubleSelector`1">
+            <summary>
+                Selects a <see cref="F:Sitecore.Processing.Engine.Projection.FieldDataType.Double"/> value for a field using a lambda expression.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.NullableDoubleSelector`1.#ctor(Sitecore.Processing.Engine.Projection.FieldDefinition,System.Func{`0,System.Nullable{System.Double}})">
+            <summary>
+                Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Projection.NullableDoubleSelector`1" /> class.
+            </summary>
+            <param name="field">The field.</param>
+            <param name="selector">The selector.</param>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.NullableDoubleSelector`1.Field">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.NullableDoubleSelector`1.SetValue(Sitecore.Processing.Engine.Projection.IDataRow,System.Int32,`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.NullableDoubleSelector`1.AddValue(Sitecore.Processing.Engine.Projection.IDataRow,System.Int32,`0)">
+            <inheritdoc />
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Projection.DateTimeSelector`1">
+            <summary>
+                Selects a <see cref="F:Sitecore.Processing.Engine.Projection.FieldDataType.DateTime"/> value for a field using a lambda expression.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.DateTimeSelector`1.#ctor(Sitecore.Processing.Engine.Projection.FieldDefinition,System.Func{`0,System.DateTime})">
+            <summary>
+                Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Projection.DateTimeSelector`1" /> class.
+            </summary>
+            <param name="field">The field.</param>
+            <param name="selector">The selector.</param>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.DateTimeSelector`1.Field">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.DateTimeSelector`1.SetValue(Sitecore.Processing.Engine.Projection.IDataRow,System.Int32,`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.DateTimeSelector`1.AddValue(Sitecore.Processing.Engine.Projection.IDataRow,System.Int32,`0)">
+            <inheritdoc />
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Projection.NullableDateTimeSelector`1">
+            <summary>
+                Selects a <see cref="F:Sitecore.Processing.Engine.Projection.FieldDataType.DateTime"/> value for a field using a lambda expression.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.NullableDateTimeSelector`1.#ctor(Sitecore.Processing.Engine.Projection.FieldDefinition,System.Func{`0,System.Nullable{System.DateTime}})">
+            <summary>
+                Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Projection.NullableDateTimeSelector`1" /> class.
+            </summary>
+            <param name="field">The field.</param>
+            <param name="selector">The selector.</param>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.NullableDateTimeSelector`1.Field">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.NullableDateTimeSelector`1.SetValue(Sitecore.Processing.Engine.Projection.IDataRow,System.Int32,`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.NullableDateTimeSelector`1.AddValue(Sitecore.Processing.Engine.Projection.IDataRow,System.Int32,`0)">
+            <inheritdoc />
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Projection.StringSelector`1">
+            <summary>
+                Selects a <see cref="F:Sitecore.Processing.Engine.Projection.FieldDataType.String"/> value for a field using a lambda expression.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.StringSelector`1.#ctor(Sitecore.Processing.Engine.Projection.FieldDefinition,System.Func{`0,System.String})">
+            <summary>
+                Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Projection.StringSelector`1" /> class.
+            </summary>
+            <param name="field">The field.</param>
+            <param name="selector">The selector.</param>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.StringSelector`1.Field">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.StringSelector`1.SetValue(Sitecore.Processing.Engine.Projection.IDataRow,System.Int32,`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.StringSelector`1.AddValue(Sitecore.Processing.Engine.Projection.IDataRow,System.Int32,`0)">
+            <inheritdoc />
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Projection.ProjectionHelpers">
+            <summary>
+                Provides a set of static methods for defining <see cref="T:Sitecore.Processing.Engine.Projection.IProjection`2" />s and
+                <see cref="T:Sitecore.Processing.Engine.Projection.IRowCollector`1" />s.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.ProjectionHelpers.Key``2(Sitecore.Processing.Engine.Projection.ProjectionBuilder{``0,``1},System.String,System.Func{``1,System.Guid})">
+            <summary>
+                Adds a required <see cref="F:Sitecore.Processing.Engine.Projection.FieldDataType.Guid" /> key field with the specified name.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TItem">The type of the item mapped from the source.</typeparam>
+            <param name="builder">The projection builder.</param>
+            <param name="name">The name.</param>
+            <param name="selector">The selector.</param>
+            <returns>The projection builder.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.ProjectionHelpers.Key``2(Sitecore.Processing.Engine.Projection.ProjectionBuilder{``0,``1},System.String,System.Func{``1,System.Nullable{System.Guid}})">
+            <summary>
+                Adds a <see cref="F:Sitecore.Processing.Engine.Projection.FieldDataType.Guid" /> key field with the specified name.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TItem">The type of the item mapped from the source.</typeparam>
+            <param name="builder">The projection builder.</param>
+            <param name="name">The name.</param>
+            <param name="selector">The selector.</param>
+            <returns>The projection builder.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.ProjectionHelpers.Key``2(Sitecore.Processing.Engine.Projection.ProjectionBuilder{``0,``1},System.String,System.Func{``1,System.Int64})">
+            <summary>
+                Adds a required <see cref="F:Sitecore.Processing.Engine.Projection.FieldDataType.Int64" /> key field with the specified name.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TItem">The type of the item mapped from the source.</typeparam>
+            <param name="builder">The projection builder.</param>
+            <param name="name">The name.</param>
+            <param name="selector">The selector.</param>
+            <returns>The projection builder.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.ProjectionHelpers.Key``2(Sitecore.Processing.Engine.Projection.ProjectionBuilder{``0,``1},System.String,System.Func{``1,System.Nullable{System.Int64}})">
+            <summary>
+                Adds a <see cref="F:Sitecore.Processing.Engine.Projection.FieldDataType.Int64" /> key field with the specified name.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TItem">The type of the item mapped from the source.</typeparam>
+            <param name="builder">The projection builder.</param>
+            <param name="name">The name.</param>
+            <param name="selector">The selector.</param>
+            <returns>The projection builder.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.ProjectionHelpers.Key``2(Sitecore.Processing.Engine.Projection.ProjectionBuilder{``0,``1},System.String,System.Func{``1,System.Double})">
+            <summary>
+                Adds a required <see cref="F:Sitecore.Processing.Engine.Projection.FieldDataType.Double" /> key field with the specified name.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TItem">The type of the item mapped from the source.</typeparam>
+            <param name="builder">The projection builder.</param>
+            <param name="name">The name.</param>
+            <param name="selector">The selector.</param>
+            <returns>The projection builder.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.ProjectionHelpers.Key``2(Sitecore.Processing.Engine.Projection.ProjectionBuilder{``0,``1},System.String,System.Func{``1,System.Nullable{System.Double}})">
+            <summary>
+                Adds a <see cref="F:Sitecore.Processing.Engine.Projection.FieldDataType.Double" /> key field with the specified name.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TItem">The type of the item mapped from the source.</typeparam>
+            <param name="builder">The projection builder.</param>
+            <param name="name">The name.</param>
+            <param name="selector">The selector.</param>
+            <returns>The projection builder.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.ProjectionHelpers.Key``2(Sitecore.Processing.Engine.Projection.ProjectionBuilder{``0,``1},System.String,System.Func{``1,System.DateTime})">
+            <summary>
+                Adds a required <see cref="F:Sitecore.Processing.Engine.Projection.FieldDataType.DateTime" /> key field with the specified name.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TItem">The type of the item mapped from the source.</typeparam>
+            <param name="builder">The projection builder.</param>
+            <param name="name">The name.</param>
+            <param name="selector">The selector.</param>
+            <returns>The projection builder.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.ProjectionHelpers.Key``2(Sitecore.Processing.Engine.Projection.ProjectionBuilder{``0,``1},System.String,System.Func{``1,System.Nullable{System.DateTime}})">
+            <summary>
+                Adds a <see cref="F:Sitecore.Processing.Engine.Projection.FieldDataType.DateTime" /> key field with the specified name.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TItem">The type of the item mapped from the source.</typeparam>
+            <param name="builder">The projection builder.</param>
+            <param name="name">The name.</param>
+            <param name="selector">The selector.</param>
+            <returns>The projection builder.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.ProjectionHelpers.Key``2(Sitecore.Processing.Engine.Projection.ProjectionBuilder{``0,``1},System.String,System.Func{``1,System.String})">
+            <summary>
+                Adds a required <see cref="F:Sitecore.Processing.Engine.Projection.FieldDataType.String" /> key field with the specified name.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TItem">The type of the item mapped from the source.</typeparam>
+            <param name="builder">The projection builder.</param>
+            <param name="name">The name.</param>
+            <param name="selector">The selector.</param>
+            <returns>The projection builder.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.ProjectionHelpers.Key``2(Sitecore.Processing.Engine.Projection.ProjectionBuilder{``0,``1},System.String,System.Func{``1,System.String},System.Boolean)">
+            <summary>
+                Adds a <see cref="F:Sitecore.Processing.Engine.Projection.FieldDataType.String" /> key field with the specified name.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TItem">The type of the item mapped from the source.</typeparam>
+            <param name="builder">The projection builder.</param>
+            <param name="name">The name.</param>
+            <param name="selector">The selector.</param>
+            <param name="nullable">If the field is nullable.</param>
+            <returns>The projection builder.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.ProjectionHelpers.Attribute``2(Sitecore.Processing.Engine.Projection.ProjectionBuilder{``0,``1},System.String,System.Func{``1,System.Guid})">
+            <summary>
+                Adds a required <see cref="F:Sitecore.Processing.Engine.Projection.FieldDataType.Guid" /> attribute field with the specified name.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TItem">The type of the item mapped from the source.</typeparam>
+            <param name="builder">The projection builder.</param>
+            <param name="name">The name.</param>
+            <param name="selector">The selector.</param>
+            <returns>The projection builder.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.ProjectionHelpers.Attribute``2(Sitecore.Processing.Engine.Projection.ProjectionBuilder{``0,``1},System.String,System.Func{``1,System.Nullable{System.Guid}})">
+            <summary>
+                Adds a <see cref="F:Sitecore.Processing.Engine.Projection.FieldDataType.Guid" /> attribute field with the specified name.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TItem">The type of the item mapped from the source.</typeparam>
+            <param name="builder">The projection builder.</param>
+            <param name="name">The name.</param>
+            <param name="selector">The selector.</param>
+            <returns>The projection builder.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.ProjectionHelpers.Attribute``2(Sitecore.Processing.Engine.Projection.ProjectionBuilder{``0,``1},System.String,System.Func{``1,System.Int64})">
+            <summary>
+                Adds a required <see cref="F:Sitecore.Processing.Engine.Projection.FieldDataType.Int64" /> attribute field with the specified name.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TItem">The type of the item mapped from the source.</typeparam>
+            <param name="builder">The projection builder.</param>
+            <param name="name">The name.</param>
+            <param name="selector">The selector.</param>
+            <returns>The projection builder.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.ProjectionHelpers.Attribute``2(Sitecore.Processing.Engine.Projection.ProjectionBuilder{``0,``1},System.String,System.Func{``1,System.Nullable{System.Int64}})">
+            <summary>
+                Adds a <see cref="F:Sitecore.Processing.Engine.Projection.FieldDataType.Int64" /> attribute field with the specified name.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TItem">The type of the item mapped from the source.</typeparam>
+            <param name="builder">The projection builder.</param>
+            <param name="name">The name.</param>
+            <param name="selector">The selector.</param>
+            <returns>The projection builder.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.ProjectionHelpers.Attribute``2(Sitecore.Processing.Engine.Projection.ProjectionBuilder{``0,``1},System.String,System.Func{``1,System.Double})">
+            <summary>
+                Adds a required <see cref="F:Sitecore.Processing.Engine.Projection.FieldDataType.Double" /> attribute field with the specified name.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TItem">The type of the item mapped from the source.</typeparam>
+            <param name="builder">The projection builder.</param>
+            <param name="name">The name.</param>
+            <param name="selector">The selector.</param>
+            <returns>The projection builder.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.ProjectionHelpers.Attribute``2(Sitecore.Processing.Engine.Projection.ProjectionBuilder{``0,``1},System.String,System.Func{``1,System.Nullable{System.Double}})">
+            <summary>
+                Adds a <see cref="F:Sitecore.Processing.Engine.Projection.FieldDataType.Double" /> attribute field with the specified name.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TItem">The type of the item mapped from the source.</typeparam>
+            <param name="builder">The projection builder.</param>
+            <param name="name">The name.</param>
+            <param name="selector">The selector.</param>
+            <returns>The projection builder.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.ProjectionHelpers.Attribute``2(Sitecore.Processing.Engine.Projection.ProjectionBuilder{``0,``1},System.String,System.Func{``1,System.DateTime})">
+            <summary>
+                Adds a required <see cref="F:Sitecore.Processing.Engine.Projection.FieldDataType.DateTime" /> attribute field with the specified name.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TItem">The type of the item mapped from the source.</typeparam>
+            <param name="builder">The projection builder.</param>
+            <param name="name">The name.</param>
+            <param name="selector">The selector.</param>
+            <returns>The projection builder.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.ProjectionHelpers.Attribute``2(Sitecore.Processing.Engine.Projection.ProjectionBuilder{``0,``1},System.String,System.Func{``1,System.Nullable{System.DateTime}})">
+            <summary>
+                Adds a <see cref="F:Sitecore.Processing.Engine.Projection.FieldDataType.DateTime" /> attribute field with the specified name.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TItem">The type of the item mapped from the source.</typeparam>
+            <param name="builder">The projection builder.</param>
+            <param name="name">The name.</param>
+            <param name="selector">The selector.</param>
+            <returns>The projection builder.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.ProjectionHelpers.Attribute``2(Sitecore.Processing.Engine.Projection.ProjectionBuilder{``0,``1},System.String,System.Func{``1,System.String})">
+            <summary>
+                Adds a required <see cref="F:Sitecore.Processing.Engine.Projection.FieldDataType.String" /> attribute field with the specified name.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TItem">The type of the item mapped from the source.</typeparam>
+            <param name="builder">The projection builder.</param>
+            <param name="name">The name.</param>
+            <param name="selector">The selector.</param>
+            <returns>The projection builder.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.ProjectionHelpers.Attribute``2(Sitecore.Processing.Engine.Projection.ProjectionBuilder{``0,``1},System.String,System.Func{``1,System.String},System.Boolean)">
+            <summary>
+                Adds a <see cref="F:Sitecore.Processing.Engine.Projection.FieldDataType.String" /> attribute field with the specified name.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TItem">The type of the item mapped from the source.</typeparam>
+            <param name="builder">The projection builder.</param>
+            <param name="name">The name.</param>
+            <param name="selector">The selector.</param>
+            <param name="nullable">If the field is nullable.</param>
+            <returns>The projection builder.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.ProjectionHelpers.Measure``2(Sitecore.Processing.Engine.Projection.ProjectionBuilder{``0,``1},System.String,System.Func{``1,System.Int64})">
+            <summary>
+                Adds a <see cref="F:Sitecore.Processing.Engine.Projection.FieldDataType.Int64" /> measure field with the specified name.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TItem">The type of the item mapped from the source.</typeparam>
+            <param name="builder">The projection builder.</param>
+            <param name="name">The name.</param>
+            <param name="selector">The selector.</param>
+            <returns>The projection builder.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.ProjectionHelpers.Measure``2(Sitecore.Processing.Engine.Projection.ProjectionBuilder{``0,``1},System.String,System.Func{``1,System.Double})">
+            <summary>
+                Adds a <see cref="F:Sitecore.Processing.Engine.Projection.FieldDataType.Double" /> measure field with the specified name.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TItem">The type of the item mapped from the source.</typeparam>
+            <param name="builder">The projection builder.</param>
+            <param name="name">The name.</param>
+            <param name="selector">The selector.</param>
+            <returns>The projection builder.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.ProjectionHelpers.CreateCollector``1(Sitecore.Processing.Engine.Projection.IProjection{``0})">
+            <summary>
+                Creates a <see cref="T:Sitecore.Processing.Engine.Projection.IRowCollector`1" /> for the projection.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <param name="projection">The projection.</param>
+            <returns>A row collector.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.ProjectionHelpers.Collect``1(Sitecore.Processing.Engine.Projection.IRowCollector{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+                Resets the specified collector, collects each source item and returns the rows collected.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <param name="collector">The collector.</param>
+            <param name="source">The source.</param>
+            <returns>The rows collected.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.ProjectionHelpers.ChildProjection``3(Sitecore.Processing.Engine.Projection.ProjectionBuilder{``0,``1},System.String,System.Func{``1,System.Collections.Generic.IEnumerable{``2}},System.Action{Sitecore.Processing.Engine.Projection.ProjectionBuilder{``1,``2}})">
+            <summary>
+                Adds a child table for the specified projection. Keys and their values from the parent projection are added to the
+                child projection.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TItem">The type of the item.</typeparam>
+            <typeparam name="TChildItem">The type of the child items.</typeparam>
+            <param name="builder">The builder.</param>
+            <param name="tableName">Name of the table.</param>
+            <param name="expansion">The selector for child items.</param>
+            <param name="cfg">The configuration for the child projection.</param>
+            <returns>This projection builder.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.ProjectionHelpers.GetRowEnumerator(System.Collections.Generic.IReadOnlyDictionary{Sitecore.Processing.Engine.Projection.TableDefinition,System.Collections.Generic.IReadOnlyList{Sitecore.Processing.Engine.Projection.IDataRow}},System.String)">
+            <summary>
+            Creates an <see cref="T:Sitecore.Processing.Engine.Projection.IDataRowEnumerator"/> for the table with the specified name in the dictionary.
+            </summary>
+            <param name="tables">The table dictionary.</param>
+            <param name="tableName">Name of the table.</param>
+            <returns>A row enumerator.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.ProjectionHelpers.GetRowEnumerator(System.Collections.Generic.IReadOnlyDictionary{Sitecore.Processing.Engine.Projection.TableDefinition,System.Collections.Generic.IReadOnlyList{Sitecore.Processing.Engine.Projection.IDataRow}},Sitecore.Processing.Engine.Projection.TableDefinition)">
+            <summary>
+            Creates an <see cref="T:Sitecore.Processing.Engine.Projection.IDataRowEnumerator"/> for the specified table in the dictionary.
+            </summary>
+            <param name="tables">The table dictionary.</param>
+            <param name="definition">The table definition.</param>
+            <returns>A row enumerator.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.ProjectionHelpers.Postfix(Sitecore.Processing.Engine.Projection.IDataRowEnumerator,System.String)">
+            <summary>
+            Creates a new <see cref="T:Sitecore.Processing.Engine.Projection.IDataRowEnumerator"/> with the specified postfix added to the table definition.
+            </summary>
+            <param name="enumerator">The enumerator.</param>
+            <param name="postfix">The postfix.</param>
+            <returns>A new row enumerator.</returns>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Projection.IDataRow">
+            <summary>
+                Represents a row of data. The fields and their types are defined by a <see cref="T:Sitecore.Processing.Engine.Projection.RowSchema" />.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.IDataRow.Schema">
+            <summary>
+                Gets the schema for this row.
+            </summary>
+            <value>
+                The schema.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.IDataRow.Item(System.String)">
+            <summary>
+                Gets or sets the value of the field with the specified name.
+            </summary>
+            <remarks>
+                It is more efficient to access values by index using the designated methods to avoid boxing.
+            </remarks>
+            <value>
+                The value.
+            </value>
+            <param name="fieldName">Name of the field.</param>
+            <returns>The value of the field.</returns>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.IDataRow.Item(System.Int32)">
+            <summary>
+                Gets or sets the value of the field at the specified index.
+            </summary>
+            <remarks>
+                It is more efficient to access values by index using the designated methods to avoid boxing.
+            </remarks>
+            <value>
+                The value.
+            </value>
+            <param name="index">The index.</param>
+            <returns>The value of the field.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.IDataRow.GetString(System.Int32)">
+            <summary>
+                Gets the value of the <see cref="T:System.String" /> field at the specified index.
+            </summary>
+            <param name="index">The index.</param>
+            <returns>The value of the field.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.IDataRow.SetString(System.Int32,System.String)">
+            <summary>
+                Sets the value of the <see cref="T:System.String" /> field at the specified index.
+            </summary>
+            <param name="index">The index.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.IDataRow.GetGuid(System.Int32)">
+            <summary>
+                Gets the value of the <see cref="T:System.Guid" /> field at the specified index.
+            </summary>
+            <param name="index">The index.</param>
+            <returns>The value of the field.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.IDataRow.SetGuid(System.Int32,System.Guid)">
+            <summary>
+                Sets the value of the <see cref="T:System.Guid" /> field at the specified index.
+            </summary>
+            <param name="index">The index.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.IDataRow.GetDateTime(System.Int32)">
+            <summary>
+                Gets the value of the <see cref="T:System.DateTime" /> field at the specified index.
+            </summary>
+            <param name="index">The index.</param>
+            <returns>The value of the field.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.IDataRow.SetDateTime(System.Int32,System.DateTime)">
+            <summary>
+                Sets the value of the <see cref="T:System.DateTime" /> at the specified index.
+            </summary>
+            <param name="index">The index.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.IDataRow.GetInt64(System.Int32)">
+            <summary>
+                Gets the value of the <see cref="T:System.Int64" /> field at the specified index.
+            </summary>
+            <param name="index">The index.</param>
+            <returns>The value of the field.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.IDataRow.AddInt64(System.Int32,System.Int64)">
+            <summary>
+                Adds the value to the <see cref="T:System.Int64" /> field at the specified index.
+            </summary>
+            <param name="index">The index.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.IDataRow.SetInt64(System.Int32,System.Int64)">
+            <summary>
+                Sets the value of the <see cref="T:System.Int64" /> field at the specified index.
+            </summary>
+            <param name="index">The index.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.IDataRow.GetDouble(System.Int32)">
+            <summary>
+                Gets the value of the <see cref="T:System.Double" /> field at the specified index.
+            </summary>
+            <param name="index">The index.</param>
+            <returns>The value of the field.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.IDataRow.SetDouble(System.Int32,System.Double)">
+            <summary>
+                Sets the value of the <see cref="T:System.Double" /> field at the specified index.
+            </summary>
+            <param name="index">The index.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.IDataRow.AddDouble(System.Int32,System.Double)">
+            <summary>
+                Adds the value to the <see cref="T:System.Double" /> field at the specified index.
+            </summary>
+            <param name="index">The index.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.IDataRow.IsNull(System.Int32)">
+            <summary>
+                Determines whether the value at the specified index is available.
+            </summary>
+            <param name="index">The index.</param>
+            <returns>
+                <c>true</c> if the value at the specified index is not available; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.IDataRow.SetNull(System.Int32,System.Boolean)">
+            <summary>
+                Sets a flag indicating whether the value at the specified index is unavailable.
+            </summary>
+            <param name="index">The index.</param>
+            <param name="isNull">if set to <c>true</c> the value is marked as unavailable.</param>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.IDataRow.WriteTo(System.IO.Stream)">
+            <summary>
+                Writes the binary representation of this row to the stream specified.
+            </summary>
+            <param name="target">The target.</param>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Projection.IDataRowEnumerator">
+            <summary>
+                Provides access to rows and their schema. Rows are returned in batches and ordered by key.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.IDataRowEnumerator.TableDefinition">
+            <summary>
+                Gets the table definition for the rows returned by this enumerator.
+            </summary>
+            <value>
+                The table definition.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.IDataRowEnumerator.TotalRowCount">
+            <summary>
+            Gets the total row count returned by this enumerator if known.
+            </summary>
+            <value>
+            The total row count; or null if it cannot be determined without enumeration.
+            </value>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Projection.InMemoryTableData">
+            <summary>
+                In memory table.
+            </summary>
+            <seealso cref="T:Sitecore.Processing.Engine.Projection.IDataRowEnumerator" />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.InMemoryTableData.#ctor(Sitecore.Processing.Engine.Projection.TableDefinition,System.Collections.Generic.IReadOnlyList{Sitecore.Processing.Engine.Projection.IDataRow})">
+            <summary>
+                Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Projection.InMemoryTableData" /> class.
+            </summary>
+            <param name="tableDefinition">The table definition.</param>
+            <param name="rows">The rows.</param>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.InMemoryTableData.TotalRowCount">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.InMemoryTableData.TableDefinition">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.InMemoryTableData.Current">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.InMemoryTableData.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.InMemoryTableData.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+            <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.InMemoryTableData.MoveNext(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Projection.IProjection`1">
+            <summary>
+                Defines how objects are mapped to <see cref="T:Sitecore.Processing.Engine.Projection.IDataRow" />s.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.IProjection`1.TableDefinition">
+            <summary>
+                Gets the table definition for the data generated by this projection.
+            </summary>
+            <value>
+                The table definition.
+            </value>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.IProjection`1.Accept``1(Sitecore.Processing.Engine.Projection.IProjectionVisitor{`0,``0})">
+            <summary>
+                Accepts the specified visitor and invokes the <code>Visit</code> method for a
+                <see cref="T:Sitecore.Processing.Engine.Projection.IProjection`2" />, i.e. with an extra type argument.
+            </summary>
+            <typeparam name="TReturn">The type of the return value.</typeparam>
+            <param name="visitor">The visitor.</param>
+            <returns>The value returned by <code>Visit</code> method of the visitor.</returns>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Projection.IProjection`2">
+            <summary>
+                Defines how objects are mapped to <see cref="T:Sitecore.Processing.Engine.Projection.IDataRow" />s.
+                Objects of type <typeparamref name="TSource" /> are expanded to zero or more <typeparamref name="TItem" />s.
+                A row is generated for each unique combination of keys from these and the
+                <see cref="T:Sitecore.Processing.Engine.Projection.IProjection`2" /> knows how to set the field values for the rows.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TItem">The type of the projection.</typeparam>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.IProjection`2.LinkedProjections">
+            <summary>
+                Gets linked projections for additional tables.
+            </summary>
+            <value>
+                The linked projections.
+            </value>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.IProjection`2.Expand(`0)">
+            <summary>
+                Maps zero or more objects from a source object for data rows. Values are selected from the projected object(s).
+            </summary>
+            <param name="source">The source.</param>
+            <returns>The projected objects.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.IProjection`2.SetKeys(Sitecore.Processing.Engine.Projection.IDataRow,`1)">
+            <summary>
+                Sets the values for the key fields.
+            </summary>
+            <param name="row">The row.</param>
+            <param name="item">The item.</param>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.IProjection`2.SetAttributes(Sitecore.Processing.Engine.Projection.IDataRow,`1)">
+            <summary>
+                Sets the values for the attribute fields.
+            </summary>
+            <param name="row">The row.</param>
+            <param name="item">The item.</param>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.IProjection`2.AddMeasures(Sitecore.Processing.Engine.Projection.IDataRow,`1)">
+            <summary>
+                Adds the measures.
+            </summary>
+            <param name="row">The row.</param>
+            <param name="item">The item.</param>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Projection.IProjectionField`1">
+            <summary>
+                Represents a field and value selector for an <see cref="T:Sitecore.Processing.Engine.Projection.IProjection`1" />.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.IProjectionField`1.Field">
+            <summary>
+                Gets the field definition.
+            </summary>
+            <value>
+                The field definition.
+            </value>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.IProjectionField`1.SetValue(Sitecore.Processing.Engine.Projection.IDataRow,System.Int32,`0)">
+            <summary>
+                Sets the value of the field with the specified index based on the source item.
+            </summary>
+            <param name="row">The row.</param>
+            <param name="index">The index.</param>
+            <param name="source">The source.</param>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.IProjectionField`1.AddValue(Sitecore.Processing.Engine.Projection.IDataRow,System.Int32,`0)">
+            <summary>
+                Increments the value of the numeric field with the specified index based on the source item.
+            </summary>
+            <param name="row">The row.</param>
+            <param name="index">The index.</param>
+            <param name="source">The source.</param>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Projection.IProjectionVisitor`2">
+            <summary>
+                A visitor for <see cref="T:Sitecore.Processing.Engine.Projection.IProjection`1" />s.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TReturn">The type of the return value.</typeparam>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.IProjectionVisitor`2.Visit``1(Sitecore.Processing.Engine.Projection.IProjection{`0,``0})">
+            <summary>
+                Visits the specified projection.
+            </summary>
+            <typeparam name="TItem">The type of the item.</typeparam>
+            <param name="projection">The projection.</param>
+            <returns>An implementation specific value.</returns>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Projection.IRowCollector`1">
+            <summary>
+                A row collector maps source data to <see cref="T:Sitecore.Processing.Engine.Projection.IDataRow" />s using an <see cref="T:Sitecore.Processing.Engine.Projection.IProjection`1" />.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.IRowCollector`1.TargetTables">
+            <summary>
+                Gets the definitions of the target tables.
+            </summary>
+            <value>
+                The definitions of target tables.
+            </value>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.IRowCollector`1.Collect(`0)">
+            <summary>
+                Collects the specified item and creates rows in the target tables.
+            </summary>
+            <param name="item">The item.</param>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.IRowCollector`1.GetRows">
+            <summary>
+                Gets the rows collected for each table.
+            </summary>
+            <returns>The rows collected.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.IRowCollector`1.Reset">
+            <summary>
+                Clears the rows collected.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Projection.LambdaProjection`2">
+            <summary>
+                An implementation of <see cref="T:Sitecore.Processing.Engine.Projection.IProjection`2" /> that expands and selects data using lambda
+                expressions.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TItem">The type of the projection.</typeparam>
+            <seealso cref="T:Sitecore.Processing.Engine.Projection.IProjection`2" />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.LambdaProjection`2.#ctor(Sitecore.Processing.Engine.Projection.TableDefinition,System.Func{`0,System.Collections.Generic.IEnumerable{`1}},Sitecore.Processing.Engine.Projection.IProjectionField{`1}[])">
+            <summary>
+                Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Projection.LambdaProjection`2" /> class.
+            </summary>
+            <param name="tableDefinition">The table definition.</param>
+            <param name="expansion">The expansion.</param>
+            <param name="fields">The value selectors.</param>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.LambdaProjection`2.#ctor(Sitecore.Processing.Engine.Projection.TableDefinition,System.Func{`0,System.Collections.Generic.IEnumerable{`1}},Sitecore.Processing.Engine.Projection.IProjectionField{`1}[],System.Collections.Generic.IReadOnlyCollection{Sitecore.Processing.Engine.Projection.IProjection{`1}})">
+            <summary>
+                Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Projection.LambdaProjection`2" /> class.
+            </summary>
+            <param name="tableDefinition">The table definition.</param>
+            <param name="expansion">The expansion.</param>
+            <param name="fields">The value selectors.</param>
+            <param name="linkedProjections">Linked projections.</param>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.LambdaProjection`2.TableDefinition">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.LambdaProjection`2.LinkedProjections">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.LambdaProjection`2.Expand(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.LambdaProjection`2.SetKeys(Sitecore.Processing.Engine.Projection.IDataRow,`1)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.LambdaProjection`2.SetAttributes(Sitecore.Processing.Engine.Projection.IDataRow,`1)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.LambdaProjection`2.AddMeasures(Sitecore.Processing.Engine.Projection.IDataRow,`1)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.LambdaProjection`2.Accept``1(Sitecore.Processing.Engine.Projection.IProjectionVisitor{`0,``0})">
+            <inheritdoc />
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Projection.Projection">
+            <summary>
+                Helper methods for configuring projections using the fluent API.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.Projection.Of``1">
+            <summary>
+                Entry point for configuring a projection with a source of type <typeparamref name="TSource" />.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <returns>Entry point to the fluent API.</returns>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Projection.Projection`1">
+            <summary>Provides a set of static methods for defining <see cref="T:Sitecore.Processing.Engine.Projection.IProjection`2" />s.</summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.Projection`1.CreateTabular``1(System.String,System.Func{`0,System.Collections.Generic.IEnumerable{``0}},System.Action{Sitecore.Processing.Engine.Projection.ProjectionBuilder{`0,``0}})">
+            <summary>
+                Creates a projection using the specified expansion and field configuration.
+            </summary>
+            <typeparam name="TItem">The type of the projected items.</typeparam>
+            <param name="tableName">Name of the table.</param>
+            <param name="expansion">The expansion.</param>
+            <param name="cfg">The field configuration.</param>
+            <returns>
+                The projection.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="expansion" /> or <paramref name="cfg" /> is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="tableName" /> is null, empty string or contains only whitespace characters.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.Projection`1.CreateTabular``1(System.String,System.Func{`0,``0},System.Action{Sitecore.Processing.Engine.Projection.ProjectionBuilder{`0,``0}})">
+            <summary>
+                Creates a projection using the specified expansion and field configuration assuming a one to one relation between
+                source and projected items.
+            </summary>
+            <typeparam name="TItem">The type of the projected items.</typeparam>
+            <param name="tableName">Name of the table.</param>
+            <param name="expansion">The expansion.</param>
+            <param name="cfg">The field configuration.</param>
+            <returns>
+                The projection.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="expansion" /> or <paramref name="cfg" /> is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="tableName" /> is null, empty string or contains only whitespace characters.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.Projection`1.CreateTabular(System.String,System.Action{Sitecore.Processing.Engine.Projection.ProjectionBuilder{`0,`0}})">
+            <summary>
+                Creates a projection using the specified field configuration.
+            </summary>
+            <param name="tableName">Name of the table.</param>
+            <param name="cfg">The field configuration.</param>
+            <returns>
+                The projection.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="cfg" /> is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="tableName" /> is null, empty string or contains only whitespace characters.
+            </exception>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Projection.ProjectionBuilder`2">
+            <summary>
+                Utility class used to construct <see cref="T:Sitecore.Processing.Engine.Projection.IProjection`2" />s using the static
+                <see cref="T:Sitecore.Processing.Engine.Projection.Projection`1" /> methods.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TItem">The type of the projection.</typeparam>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.ProjectionBuilder`2.#ctor(System.String,System.Func{`0,System.Collections.Generic.IEnumerable{`1}})">
+            <summary>
+                Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Projection.ProjectionBuilder`2" /> class.
+            </summary>
+            <param name="tableName">Name of the table.</param>
+            <param name="expansion">The expansion.</param>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="tableName" /> or <paramref name="expansion" /> is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="tableName" /> is null, empty string or contains only whitespace characters.
+            </exception>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.ProjectionBuilder`2.Fields">
+            <summary>
+                Gets the fields currently added to this projection builder.
+            </summary>
+            <value>
+                The fields.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.ProjectionBuilder`2.TableName">
+            <summary>
+                Gets the name of the table.
+            </summary>
+            <value>
+                The name of the table.
+            </value>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.ProjectionBuilder`2.AddField(Sitecore.Processing.Engine.Projection.IProjectionField{`1})">
+            <summary>
+                Adds a field and its projection to this builder.
+            </summary>
+            <param name="projection">The projection.</param>
+            <returns>This projection builder.</returns>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="projection" /> is null.
+            </exception>
+            <exception cref="T:System.InvalidOperationException">Thrown when fields are added after linked projections.</exception>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.ProjectionBuilder`2.LinkedProjection``1(System.String,System.Func{`1,System.Collections.Generic.IEnumerable{``0}},System.Action{Sitecore.Processing.Engine.Projection.ProjectionBuilder{`1,``0}})">
+            <summary>
+                Adds a linked projection.
+            </summary>
+            <typeparam name="TLinkedProjection">The type of the linked projection expansion.</typeparam>
+            <param name="tableName">Name of the table.</param>
+            <param name="expansion">The expansion.</param>
+            <param name="cfg">The field configuration.</param>
+            <returns>This projection builder.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.ProjectionBuilder`2.RegisterParentTable(System.String)">
+            <summary>
+                Registers the name of a parent table for this projection's table definition.
+            </summary>
+            <param name="name">The name of the parent table.</param>
+            <returns>This projection builder.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.ProjectionBuilder`2.SetSorted(System.Boolean)">
+            <summary>
+            Sets whether the projected rows should be sorted.        
+            </summary>
+            <remarks>
+            The default value is <c>true</c> for projections with measures, and <c>false</c> for projections without.
+            </remarks>
+            <param name="sorted">if set to <c>true</c> the rows will be sorted.</param>
+            <returns>This projection builder.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.ProjectionBuilder`2.Build">
+            <summary>
+                Creates an <see cref="T:Sitecore.Processing.Engine.Projection.IProjection`2" /> with the fields defined using methods of this builder.
+            </summary>
+            <returns>An <see cref="T:Sitecore.Processing.Engine.Projection.IProjection`2" />.</returns>
+            <exception cref="T:System.InvalidOperationException">Thrown when no fields are specified for the projection.</exception>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Projection.RowAggregator`2">
+            <summary>
+                A row collector where rows are grouped by keys and measures are summed.
+                Resulting rows are ordered by key(s).
+            </summary>
+            <typeparam name="TSource">The type of the source items.</typeparam>
+            <typeparam name="TItem">Type of the items expanded by the projection.</typeparam>
+            <seealso cref="T:Sitecore.Processing.Engine.Projection.IRowCollector`1" />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.RowAggregator`2.#ctor(Sitecore.Processing.Engine.Projection.IProjection{`0,`1},System.Collections.Generic.IReadOnlyList{Sitecore.Processing.Engine.Projection.IRowCollector{`1}})">
+            <summary>
+                Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Projection.RowAggregator`2" /> class.
+            </summary>
+            <param name="projection">The projection.</param>
+            <param name="linkedCollectors">The linked collectors.</param>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.RowAggregator`2.DoReset">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.RowAggregator`2.GetOrAddRow(`1)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.RowAggregator`2.GetProjectionRows">
+            <inheritdoc />
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Projection.RowCollectorBase`2">
+            <summary>
+                Base class with common logic for implementors of <see cref="T:Sitecore.Processing.Engine.Projection.IRowCollector`1" />.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TItem">The type of the item.</typeparam>
+            <seealso cref="T:Sitecore.Processing.Engine.Projection.IRowCollector`1" />
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.RowCollectorBase`2.#ctor(Sitecore.Processing.Engine.Projection.IProjection{`0,`1},System.Collections.Generic.IReadOnlyList{Sitecore.Processing.Engine.Projection.IRowCollector{`1}})">
+            <summary>
+                Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Projection.RowCollectorBase`2" /> class.
+            </summary>
+            <param name="projection">The projection.</param>
+            <param name="linkedCollectors">The linked collectors.</param>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.RowCollectorBase`2.TargetTables">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.RowCollectorBase`2.Projection">
+            <summary>
+                Gets the projection.
+            </summary>
+            <value>
+                The projection.
+            </value>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.RowCollectorBase`2.Collect(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.RowCollectorBase`2.GetRows">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.RowCollectorBase`2.Reset">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.RowCollectorBase`2.DoReset">
+            <summary>
+                Performs actual reset logic by descendants of <see cref="T:Sitecore.Processing.Engine.Projection.RowCollectorBase`2"/>.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.RowCollectorBase`2.GetOrAddRow(`1)">
+            <summary>
+                Gets or adds a row with the keys matching the specified item.
+            </summary>
+            <param name="item">The item.</param>
+            <returns>The row.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.RowCollectorBase`2.GetProjectionRows">
+            <summary>
+                Gets the rows collected for this collector's projection.
+            </summary>
+            <returns>The rows.</returns>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Projection.RowSchema">
+            <summary>
+                Defines the fields and their types for <see cref="T:Sitecore.Processing.Engine.Projection.IDataRow" />s.
+                A schema consists of zero or more keys, attributes and measures.
+                When aggregated, rows are grouped by keys and measures are summed for each key. Composite keys are allowed.
+                Attributes can contain values of any type but rows are not grouped by these. Attribute values must be unique per
+                key, but can be ommitted from the key to improve performance if a unique key is already present.
+                Measures can only be numeric types and are summed by key.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.RowSchema.#ctor(Sitecore.Processing.Engine.Projection.FieldDefinition[])">
+            <summary>
+                Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Projection.RowSchema" /> class.
+            </summary>
+            <param name="fields">The fields.</param>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.RowSchema.Keys">
+            <summary>
+                Gets the keys defined in this schema.
+            </summary>
+            <value>
+                The keys.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.RowSchema.Attributes">
+            <summary>
+                Gets the attributes defined in this schema.
+            </summary>
+            <value>
+                The attributes.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.RowSchema.Measures">
+            <summary>
+                Gets the measures defined in this schema.
+            </summary>
+            <value>
+                The measures.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.RowSchema.Fields">
+            <summary>
+                Gets the fields defined in this schema.
+            </summary>
+            <value>
+                The fields.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.RowSchema.NullableFieldCount">
+            <summary>
+                Gets the count of nullable fields.
+            </summary>
+            <value>
+                The nullable field count.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.RowSchema.RootTableSize">
+            <summary>
+                Gets the size in bytes of the root table in a <see cref="T:Sitecore.Processing.Engine.Projection.DataRow" />s binary representation. This is the minimum
+                size of a datarow with this schema, and the offset for object data.
+            </summary>
+            <value>
+                The size of the root table in bytes.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.RowSchema.FieldOffsets">
+            <summary>
+                Gets the field offsets in bytes in a <see cref="T:Sitecore.Processing.Engine.Projection.DataRow" />s binary representation.
+            </summary>
+            <value>
+                The field offsets.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.RowSchema.NullOffsets">
+            <summary>
+                Gets the index of the field in the list of nullable fields, or -1 if the field is not nullable.
+                This corresponds to the bit index in null flag bytes of the data row.
+            </summary>
+            <value>
+                The nullable offsets.
+            </value>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.RowSchema.GetFieldIndex(System.String)">
+            <summary>
+                Gets the index of the field with the name specified.
+            </summary>
+            <param name="name">The name of the field.</param>
+            <returns>The index of the field.</returns>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.RowSchema.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.RowSchema.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Projection.SimpleRowCollector`2">
+            <summary>
+                A row collector that creates a row for each source item. This is suitable for projections with unique keys since it
+                is faster than aggregation.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TItem">The type of the item.</typeparam>
+            <seealso cref="T:Sitecore.Processing.Engine.Projection.RowCollectorBase`2" />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.SimpleRowCollector`2.#ctor(Sitecore.Processing.Engine.Projection.IProjection{`0,`1},System.Collections.Generic.IReadOnlyList{Sitecore.Processing.Engine.Projection.IRowCollector{`1}})">
+            <summary>
+                Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Projection.SimpleRowCollector`2" /> class.
+            </summary>
+            <param name="projection">The projection.</param>
+            <param name="linkedCollectors">The linked collectors.</param>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.SimpleRowCollector`2.DoReset">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.SimpleRowCollector`2.GetOrAddRow(`1)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.SimpleRowCollector`2.GetProjectionRows">
+            <inheritdoc />
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Projection.TableDefinition">
+            <summary>
+                Represents the definition of a table including name, parent tables and schema.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.TableDefinition.#ctor(System.String,Sitecore.Processing.Engine.Projection.RowSchema)">
+            <summary>
+                Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Projection.TableDefinition" /> class.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="schema">The schema.</param>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.TableDefinition.#ctor(System.String,Sitecore.Processing.Engine.Projection.RowSchema,System.Boolean,System.Collections.Generic.IReadOnlyList{System.String})">
+            <summary>
+                Initializes a new instance of the <see cref="T:Sitecore.Processing.Engine.Projection.TableDefinition" /> class.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="schema">The schema.</param>
+            <param name="sorted">if set to <c>true</c> the rows in the table are sorted ascending by key(s).</param>
+            <param name="parentTableNames">The parent table names.</param>        
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.TableDefinition.Name">
+            <summary>
+                Gets the name.
+            </summary>
+            <value>
+                The name.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.TableDefinition.Schema">
+            <summary>
+                Gets the schema.
+            </summary>
+            <value>
+                The schema.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.TableDefinition.Sorted">
+            <summary>
+            Gets a value indicating whether the rows in the table are sorted ascending by key(s)
+            </summary>
+            <value>
+              <c>true</c> if sorted; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Sitecore.Processing.Engine.Projection.TableDefinition.ParentTableNames">
+            <summary>
+                Gets the parent table names.
+            </summary>
+            <value>
+                The parent table names.
+            </value>
+        </member>
+        <member name="M:Sitecore.Processing.Engine.Projection.TableDefinition.Postfix(System.String)">
+            <summary>
+            Creates a new table definition with the name and parent table names postfixed by the specified value.
+            </summary>
+            <param name="postfix">The postfix.</param>
+            <returns>A new table definition.</returns>
+        </member>
+        <member name="T:Sitecore.Processing.Engine.Projection.TypeHelpers">
+            <summary>
+                Internal helpers for mapping field data.
+            </summary>
+        </member>
+    </members>
+</doc>
