@@ -1,5 +1,0 @@
-﻿<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <ItemGroup>
-    <ExcludeFromPackageFiles Include="web.config;Views\web.config;bin\Sitecore.*.dll" />
-  </ItemGroup>
-</Project>
